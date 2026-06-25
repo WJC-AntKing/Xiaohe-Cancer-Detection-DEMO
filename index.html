@@ -656,6 +656,14 @@
     }
     .linkbtn:active { color: var(--brand-deep); }
 
+    .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .stat { background: #f5f8fc; border: 1px solid #e5ebf2; border-radius: 8px; padding: 11px 10px; }
+    .stat b { display: block; font-size: 20px; font-weight: 800; color: var(--brand-deep); }
+    .stat b i { font-style: normal; font-size: 12px; font-weight: 600; margin-left: 2px; }
+    .stat span { display: block; color: var(--muted); font-size: 11px; margin-top: 4px; line-height: 1.4; }
+    .stat-recent { display: flex; align-items: center; gap: 6px; margin: 12px 0 0; font-size: 12px; color: var(--brand-deep); font-weight: 700; }
+    .stat-recent .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 3px var(--brand-soft); flex: none; }
+
     /* result toggle */
     .seg {
       display: grid;
@@ -956,6 +964,18 @@
               <div class="row"><div><strong>适用人群</strong><span class="mini">40岁以上、有家族史、长期吸烟饮酒或慢病人群优先</span></div></div>
             </div>
 
+            <div class="card" id="service-stats">
+              <div class="card-title"><h2>服务实况 · 我们的陪伴</h2><span class="pill green">更新于 06-24</span></div>
+              <div class="stat-grid">
+                <div class="stat"><b>12,800<i>人次</i></b><span>已陪伴完成早筛</span></div>
+                <div class="stat"><b>326<i>人</i></b><span>经就医明确诊断</span></div>
+                <div class="stat"><b>¥48<i>万</i></b><span>累计发放检查补贴</span></div>
+                <div class="stat"><b>5.8<i>天</i></b><span>风险提示到协助就诊（平均）</span></div>
+              </div>
+              <p class="stat-recent"><span class="dot"></span>近 7 天新增 · 早筛 +38 人次 · 协助就诊 +5 人</p>
+              <p class="footnote">数据示意，为服务规模与时效说明，不代表筛查或诊断有效性的承诺。</p>
+            </div>
+
             <div class="card">
               <div class="card-title"><h2>还有疑问？</h2><span class="pill green">顾问在线</span></div>
               <div class="doctor">
@@ -1244,6 +1264,10 @@
               <div class="row"><div><strong>就医建议咨询</strong><span class="mini">有疑问随时问，异常人群获更高频跟进</span></div><span class="pill blue">按需</span></div>
               <div class="row"><div><strong>情绪陪伴陪聊</strong><span class="mini">焦虑、担心时有人倾听和疏导</span></div><span class="pill green">随时</span></div>
               <div class="row"><div><strong>年度复查提醒</strong><span class="mini">到期自动提醒，帮你把"每年一次"坚持下来</span></div><span class="pill blue">每年</span></div>
+              <div class="row" style="opacity:.55"><div><strong>专属体检 / 复查折扣</strong><span class="mini">会员价预约后续检查与复筛</span></div><span class="pill gray">即将上线</span></div>
+              <div class="row" style="opacity:.55"><div><strong>家庭健康档案</strong><span class="mini">为家人统一管理报告与提醒</span></div><span class="pill gray">即将上线</span></div>
+              <div class="row" style="opacity:.55"><div><strong>专属健康保险</strong><span class="mini">联合保险伙伴，为会员提供专属投保与理赔权益</span></div><span class="pill gray">即将上线</span></div>
+              <div class="row"><div><strong style="color:var(--brand-deep)">✦ 更多会员权益陆续上线</strong><span class="mini">随访权益持续扩充，敬请期待</span></div><span class="pill green">敬请期待</span></div>
               <p class="footnote">随访强度按本次筛查结果分层：结果正常侧重科普与提醒；结果异常加强就医建议与主动回访。</p>
             </div>
             <div class="card">
@@ -1253,6 +1277,11 @@
                 <div class="track-item current"><span class="track-dot"></span><div class="track-body"><strong>每月 · 健康关怀</strong><span class="mini">科普推送 + 随时咨询与陪聊</span></div></div>
                 <div class="track-item"><span class="track-dot"></span><div class="track-body"><strong>满 1 年 · 复查提醒</strong><span class="mini">提醒并协助预约下一年度筛查</span></div></div>
               </div>
+            </div>
+            <div class="card">
+              <div class="card-title"><h2>参与科普共创</h2><span class="pill green">稿酬 ¥1000</span></div>
+              <p class="mini">如果这段经历对你有帮助，欢迎把它分享出来，帮到更多还在犹豫或担心的人。完全自愿，可化名 / 打码；内容仅用于健康科普，不含疗效宣传；经你书面授权后使用、可随时撤回。我们提供 1000 元科普共创稿酬。</p>
+              <button class="secondary" style="width:100%;margin-top:12px" data-action="share-story">申请参与科普共创</button>
             </div>
             <button class="primary" data-action="go-loyalty">查看复购 / 推荐返现</button>
           </section>
@@ -1562,6 +1591,7 @@
       "go-loyalty": () => goTo(4, 1),
       "rebook":  () => showToast("已为你预留明年复查名额"),
       "refer":   () => showToast("推荐链接已生成，可分享给家人"),
+      "share-story": () => showToast("已提交科普共创申请，工作人员会与你联系确认授权范围"),
       "upload":  () => showToast("已选择文件（示意）")
     };
 
@@ -1640,6 +1670,13 @@
 
     document.querySelector("#im-voice").addEventListener("click", () => showToast("按住说话（示意）"));
     document.querySelector("#im-plus").addEventListener("click", () => showToast("发送图片 / 报告 / 位置（示意）"));
+
+    // 服务实况：早期服务人数少、数字不好看时，把下面这行改成 false 即可整块隐藏（宁可不展示也不注水）
+    const SERVICE_STATS_ENABLED = true;
+    if (!SERVICE_STATS_ENABLED) {
+      const statsCard = document.querySelector("#service-stats");
+      if (statsCard) statsCard.style.display = "none";
+    }
 
     goTo(0, 0);
   </script>
