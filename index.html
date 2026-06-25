@@ -3,7 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>癌症早筛服务产品 DEMO</title>
+  <title>小荷早筛 · 癌症早筛服务产品 DEMO</title>
+  <link rel="icon" href="logo-mark.png?v=1">
   <style>
     :root {
       --ink: #17202a;
@@ -61,6 +62,7 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
+      position: relative;
     }
 
     .statusbar {
@@ -101,12 +103,16 @@
       width: 34px;
       height: 34px;
       border-radius: 10px;
-      background: linear-gradient(135deg, #19bf8c, #0f9f7b);
+      background: #fff;
+      border: 1px solid var(--brand-line);
+      object-fit: contain;
+      padding: 2px;
       display: grid;
       place-items: center;
       color: #fff;
       font-weight: 900;
     }
+    .mark-fallback { background: linear-gradient(135deg, #19bf8c, #0f9f7b); border: 0; }
 
     .brand strong {
       display: block;
@@ -129,7 +135,9 @@
       padding: 6px 10px;
       font-size: 12px;
       white-space: nowrap;
+      cursor: pointer;
     }
+    .service-badge:active { transform: scale(.97); }
 
     /* progress stepper */
     .stepper {
@@ -629,6 +637,21 @@
     }
     .gauge.low span { color: var(--brand-deep); }
 
+    .status-circle {
+      width: 86px; height: 86px; border-radius: 50%;
+      display: grid; place-items: center; font-size: 36px; font-weight: 900;
+      background: #fff5e9; color: var(--orange); border: 4px solid var(--orange);
+    }
+    .status-circle.ok { background: var(--brand-soft); color: var(--brand-deep); border-color: var(--green); }
+    .too-label { color: var(--brand-deep); font-size: 12px; font-weight: 700; }
+    .too-part { font-size: 30px; font-weight: 900; color: var(--orange); margin: 6px 0 8px; }
+    .linkbtn {
+      width: 100%; background: transparent; border: 0; color: var(--muted);
+      font-size: 13px; padding: 6px 0 2px; cursor: pointer;
+      text-decoration: underline; text-underline-offset: 3px;
+    }
+    .linkbtn:active { color: var(--brand-deep); }
+
     /* result toggle */
     .seg {
       display: grid;
@@ -653,9 +676,10 @@
     .doctor { display: grid; grid-template-columns: 52px 1fr; gap: 12px; align-items: center; }
     .avatar {
       width: 52px; height: 52px; border-radius: 16px;
-      background: linear-gradient(#d9f8ee 0 42%, #f9c9aa 42% 67%, #19bf8c 67%);
+      background: #e8fff6 center / cover no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 52'%3E%3Ccircle cx='26' cy='20' r='8' fill='%2319bf8c'/%3E%3Cpath d='M11 45c0-8.3 6.7-13.5 15-13.5S41 36.7 41 45z' fill='%2319bf8c'/%3E%3C/svg%3E");
       border: 1px solid var(--brand-line);
     }
+    .avatar.avatar-logo { background: #fff center / 72% no-repeat url('logo-mark.png?v=1'); }
 
     .chat {
       display: grid; gap: 10px;
@@ -769,6 +793,62 @@
     }
     .table-row:first-child { border-top: 0; color: var(--ink); font-weight: 800; }
 
+    /* 微信式 IM 对话 */
+    .im {
+      position: absolute; inset: 0; z-index: 30;
+      background: #ededed; display: flex; flex-direction: column;
+      transform: translateX(100%); transition: transform .28s ease;
+    }
+    .im.open { transform: translateX(0); }
+    .im-bar {
+      flex: none; height: 50px; background: #f7f7f7; border-bottom: 1px solid #e2e2e2;
+      display: flex; align-items: center; padding: 0 8px;
+    }
+    .im-back { border: 0; background: transparent; font-size: 26px; line-height: 1; color: #1a1a1a; cursor: pointer; padding: 0 6px; }
+    .im-title { flex: 1; text-align: center; font-size: 16px; font-weight: 600; color: #1a1a1a; }
+    .im-title small { display: block; font-size: 11px; color: #93a05a; font-weight: 400; margin-top: 1px; }
+    .im-more { width: 30px; text-align: center; color: #1a1a1a; font-size: 20px; }
+    .im-body { flex: 1; overflow: auto; padding: 14px 12px 8px; display: flex; flex-direction: column; gap: 14px; }
+    .im-time { text-align: center; font-size: 11px; color: #9a9a9a; }
+    .im-msg { display: flex; gap: 8px; align-items: flex-start; }
+    .im-msg.me { flex-direction: row-reverse; }
+    .im .ava { width: 36px; height: 36px; border-radius: 6px; flex: none; }
+    .ava-doc { background: #fff center / 76% no-repeat url('logo-mark.png?v=1'); border: 1px solid var(--brand-line); }
+    .ava-me { background: linear-gradient(135deg, #6aa6dd, #3f7cb5); }
+    .im-bubble {
+      max-width: 72%; padding: 9px 11px; border-radius: 6px;
+      font-size: 14px; line-height: 1.55; color: #1a1a1a; background: #fff;
+      word-break: break-word;
+    }
+    .im-msg.me .im-bubble { background: #95ec69; }
+    .im-foot {
+      flex: none; background: #f7f7f7; border-top: 1px solid #e2e2e2;
+      padding: 8px 10px; display: flex; gap: 8px; align-items: center;
+    }
+    .im-input {
+      flex: 1; border: 1px solid #e2e2e2; border-radius: 6px; background: #fff;
+      padding: 8px 10px; outline: none; font-size: 14px;
+    }
+    .im-send { border: 0; background: var(--blue); color: #fff; border-radius: 6px; padding: 9px 14px; font-weight: 700; cursor: pointer; }
+    .im-quick { flex: none; display: flex; gap: 8px; padding: 8px 10px 0; overflow-x: auto; background: #ededed; }
+    .im-quick::-webkit-scrollbar { display: none; }
+    .im-quick button {
+      flex: none; border: 1px solid #dcdcdc; background: #fff; color: #4a5560;
+      border-radius: 999px; padding: 7px 12px; font-size: 13px; cursor: pointer; white-space: nowrap;
+    }
+    .im-quick button:active { background: #f0f0f0; }
+    .im-ic {
+      width: 32px; height: 32px; flex: none; border: 0; background: transparent;
+      color: #5a5a5a; cursor: pointer; display: grid; place-items: center;
+    }
+    .im-ic svg { width: 24px; height: 24px; }
+
+    .site-credit {
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 20px 16px 30px; color: var(--muted); font-size: 12px; flex-wrap: wrap; text-align: center;
+    }
+    .site-credit img { height: 22px; width: auto; }
+
     .toast {
       position: fixed; left: 50%; bottom: 24px;
       transform: translateX(-50%) translateY(20px);
@@ -802,20 +882,20 @@
         <header class="app-header">
           <div class="header-row">
             <div class="brand">
-              <div class="mark">早</div>
+              <img class="mark" src="logo-mark.png?v=1" alt="小荷医学" onerror="this.onerror=null;const d=document.createElement('div');d.className='mark mark-fallback';d.textContent='荷';this.replaceWith(d);">
               <div>
                 <strong>小荷早筛</strong>
                 <span id="stage-subtitle">约前咨询与预约</span>
               </div>
             </div>
-            <span class="service-badge">专属顾问在线</span>
+            <span class="service-badge" id="service-badge" role="button" tabindex="0">专属顾问在线</span>
           </div>
         </header>
 
         <div class="stepper" id="stepper">
           <div class="step" data-step="0"><i>1</i>预约</div>
           <div class="step" data-step="1"><i>2</i>检查</div>
-          <div class="step" data-step="2"><i>3</i>解读</div>
+          <div class="step" data-step="2"><i>3</i>结果</div>
           <div class="step" data-step="3"><i>4</i>协助</div>
           <div class="step" data-step="4"><i>5</i>随访</div>
         </div>
@@ -876,7 +956,7 @@
             <div class="card">
               <div class="card-title"><h2>还有疑问？</h2><span class="pill green">顾问在线</span></div>
               <div class="doctor">
-                <div class="avatar" aria-hidden="true"></div>
+                <div class="avatar avatar-logo" aria-hidden="true"></div>
                 <div><strong>约前咨询</strong><p class="mini">不确定自己适不适合？先和顾问聊聊适用性、流程和价格，再决定预约。</p></div>
               </div>
               <button class="ghost" style="width:100%;margin-top:12px" data-action="consult">在线咨询顾问</button>
@@ -989,7 +1069,7 @@
 
           <!-- ===================== 阶段3 报告解读 ===================== -->
           <section class="stage-screen" data-stage="2" data-step="0">
-            <div class="substep">解读 · <b>第 1 步 / 共 3 步</b> · 筛查结论</div>
+            <div class="substep">结果 · <b>第 1 步 / 共 3 步</b> · 筛查结论</div>
             <div class="banner"><i>📄</i><div><strong>你的筛查报告已就绪</strong><span class="mini">点击下方切换查看两种结论示例</span></div></div>
 
             <div class="seg" id="result-seg">
@@ -997,60 +1077,56 @@
               <button data-result="low">正常示例</button>
             </div>
 
-            <!-- 异常 -->
+            <!-- 异常：DOC 有风险 + TOO 单一部位 -->
             <div data-result-view="abn">
               <div class="report-band">
                 <div class="risk-score">
-                  <div class="gauge"><span>中</span></div>
+                  <div class="status-circle">!</div>
                   <div>
-                    <div class="eyebrow">筛查结论 · 需进一步确认</div>
-                    <h1>检测提示存在异常风险信号</h1>
-                    <p class="mini">筛查不是诊断。建议预约医生解读，并结合影像、内镜或专科检查明确。</p>
+                    <div class="eyebrow">DOC 模型 · 癌症风险检测</div>
+                    <h1>检测到癌症风险信号</h1>
+                    <p class="mini">筛查不是诊断。建议预约医生解读，并结合影像、内镜或专科检查进一步明确。</p>
                   </div>
                 </div>
               </div>
               <div class="card">
-                <div class="card-title"><h2>报告摘要</h2><span class="pill orange">建议解读</span></div>
-                <div class="bars">
-                  <div><div class="bar-label"><span>肺部相关风险</span><b>68</b></div><div class="bar-track"><div class="bar-fill" style="width:68%; background: var(--orange);"></div></div></div>
-                  <div><div class="bar-label"><span>消化道相关风险</span><b>31</b></div><div class="bar-track"><div class="bar-fill" style="width:31%;"></div></div></div>
-                  <div><div class="bar-label"><span>肝胆胰相关风险</span><b>18</b></div><div class="bar-track"><div class="bar-fill" style="width:18%; background: var(--green);"></div></div></div>
-                </div>
+                <div class="card-title"><h2>TOO 模型 · 溯源提示</h2><span class="pill orange">建议解读</span></div>
+                <div class="too-label">溯源信号最显著的部位</div>
+                <div class="too-part">肺部</div>
+                <p class="mini">检测到风险时，模型会提示且仅提示一个溯源信号最显著的部位，供医生优先排查。建议优先针对肺部进一步检查（如低剂量胸部 CT）。</p>
+                <button class="primary" style="margin-top:12px" data-action="go-care">针对肺部就医，连接诊断资源 →</button>
               </div>
+              <button class="linkbtn" data-action="go-interpret">仍有疑问？也可预约医生解读</button>
             </div>
 
-            <!-- 正常 -->
+            <!-- 正常：DOC 无风险，无 TOO 提示 -->
             <div data-result-view="low" style="display:none">
               <div class="report-band low">
                 <div class="risk-score">
-                  <div class="gauge low"><span>低</span></div>
+                  <div class="status-circle ok">✓</div>
                   <div>
-                    <div class="eyebrow">筛查结论 · 未见明显异常</div>
-                    <h1>本次未提示明显风险信号</h1>
+                    <div class="eyebrow">DOC 模型 · 癌症风险检测</div>
+                    <h1>未检测到癌症风险信号</h1>
                     <p class="mini">筛查阴性不代表绝对无风险。建议保持定期筛查，并留意身体变化。</p>
                   </div>
                 </div>
               </div>
               <div class="card">
-                <div class="card-title"><h2>报告摘要</h2><span class="pill green">未见异常</span></div>
-                <div class="bars">
-                  <div><div class="bar-label"><span>肺部相关风险</span><b>9</b></div><div class="bar-track"><div class="bar-fill" style="width:9%; background: var(--green);"></div></div></div>
-                  <div><div class="bar-label"><span>消化道相关风险</span><b>12</b></div><div class="bar-track"><div class="bar-fill" style="width:12%; background: var(--green);"></div></div></div>
-                  <div><div class="bar-label"><span>肝胆胰相关风险</span><b>7</b></div><div class="bar-track"><div class="bar-fill" style="width:7%; background: var(--green);"></div></div></div>
-                </div>
+                <div class="card-title"><h2>TOO 模型 · 溯源提示</h2><span class="pill green">无需溯源</span></div>
+                <p class="mini">本次未检测到癌症风险信号，不进行部位溯源提示。</p>
               </div>
               <div class="card">
                 <div class="card-title"><h2>下次建议</h2></div>
                 <div class="row"><div><strong>定期复筛</strong><span class="mini">建议 12 个月后再次筛查，高危人群可缩短至 6 个月</span></div><span class="pill blue">提醒我</span></div>
               </div>
+              <button class="linkbtn" data-action="go-interpret">如仍想咨询，可预约医生解读</button>
             </div>
 
             <p class="mini" style="margin:2px 4px 12px">⚠️ 本报告为筛查提示，不作为临床诊断依据。任何结论建议由专业医生解读。</p>
-            <button class="primary" data-action="go-interpret">预约医生解读</button>
           </section>
 
           <section class="stage-screen" data-stage="2" data-step="1">
-            <div class="substep">解读 · <b>第 2 步 / 共 3 步</b> · 预约解读</div>
+            <div class="substep">结果 · <b>第 2 步 / 共 3 步</b> · 预约解读</div>
             <div class="card">
               <div class="card-title"><h2>预约报告解读</h2><span class="pill blue">最快今晚</span></div>
               <div class="doctor">
@@ -1074,14 +1150,14 @@
           </section>
 
           <section class="stage-screen" data-stage="2" data-step="2">
-            <div class="substep">解读 · <b>第 3 步 / 共 3 步</b> · 解读小结</div>
+            <div class="substep">结果 · <b>第 3 步 / 共 3 步</b> · 解读小结</div>
             <div class="banner"><i>✓</i><div><strong>解读已完成</strong><span class="mini">李医生 · 06-25 20:14 · 15分钟</span></div></div>
             <div class="card">
               <div class="card-title"><h2>医生解读</h2><span class="pill orange">重点</span></div>
               <div class="chat">
-                <div class="bubble doc">报告提示<b>肺部相关风险偏高（68）</b>，这是一个需要重视的<b>信号</b>，但不等于确诊。</div>
+                <div class="bubble doc">DOC 模型<b>检测到癌症风险信号</b>，TOO 溯源提示<b>最显著部位是肺部</b>。这是需要重视的<b>信号</b>，但不等于确诊。</div>
                 <div class="bubble me">那我接下来要做什么？</div>
-                <div class="bubble doc">建议尽快做一次<b>低剂量胸部 CT（LDCT）</b>明确，必要时呼吸科/胸外科就诊。消化道和肝胆胰风险较低，常规随访即可。</div>
+                <div class="bubble doc">建议尽快做一次<b>低剂量胸部 CT（LDCT）</b>明确，必要时到呼吸科/胸外科就诊。模型只溯源到肺部一个部位，优先针对它排查即可。</div>
               </div>
             </div>
             <div class="card">
@@ -1106,7 +1182,7 @@
             <div class="card">
               <div class="card-title"><h2>问题反馈</h2><span class="pill red">48小时内跟进</span></div>
               <div class="form-grid">
-                <label>我的主要疑问<textarea>报告提示肺部相关风险偏高，是否必须尽快做低剂量 CT？去哪家医院比较好？</textarea></label>
+                <label>我的主要疑问<textarea>报告检测到癌症风险、溯源提示肺部，是否必须尽快做低剂量 CT？去哪家医院比较好？</textarea></label>
                 <label>已就诊医院/科室<input value="暂未就诊，计划预约三甲医院胸外/呼吸科"></label>
                 <div class="upload" data-action="upload">＋ 上传影像、门诊病历、检查单或病理报告</div>
               </div>
@@ -1203,10 +1279,38 @@
         <nav class="bottom-nav" aria-label="阶段导航">
           <button class="nav-btn active" data-stage="0"><svg class="nav-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>预约</button>
           <button class="nav-btn" data-stage="1"><svg class="nav-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s6 6.5 6 10.5a6 6 0 0 1-12 0C6 9.5 12 3 12 3z"/></svg>检查</button>
-          <button class="nav-btn" data-stage="2"><svg class="nav-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h8l4 4v16H6z"/><path d="M14 2v4h4M9 13h6M9 17h6"/></svg>解读</button>
+          <button class="nav-btn" data-stage="2"><svg class="nav-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h8l4 4v16H6z"/><path d="M14 2v4h4M9 13h6M9 17h6"/></svg>结果</button>
           <button class="nav-btn" data-stage="3"><svg class="nav-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-7-9.5A3.5 3.5 0 0 1 12 8a3.5 3.5 0 0 1 7 3.5C19 16.5 12 21 12 21z"/></svg>协助</button>
           <button class="nav-btn" data-stage="4"><svg class="nav-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8.4c-.7-1.5-2.5-2-3.8-1C7 8.2 6.8 9.9 7.6 11.1c.8 1.2 4.4 3.3 4.4 3.3s3.6-2.1 4.4-3.3c.8-1.2.6-2.9-.6-3.7-1.3-1-3.1-.5-3.8 1z"/><path d="M4.5 15.3c1.8 2.6 4.6 4 7.5 4s5.7-1.4 7.5-4"/></svg>随访</button>
         </nav>
+
+        <div class="im" id="im" aria-label="顾问对话">
+          <div class="im-bar">
+            <button class="im-back" id="im-back" aria-label="返回">‹</button>
+            <div class="im-title">小荷医学 · 健康顾问<small>在线</small></div>
+            <div class="im-more" aria-hidden="true">⋯</div>
+          </div>
+          <div class="im-body" id="im-body">
+            <div class="im-time">今天 09:40</div>
+            <div class="im-msg them"><div class="ava ava-doc"></div><div class="im-bubble">您好，我是您的专属健康顾问，关于多癌早筛有任何疑问都可以问我～</div></div>
+            <div class="im-msg them"><div class="ava ava-doc"></div><div class="im-bubble">比如：适不适合做、检测流程、价格、报告怎么看，都可以问我哦。</div></div>
+            <div class="im-msg me"><div class="ava ava-me"></div><div class="im-bubble">我45岁，家里有癌症史，适合做这个检查吗？</div></div>
+            <div class="im-msg them"><div class="ava ava-doc"></div><div class="im-bubble">非常适合。有家族史属于重点关注人群，建议定期筛查。这个检测一次抽血可覆盖16种高发癌，要不要我帮您看看就近的采血点和时间？</div></div>
+          </div>
+          <div class="im-quick" id="im-quick">
+            <button>适合我吗？</button>
+            <button>多少钱？</button>
+            <button>报告怎么看？</button>
+            <button>检测流程</button>
+            <button>采血点在哪</button>
+          </div>
+          <div class="im-foot">
+            <button class="im-ic" id="im-voice" aria-label="语音"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button>
+            <input class="im-input" id="im-input" placeholder="发消息…" aria-label="输入消息">
+            <button class="im-ic" id="im-plus" aria-label="更多"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg></button>
+            <button class="im-send" id="im-send">发送</button>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -1273,6 +1377,11 @@
     </section>
   </main>
 
+  <footer class="site-credit">
+    <img src="logo.png" alt="小荷医学" onerror="this.style.display='none'">
+    <span>由小荷医学提供 · 本页面仅为产品原型演示</span>
+  </footer>
+
   <div class="toast" id="toast">已更新</div>
 
   <script>
@@ -1303,7 +1412,7 @@
         steps: ["筛查结论", "预约解读", "解读小结"],
         insights: [
           ["筛查不是诊断", "结论页显式标注免责说明，正常/异常两种结果都强调由医生解读。"],
-          ["结果分层表达", "用风险条 + 摘要替代原始指标堆叠，让用户知道优先处理什么。"],
+          ["DOC + TOO 双结果", "先给出有无癌症风险（DOC），有风险时再提示唯一溯源部位（TOO），避免多指标堆叠误导。"],
           ["解读形成闭环", "从预约解读到解读小结与行动清单，避免拿到异常结果后流失或焦虑升级。"]
         ]
       },
@@ -1432,7 +1541,7 @@
 
     // action buttons: advance flow
     const actions = {
-      "consult": () => showToast("顾问会在 10 分钟内联系你"),
+      "consult": () => openIM(),
       "go-book": () => goTo(0, 1),
       "book":    () => goTo(1, 0, "预约成功，已为你保留名额"),
       "reserve": () => goTo(1, 0, "已预约，可到现场确认后再付款"),
@@ -1443,6 +1552,7 @@
       "go-interpret": () => goTo(2, 1),
       "interpret": () => goTo(2, 2, "已预约解读，服务前将短信提醒"),
       "go-assist": () => goTo(3, 0),
+      "go-care": () => goTo(3, 1, "已跳转到就医连接服务，可申请专科就医建议与诊断资源"),
       "go-apply": () => goTo(3, 1),
       "submit":  () => goTo(3, 2, "已提交，顾问将在 48 小时内跟进"),
       "update":  () => showToast("最新诊断结论已更新，将触发对应保障"),
@@ -1466,6 +1576,67 @@
     document.querySelectorAll("[data-ref]").forEach(ref => {
       ref.querySelector(".ref-head").addEventListener("click", () => ref.classList.toggle("open"));
     });
+
+    // 微信式 IM 对话
+    const im = document.querySelector("#im");
+    const imBody = document.querySelector("#im-body");
+    const imInput = document.querySelector("#im-input");
+
+    function openIM() {
+      im.classList.add("open");
+      imBody.scrollTop = imBody.scrollHeight;
+    }
+    function closeIM() { im.classList.remove("open"); }
+
+    function addMsg(text, who) {
+      const wrap = document.createElement("div");
+      wrap.className = "im-msg " + who;
+      const ava = document.createElement("div");
+      ava.className = "ava " + (who === "me" ? "ava-me" : "ava-doc");
+      const bubble = document.createElement("div");
+      bubble.className = "im-bubble";
+      bubble.textContent = text;
+      wrap.append(ava, bubble);
+      imBody.appendChild(wrap);
+      imBody.scrollTop = imBody.scrollHeight;
+    }
+
+    const quickReplies = {
+      "适合我吗？": "40岁以上、有家族史或长期烟酒人群尤其建议。告诉我您的年龄和家族史，我帮您判断～",
+      "多少钱？": "标准版 ¥3000，已含采血检测、医生解读和一年随访权益；异常还有检查补贴与保障。",
+      "报告怎么看？": "报告会给出风险等级和分部位提示。筛查结果不是诊断，出报告后可预约医生 15 分钟解读。",
+      "检测流程": "预约 → 到采血点抽血 → 约 3 天出报告 → 医生解读 → 异常协助。全程一次抽血即可。",
+      "采血点在哪": "您在哪个城市？我帮您找最近的采血点，比如北京三里屯采血点支持当天预约。"
+    };
+
+    function replyTo(text) {
+      const r = quickReplies[text] || "收到～ 顾问正在为您查询（示意回复）。需要的话也可以帮您直接预约采血点。";
+      window.setTimeout(() => addMsg(r, "them"), 700);
+    }
+
+    function sendIM() {
+      const text = imInput.value.trim();
+      if (!text) return;
+      addMsg(text, "me");
+      imInput.value = "";
+      replyTo(text);
+    }
+
+    document.querySelector("#service-badge").addEventListener("click", openIM);
+    document.querySelector("#im-back").addEventListener("click", closeIM);
+    document.querySelector("#im-send").addEventListener("click", sendIM);
+    imInput.addEventListener("keydown", e => { if (e.key === "Enter") sendIM(); });
+
+    document.querySelectorAll("#im-quick button").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const text = btn.textContent;
+        addMsg(text, "me");
+        replyTo(text);
+      });
+    });
+
+    document.querySelector("#im-voice").addEventListener("click", () => showToast("按住说话（示意）"));
+    document.querySelector("#im-plus").addEventListener("click", () => showToast("发送图片 / 报告 / 位置（示意）"));
 
     goTo(0, 0);
   </script>
