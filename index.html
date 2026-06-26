@@ -973,8 +973,8 @@
               <h1>一次抽血，高效覆盖大部分癌症担忧</h1>
               <p>跑一趟筛查多种癌，省去逐项检查的奔波；即使提示异常，也有解读和保障一路陪伴。</p>
               <div class="metrics">
-                <div class="metric tappable" data-action="open-cancer"><b>16种</b><span>高发癌症</span></div>
-                <div class="metric tappable" data-action="open-cancer"><b>86%</b><span>发病率覆盖</span></div>
+                <div class="metric tappable" data-action="open-cancer"><b>16种</b><span>覆盖86%发病率</span></div>
+                <div class="metric tappable" data-action="open-care"><b>76家</b><span>三甲就医资源</span></div>
                 <div class="metric tappable" data-action="open-guarantee"><b>600-10万</b><span>补贴保障</span></div>
               </div>
               <button class="metrics-more" data-action="open-cancer">查看 16 种覆盖癌种与选择依据 ›</button>
@@ -1503,6 +1503,24 @@
             </div>
           </div>
         </div>
+
+        <div class="sheet-mask" id="care-sheet">
+          <div class="sheet">
+            <div class="sheet-head">
+              <strong>提示风险后的就医协助</strong>
+              <button class="sheet-close" data-action="close-sheet" aria-label="关闭">✕</button>
+            </div>
+            <div class="sheet-body">
+              <p class="mini" style="margin-bottom:14px">已对接 76 家三甲医院资源。若检测提示癌症风险，我们不止给结论，更帮你把"下一步就医"安排到位。</p>
+              <div class="todo">
+                <div class="todo-item"><i>1</i><div><strong>专科就医建议</strong><span class="mini">按风险部位推荐科室、检查顺序与就诊材料清单。</span></div></div>
+                <div class="todo-item"><i>2</i><div><strong>连接诊断资源</strong><span class="mini">协助预约影像 / 内镜 / 病理等检查，尽快明确诊断。</span></div></div>
+                <div class="todo-item"><i>3</i><div><strong>连接治疗资源</strong><span class="mini">确诊后优先对接合适的治疗资源与专家。</span></div></div>
+              </div>
+              <p class="footnote">"76 家三甲"为占位示意，正式以实际合作资源为准；就医协助为筛查提示风险后的后续服务，依实际病情与资源情况而定。</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -1769,6 +1787,7 @@
       "share-story": () => showToast("已提交科普共创申请，工作人员会与你联系确认授权范围"),
       "open-cancer": () => document.querySelector("#cancer-sheet").classList.add("open"),
       "open-guarantee": () => document.querySelector("#guarantee-sheet").classList.add("open"),
+      "open-care": () => document.querySelector("#care-sheet").classList.add("open"),
       "close-sheet": () => document.querySelectorAll(".sheet-mask").forEach(m => m.classList.remove("open")),
       "open-wecom": () => showToast("正在打开企业微信对话…（示意，正式版经微信客服 / 活码直达会话）"),
       "copy-wecom": () => showToast("顾问企业微信号已复制：xiaohe-care-001"),
