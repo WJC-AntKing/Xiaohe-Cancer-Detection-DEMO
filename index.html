@@ -464,6 +464,8 @@
     }
 
     .pay-option strong { display: block; font-size: 14px; margin-bottom: 3px; }
+    .perk-tag { display: inline-block; font-size: 11px; font-weight: 700; color: #fff; background: var(--blue); border-radius: 6px; padding: 1px 6px; margin-left: 6px; vertical-align: middle; }
+    .perk { margin-top: 6px; font-size: 12px; color: var(--brand-deep); font-weight: 700; }
 
     /* checkbox */
     .check {
@@ -805,55 +807,94 @@
     }
     .table-row:first-child { border-top: 0; color: var(--ink); font-weight: 800; }
 
-    /* 微信式 IM 对话 */
+    /* 顾问对话（沿用产品配色） */
     .im {
       position: absolute; inset: 0; z-index: 30;
-      background: #ededed; display: flex; flex-direction: column;
+      background: var(--bg); display: flex; flex-direction: column;
       transform: translateX(100%); transition: transform .28s ease;
     }
     .im.open { transform: translateX(0); }
     .im-bar {
-      flex: none; height: 50px; background: #f7f7f7; border-bottom: 1px solid #e2e2e2;
+      flex: none; height: 50px; background: #fff; border-bottom: 1px solid var(--line);
       display: flex; align-items: center; padding: 0 8px;
     }
-    .im-back { border: 0; background: transparent; font-size: 26px; line-height: 1; color: #1a1a1a; cursor: pointer; padding: 0 6px; }
-    .im-title { flex: 1; text-align: center; font-size: 16px; font-weight: 600; color: #1a1a1a; }
-    .im-title small { display: block; font-size: 11px; color: #93a05a; font-weight: 400; margin-top: 1px; }
-    .im-more { width: 30px; text-align: center; color: #1a1a1a; font-size: 20px; }
+    .im-back { border: 0; background: transparent; font-size: 26px; line-height: 1; color: var(--ink); cursor: pointer; padding: 0 6px; }
+    .im-title { flex: 1; text-align: center; font-size: 16px; font-weight: 700; color: var(--ink); }
+    .im-title small { display: block; font-size: 11px; color: var(--brand-deep); font-weight: 400; margin-top: 1px; }
+    .im-more { width: 30px; text-align: center; color: var(--muted); font-size: 20px; }
     .im-body { flex: 1; overflow: auto; padding: 14px 12px 8px; display: flex; flex-direction: column; gap: 14px; }
-    .im-time { text-align: center; font-size: 11px; color: #9a9a9a; }
+    .im-time { text-align: center; font-size: 11px; color: var(--muted); }
     .im-msg { display: flex; gap: 8px; align-items: flex-start; }
     .im-msg.me { flex-direction: row-reverse; }
-    .im .ava { width: 36px; height: 36px; border-radius: 6px; flex: none; }
+    .im .ava { width: 36px; height: 36px; border-radius: 10px; flex: none; }
     .ava-doc { background: #fff center / 76% no-repeat url('logo-mark.png?v=1'); border: 1px solid var(--brand-line); }
-    .ava-me { background: linear-gradient(135deg, #6aa6dd, #3f7cb5); }
+    .ava-me { background: linear-gradient(135deg, #19bf8c, #0f9f7b); }
     .im-bubble {
-      max-width: 72%; padding: 9px 11px; border-radius: 6px;
-      font-size: 14px; line-height: 1.55; color: #1a1a1a; background: #fff;
-      word-break: break-word;
+      max-width: 76%; padding: 9px 12px; border-radius: 12px;
+      font-size: 14px; line-height: 1.55; color: var(--ink); background: #fff;
+      border: 1px solid var(--line); word-break: break-word;
     }
-    .im-msg.me .im-bubble { background: #95ec69; }
+    .im-msg.them .im-bubble { border-top-left-radius: 3px; }
+    .im-msg.me .im-bubble { background: var(--brand-soft); border-color: var(--brand-line); color: var(--brand-deep); border-top-right-radius: 3px; }
     .im-foot {
-      flex: none; background: #f7f7f7; border-top: 1px solid #e2e2e2;
+      flex: none; background: #fff; border-top: 1px solid var(--line);
       padding: 8px 10px; display: flex; gap: 8px; align-items: center;
     }
     .im-input {
-      flex: 1; border: 1px solid #e2e2e2; border-radius: 6px; background: #fff;
-      padding: 8px 10px; outline: none; font-size: 14px;
+      flex: 1; border: 1px solid var(--line); border-radius: 8px; background: #fff;
+      padding: 9px 11px; outline: none; font-size: 14px;
     }
-    .im-send { border: 0; background: var(--blue); color: #fff; border-radius: 6px; padding: 9px 14px; font-weight: 700; cursor: pointer; }
-    .im-quick { flex: none; display: flex; gap: 8px; padding: 8px 10px 0; overflow-x: auto; background: #ededed; }
+    .im-input:focus { border-color: var(--brand-line); box-shadow: 0 0 0 3px var(--brand-soft); }
+    .im-send { border: 0; background: var(--blue); color: #fff; border-radius: 8px; padding: 9px 14px; font-weight: 700; cursor: pointer; }
+    .im-quick { flex: none; display: flex; gap: 8px; padding: 8px 10px 0; overflow-x: auto; background: var(--bg); }
     .im-quick::-webkit-scrollbar { display: none; }
     .im-quick button {
-      flex: none; border: 1px solid #dcdcdc; background: #fff; color: #4a5560;
+      flex: none; border: 1px solid var(--brand-line); background: var(--brand-soft); color: var(--brand-deep);
       border-radius: 999px; padding: 7px 12px; font-size: 13px; cursor: pointer; white-space: nowrap;
     }
-    .im-quick button:active { background: #f0f0f0; }
+    .im-quick button:active { background: #d7f8eb; }
     .im-ic {
       width: 32px; height: 32px; flex: none; border: 0; background: transparent;
-      color: #5a5a5a; cursor: pointer; display: grid; place-items: center;
+      color: var(--muted); cursor: pointer; display: grid; place-items: center;
     }
     .im-ic svg { width: 24px; height: 24px; }
+
+    /* 可点击数字 + 底部浮层 */
+    .metric.tappable { cursor: pointer; position: relative; }
+    .metric.tappable:active { background: #eef3f9; }
+    .metric.tappable::after { content: "›"; position: absolute; top: 6px; right: 9px; color: var(--brand-deep); font-size: 15px; line-height: 1; }
+    .metrics-more {
+      width: 100%; margin-top: 10px; border: 0; background: transparent; cursor: pointer;
+      color: var(--brand-deep); font-size: 12px; font-weight: 700; text-align: center;
+    }
+    .sheet-mask {
+      position: absolute; inset: 0; z-index: 40; background: rgba(15,23,32,.45);
+      display: flex; align-items: flex-end; opacity: 0; pointer-events: none; transition: opacity .25s ease;
+    }
+    .sheet-mask.open { opacity: 1; pointer-events: auto; }
+    .sheet {
+      width: 100%; background: #fff; border-radius: 18px 18px 0 0; max-height: 86%;
+      display: flex; flex-direction: column; transform: translateY(100%); transition: transform .28s ease;
+    }
+    .sheet-mask.open .sheet { transform: translateY(0); }
+    .sheet-head {
+      flex: none; display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 16px; border-bottom: 1px solid var(--line);
+    }
+    .sheet-head strong { font-size: 16px; }
+    .sheet-close { border: 0; background: transparent; font-size: 18px; color: var(--muted); cursor: pointer; padding: 4px 6px; }
+    .sheet-body { overflow: auto; padding: 16px; }
+    .ca-group { margin-bottom: 16px; }
+    .ca-title { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+    .ca-chips { display: flex; flex-wrap: wrap; gap: 7px; }
+    .ca-chip { border: 1px solid var(--line); background: #f5f8fc; color: var(--ink); border-radius: 999px; padding: 6px 11px; font-size: 13px; }
+    .ca-chip.soc { background: var(--brand-soft); border-color: var(--brand-line); color: var(--brand-deep); }
+    .ca-list { margin: 0; padding-left: 18px; }
+    .ca-list li { font-size: 12px; color: var(--muted); line-height: 1.6; margin-bottom: 4px; }
+    .gtier { display: grid; grid-template-columns: 62px 1fr; gap: 12px; padding: 13px 0; border-top: 1px solid #edf1f6; }
+    .gtier:first-of-type { border-top: 0; }
+    .gtier-amt { font-size: 18px; font-weight: 800; color: var(--brand-deep); }
+    .gtier-body strong { display: block; font-size: 14px; margin-bottom: 3px; }
 
     .site-credit {
       display: flex; align-items: center; justify-content: center; gap: 10px;
@@ -887,10 +928,6 @@
   <main class="page">
     <section class="phone-shell" aria-label="H5 手机原型">
       <div class="phone">
-        <div class="statusbar">
-          <span>09:41</span>
-          <span>5G  88%</span>
-        </div>
         <header class="app-header">
           <div class="header-row">
             <div class="brand">
@@ -918,18 +955,19 @@
           <section class="stage-screen active" data-stage="0" data-step="0">
             <div class="hero">
               <h1>一次抽血，高效覆盖大部分癌症担忧</h1>
-              <p>跑一趟完成多癌早筛，省去逐项检查的反复奔波，更高性价比，更安心。即使提示异常，也有解读和后续保障承接，小荷会一直陪伴和尽力提供帮助。</p>
+              <p>跑一趟筛查多种癌，省去逐项检查的奔波；即使提示异常，也有解读和保障一路陪伴。</p>
               <div class="metrics">
-                <div class="metric"><b>16种</b><span>高发癌症</span></div>
-                <div class="metric"><b>83%</b><span>发病率覆盖</span></div>
-                <div class="metric"><b>2千-10万</b><span>治疗保障</span></div>
+                <div class="metric tappable" data-action="open-cancer"><b>16种</b><span>高发癌症</span></div>
+                <div class="metric tappable" data-action="open-cancer"><b>86%</b><span>发病率覆盖</span></div>
+                <div class="metric tappable" data-action="open-guarantee"><b>600-10万</b><span>补贴保障</span></div>
               </div>
+              <button class="metrics-more" data-action="open-cancer">查看 16 种覆盖癌种与选择依据 ›</button>
             </div>
 
             <!-- 技术路径 -->
             <div class="card">
               <div class="card-title"><h2>技术路径 · DNA 甲基化</h2><span class="pill green">论文支撑</span></div>
-              <p class="mini">检测血液中游离 DNA（cfDNA）的甲基化信号来识别癌症线索。甲基化异常在肿瘤极早期即出现，是目前多癌早筛公认较可靠的技术方向之一，无创、只需一次抽血。</p>
+              <p class="mini">检测血液中 cfDNA 的甲基化信号识别癌症线索；这类异常在肿瘤极早期即出现，无创、一次抽血即可。</p>
               <div class="tag-row">
                 <span class="pill gray">cfDNA 甲基化</span>
                 <span class="pill gray">同行评审研究</span>
@@ -948,11 +986,11 @@
             <div class="card">
               <div class="card-title"><h2>为什么值得你选择</h2><span class="pill blue">核心优势</span></div>
               <div class="adv-list">
-                <div class="adv"><i>全</i><div><strong>癌种覆盖更全</strong><span class="mini">相比覆盖相对同质化的同类产品，一次覆盖 16 种中国高发癌。</span></div></div>
-                <div class="adv"><i>简</i><div><strong>比传统筛查方式更便捷</strong><span class="mini">一次抽血替代低剂量 CT、胃肠镜等多项分散检查，省去反复奔波。</span></div></div>
-                <div class="adv"><i>准</i><div><strong>中早期性能领先</strong><span class="mini">灵敏度 70%、特异度 99%，为当前国内同等规模样本中的最佳性能。</span></div></div>
-                <div class="adv"><i>快</i><div><strong>一趟排查多种癌</strong><span class="mini">不用像传统检查那样一个癌种一个项目逐项排查。</span></div></div>
-                <div class="adv"><i>孝</i><div><strong>替爸妈长辈约更省心</strong><span class="mini">排查范围大、覆盖的又都是重要高发癌，老人只需跑一趟，少折腾。</span></div></div>
+                <div class="adv"><i>全</i><div><strong>癌种覆盖更全</strong><span class="mini">一次覆盖 16 种中国高发癌，比同类更全。</span></div></div>
+                <div class="adv"><i>简</i><div><strong>比传统筛查更便捷</strong><span class="mini">一次抽血替代 CT、胃肠镜等多项分散检查。</span></div></div>
+                <div class="adv"><i>准</i><div><strong>中早期性能领先</strong><span class="mini">灵敏度 70%、特异度 99%，同规模样本中领先。</span></div></div>
+                <div class="adv"><i>快</i><div><strong>一趟排查多种癌</strong><span class="mini">不用像传统检查那样逐个癌种排查。</span></div></div>
+                <div class="adv"><i>孝</i><div><strong>替长辈约更省心</strong><span class="mini">覆盖重要高发癌，老人跑一趟，少折腾。</span></div></div>
               </div>
               <p class="footnote">数据来源：XX 临床研究（N=____），样本来源 / 统计口径以正式发表为准。</p>
             </div>
@@ -960,7 +998,7 @@
             <!-- 服务与适用（由原产品详情去重精简而来） -->
             <div class="card">
               <div class="card-title"><h2>服务与适用</h2><span class="pill blue">可预约</span></div>
-              <div class="row"><div><strong>包含服务</strong><span class="mini">采血检测 · 电子报告 · 医生解读 · 诊断/治疗资源连接 · 异常补贴与保障 · 一年随访权益（含）</span></div></div>
+              <div class="row"><div><strong>包含服务</strong><span class="mini">采血检测 · 电子报告 · 医生解读 · 就医连接 · 补贴保障 · 一年随访</span></div></div>
               <div class="row"><div><strong>适用人群</strong><span class="mini">40岁以上、有家族史、长期吸烟饮酒或慢病人群优先</span></div></div>
             </div>
 
@@ -1015,10 +1053,7 @@
               <div class="check on" data-check><span class="box"></span><span>我已阅读并同意《知情同意书》《隐私政策》，且不处于上述特殊状态。</span></div>
             </div>
 
-            <div class="two-actions">
-              <button class="ghost" data-action="reserve">先预约到场再付</button>
-              <button class="primary" data-action="book">提交预约</button>
-            </div>
+            <button class="primary" data-action="book">提交预约</button>
           </section>
 
           <!-- ===================== 阶段2 核销/检验 ===================== -->
@@ -1027,7 +1062,7 @@
             <div class="hero">
               <div class="eyebrow">已预约 · 支付方式可二选一</div>
               <h1>三里屯采血点 明天 14:30</h1>
-              <p>可现在线上支付，也可到现场与医护/顾问确认后再付。名额已为你保留。</p>
+              <p>可现在线上支付，也可到现场确认后再付。名额已为你保留。</p>
               <div class="price">¥3000 <span>¥3680</span></div>
             </div>
 
@@ -1040,15 +1075,12 @@
             <div class="card">
               <div class="card-title"><h2>选择支付方式</h2><span class="pill green">更放心</span></div>
               <div class="pay-options" id="pay-options">
-                <div class="pay-option active"><span class="radio-dot"></span><div><strong>线上支付</strong><p class="mini">现在支付，现场直接核销采血，适合已确认产品和流程的用户。</p></div></div>
-                <div class="pay-option"><span class="radio-dot"></span><div><strong>现场沟通后支付</strong><p class="mini">先保留预约，到采血点确认价值、适用性和流程后再付款。</p></div></div>
+                <div class="pay-option active" data-pay="online"><span class="radio-dot"></span><div><strong>线上支付<span class="perk-tag">推荐</span></strong><p class="mini">现在支付，到场直接采血；未采血可随时全额退，无顾虑。</p><p class="perk">专属快速服务通道 · 到检纪念礼</p></div></div>
+                <div class="pay-option" data-pay="onsite"><span class="radio-dot"></span><div><strong>现场沟通后支付</strong><p class="mini">先保留名额，到现场进一步了解产品价值与流程后再付款。</p></div></div>
               </div>
             </div>
 
-            <div class="two-actions">
-              <button class="ghost" data-action="onsite">到现场再付</button>
-              <button class="primary" data-action="pay">线上支付 ¥3000</button>
-            </div>
+            <button class="primary" id="pay-confirm" data-action="pay">线上支付 ¥3000</button>
           </section>
 
           <section class="stage-screen" data-stage="1" data-step="1">
@@ -1108,7 +1140,7 @@
                   <div>
                     <div class="eyebrow">DOC 模型 · 癌症风险检测</div>
                     <h1>检测到癌症风险信号</h1>
-                    <p class="mini">筛查不是诊断。建议预约医生解读，并结合影像、内镜或专科检查进一步明确。</p>
+                    <p class="mini">筛查不是诊断，建议结合影像、内镜等进一步明确。</p>
                   </div>
                 </div>
               </div>
@@ -1116,7 +1148,7 @@
                 <div class="card-title"><h2>TOO 模型 · 溯源提示</h2><span class="pill orange">建议解读</span></div>
                 <div class="too-label">溯源信号最显著的部位</div>
                 <div class="too-part">肺部</div>
-                <p class="mini">检测到风险时，模型会提示且仅提示一个溯源信号最显著的部位，供医生优先排查。建议优先针对肺部进一步检查（如低剂量胸部 CT）。</p>
+                <p class="mini">模型只提示一个最显著部位，供医生优先排查。建议优先针对肺部检查（如低剂量 CT）。</p>
                 <button class="primary" style="margin-top:12px" data-action="go-care">针对肺部就医，连接诊断资源 →</button>
               </div>
               <button class="linkbtn" data-action="go-interpret">仍有疑问？也可预约医生解读</button>
@@ -1130,13 +1162,13 @@
                   <div>
                     <div class="eyebrow">DOC 模型 · 癌症风险检测</div>
                     <h1>未检测到癌症风险信号</h1>
-                    <p class="mini">筛查阴性不代表绝对无风险。建议保持定期筛查，并留意身体变化。</p>
+                    <p class="mini">筛查阴性不代表绝对无风险，建议保持定期复筛。</p>
                   </div>
                 </div>
               </div>
               <div class="card">
                 <div class="card-title"><h2>TOO 模型 · 溯源提示</h2><span class="pill green">无需溯源</span></div>
-                <p class="mini">本次未检测到癌症风险信号，不进行部位溯源提示。</p>
+                <p class="mini">本次未检测到风险，无需部位溯源。</p>
               </div>
               <div class="card">
                 <div class="card-title"><h2>下次建议</h2></div>
@@ -1154,7 +1186,7 @@
               <div class="card-title"><h2>预约报告解读</h2><span class="pill blue">最快今晚</span></div>
               <div class="doctor">
                 <div class="avatar" aria-hidden="true"></div>
-                <div><strong>李医生 · 肿瘤内科 副主任医师</strong><p class="mini">15分钟电话/视频解读，说明风险含义、建议检查和就医路径。</p></div>
+                <div><strong>李医生 · 肿瘤内科 副主任医师</strong><p class="mini">15 分钟解读：风险含义、建议检查与就医路径。</p></div>
               </div>
               <div class="calendar" id="slots-interpret" style="margin-top:12px">
                 <button class="slot active">今晚<br><span class="mini">20:00</span></button>
@@ -1200,8 +1232,19 @@
             <div class="hero">
               <div class="eyebrow">结果疑问、诊断连接与保障补贴</div>
               <h1>对结果有疑问，我们帮你查清并提供保障</h1>
-              <p>顾问会整理问题、按需连接诊断与治疗资源；技术限制导致的假阳、假阴也提供安抚和补贴。</p>
+              <p>顾问帮你整理问题、连接诊断与治疗资源；假阳、假阴也有补贴。</p>
             </div>
+
+            <div class="card">
+              <div class="card-title"><h2>想直接找人？联系顾问</h2><span class="pill green">企业微信 1对1</span></div>
+              <div class="doctor">
+                <div class="avatar avatar-logo" aria-hidden="true"></div>
+                <div><strong>小荷健康顾问</strong><p class="mini">想尽快有人帮忙？顾问可协助整理问题、连接就医资源。</p></div>
+              </div>
+              <button class="primary" style="margin-top:12px" data-action="open-wecom">打开企业微信，联系顾问</button>
+              <button class="linkbtn" data-action="copy-wecom">或复制顾问企业微信号</button>
+            </div>
+
             <div class="card">
               <div class="card-title"><h2>问题反馈</h2><span class="pill red">48小时内跟进</span></div>
               <div class="form-grid">
@@ -1216,12 +1259,12 @@
           <section class="stage-screen" data-stage="3" data-step="1">
             <div class="substep">协助 · <b>第 2 步 / 共 3 步</b> · 辅助申请</div>
             <div class="card">
-              <div class="card-title"><h2>辅助申请</h2><span class="pill blue">可勾选提交</span></div>
-              <div class="row"><div><strong>申请专科就医建议</strong><span class="mini">按风险部位推荐科室、检查顺序和就诊材料清单</span></div><span class="pill gray">免费</span></div>
-              <div class="row"><div><strong>连接诊断与治疗资源</strong><span class="mini">适用于疑似阳性且需尽快明确诊断、进一步治疗的人群</span></div><span class="pill orange">审核</span></div>
-              <div class="row"><div><strong>申请诊断检查补贴</strong><span class="mini">完成 CT、内镜、病理等进一步检查，可申请补贴</span></div><span class="pill green">¥600</span></div>
-              <div class="row"><div><strong>假阳安抚补贴</strong><span class="mini">如进一步诊断排除癌症，补贴额外奔波和担心</span></div><span class="pill green">¥2000</span></div>
-              <div class="row"><div><strong>假阴治疗费用补贴</strong><span class="mini">如筛查未提示但后续确诊，提供后续治疗费用补贴</span></div><span class="pill red">¥10万</span></div>
+              <div class="card-title"><h2>辅助申请</h2><span class="pill blue">可申请</span></div>
+              <div class="row"><div><strong>申请专科就医建议</strong><span class="mini">推荐科室、检查顺序与就诊材料</span></div><span class="pill gray">免费</span></div>
+              <div class="row"><div><strong>连接诊断与治疗资源</strong><span class="mini">疑似阳性、需尽快确诊与治疗者</span></div><span class="pill orange">审核</span></div>
+              <div class="row"><div><strong>申请诊断检查补贴</strong><span class="mini">完成 CT / 内镜 / 病理等检查可申请</span></div><span class="pill green">¥600</span></div>
+              <div class="row"><div><strong>假阳安抚补贴</strong><span class="mini">诊断排除癌症，补贴额外奔波</span></div><span class="pill green">¥2000</span></div>
+              <div class="row"><div><strong>假阴治疗费用补贴</strong><span class="mini">筛查未提示但后续确诊，补贴治疗费用</span></div><span class="pill red">¥10万</span></div>
             </div>
             <button class="primary" data-action="submit">提交反馈与协助申请</button>
           </section>
@@ -1258,16 +1301,24 @@
               <h1>检查结束不是终点，我们陪你管理一整年</h1>
               <p>报告之后持续为你提供科普、就医建议和情绪陪伴；明年复查或推荐亲友，还有返现感谢。</p>
             </div>
+
+            <div class="card">
+              <div class="card-title"><h2>你的专属顾问</h2><span class="pill green">企业微信 1对1</span></div>
+              <div class="doctor">
+                <div class="avatar avatar-logo" aria-hidden="true"></div>
+                <div><strong>小荷健康顾问</strong><p class="mini">一年随访专人对接：解读、就医协调、复查提醒。</p></div>
+              </div>
+              <button class="primary" style="margin-top:12px" data-action="open-wecom">打开企业微信，联系顾问</button>
+              <button class="linkbtn" data-action="copy-wecom">或复制顾问企业微信号</button>
+            </div>
+
             <div class="card">
               <div class="card-title"><h2>你的随访权益</h2><span class="pill green">全部用户</span></div>
-              <div class="row"><div><strong>健康科普推送</strong><span class="mini">定期推送防癌、复查与生活方式科普</span></div><span class="pill gray">定期</span></div>
-              <div class="row"><div><strong>就医建议咨询</strong><span class="mini">有疑问随时问，异常人群获更高频跟进</span></div><span class="pill blue">按需</span></div>
-              <div class="row"><div><strong>情绪陪伴陪聊</strong><span class="mini">焦虑、担心时有人倾听和疏导</span></div><span class="pill green">随时</span></div>
-              <div class="row"><div><strong>年度复查提醒</strong><span class="mini">到期自动提醒，帮你把"每年一次"坚持下来</span></div><span class="pill blue">每年</span></div>
-              <div class="row" style="opacity:.55"><div><strong>专属体检 / 复查折扣</strong><span class="mini">会员价预约后续检查与复筛</span></div><span class="pill gray">即将上线</span></div>
-              <div class="row" style="opacity:.55"><div><strong>家庭健康档案</strong><span class="mini">为家人统一管理报告与提醒</span></div><span class="pill gray">即将上线</span></div>
-              <div class="row" style="opacity:.55"><div><strong>专属健康保险</strong><span class="mini">联合保险伙伴，为会员提供专属投保与理赔权益</span></div><span class="pill gray">即将上线</span></div>
-              <div class="row"><div><strong style="color:var(--brand-deep)">✦ 更多会员权益陆续上线</strong><span class="mini">随访权益持续扩充，敬请期待</span></div><span class="pill green">敬请期待</span></div>
+              <div class="row"><div><strong>健康科普推送</strong><span class="mini">防癌、复查与生活方式科普</span></div><span class="pill gray">定期</span></div>
+              <div class="row"><div><strong>就医建议咨询</strong><span class="mini">有疑问随时问，异常人群更高频跟进</span></div><span class="pill blue">按需</span></div>
+              <div class="row"><div><strong>情绪陪伴陪聊</strong><span class="mini">焦虑、担心时有人倾听疏导</span></div><span class="pill green">随时</span></div>
+              <div class="row"><div><strong>年度复查提醒</strong><span class="mini">到期自动提醒，把"每年一次"坚持下来</span></div><span class="pill blue">每年</span></div>
+              <div class="row"><div><strong style="color:var(--brand-deep)">✦ 更多权益陆续上线</strong><span class="mini">专属体检折扣 · 家庭健康档案 · 专属健康保险…</span></div><span class="pill green">敬请期待</span></div>
               <p class="footnote">随访强度按本次筛查结果分层：结果正常侧重科普与提醒；结果异常加强就医建议与主动回访。</p>
             </div>
             <div class="card">
@@ -1280,7 +1331,7 @@
             </div>
             <div class="card">
               <div class="card-title"><h2>参与科普共创</h2><span class="pill green">稿酬 ¥1000</span></div>
-              <p class="mini">如果这段经历对你有帮助，欢迎把它分享出来，帮到更多还在犹豫或担心的人。完全自愿，可化名 / 打码；内容仅用于健康科普，不含疗效宣传；经你书面授权后使用、可随时撤回。我们提供 1000 元科普共创稿酬。</p>
+              <p class="mini">把你的经历分享出来，帮到更多还在犹豫或担心的人。完全自愿、可化名，仅用于健康科普、经授权后使用，提供 1000 元稿酬。</p>
               <button class="secondary" style="width:100%;margin-top:12px" data-action="share-story">申请参与科普共创</button>
             </div>
             <button class="primary" data-action="go-loyalty">查看复购 / 推荐返现</button>
@@ -1290,14 +1341,14 @@
             <div class="substep">随访 · <b>第 2 步 / 共 2 步</b> · 复购 / 推荐返现</div>
             <div class="card">
               <div class="card-title"><h2>复购与推荐返现</h2><span class="pill green">返现 15%</span></div>
-              <div class="row"><div><strong>明年复查复购</strong><span class="mini">续约下一年度筛查，返现订单金额 15%</span></div><span class="pill green">¥450</span></div>
-              <div class="row"><div><strong>推荐亲友</strong><span class="mini">每成功推荐一位完成检查，返现 15% 感谢金</span></div><span class="pill green">¥450</span></div>
+              <div class="row"><div><strong>明年复查复购</strong><span class="mini">续约明年筛查，返现 15%</span></div><span class="pill green">¥450</span></div>
+              <div class="row"><div><strong>推荐亲友</strong><span class="mini">每推荐一位完成检查，返现 15%</span></div><span class="pill green">¥450</span></div>
             </div>
             <div class="card">
               <div class="card-title"><h2>把守护带给家人</h2></div>
               <div class="doctor">
                 <div class="avatar" aria-hidden="true"></div>
-                <div><strong>替爸妈、伴侣预约</strong><p class="mini">长辈高发癌风险更高，一次抽血少折腾，推荐还能获得返现。</p></div>
+                <div><strong>替爸妈、伴侣预约</strong><p class="mini">长辈风险更高，一次抽血少折腾，推荐还有返现。</p></div>
               </div>
             </div>
             <div class="two-actions">
@@ -1341,6 +1392,98 @@
             <input class="im-input" id="im-input" placeholder="发消息…" aria-label="输入消息">
             <button class="im-ic" id="im-plus" aria-label="更多"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg></button>
             <button class="im-send" id="im-send">发送</button>
+          </div>
+        </div>
+
+        <div class="sheet-mask" id="cancer-sheet">
+          <div class="sheet">
+            <div class="sheet-head">
+              <strong>覆盖癌种与选择依据</strong>
+              <button class="sheet-close" data-action="close-sheet" aria-label="关闭">✕</button>
+            </div>
+            <div class="sheet-body">
+              <p class="mini" style="margin-bottom:14px">一次检测覆盖 <b>16 种</b>中国高发癌症。50–74 岁人群中，这 16 个癌种发病占比约 <b>86%</b>，是我国癌症负担的主要来源。</p>
+
+              <div class="ca-group">
+                <div class="ca-title">过去没有推荐筛查手段的 8 种 · <span style="color:var(--brand-deep)">本产品独特价值</span></div>
+                <p class="mini" style="margin-bottom:8px">这些高发癌种过去缺乏合适的筛查方法，MCED 检测填补空白、帮你提前发现。</p>
+                <div class="ca-chips">
+                  <span class="ca-chip soc">胰腺癌</span>
+                  <span class="ca-chip soc">卵巢癌</span>
+                  <span class="ca-chip soc">子宫内膜癌</span>
+                  <span class="ca-chip soc">胆道癌</span>
+                  <span class="ca-chip soc">淋巴瘤</span>
+                  <span class="ca-chip soc">前列腺癌</span>
+                  <span class="ca-chip soc">膀胱癌</span>
+                  <span class="ca-chip soc">肾癌</span>
+                </div>
+              </div>
+
+              <div class="ca-group">
+                <div class="ca-title">已有推荐筛查方法（SOC）· 8 种</div>
+                <p class="mini" style="margin-bottom:8px">这些癌种也一并纳入，一次检测同步覆盖。</p>
+                <div class="ca-chips">
+                  <span class="ca-chip">肺癌</span>
+                  <span class="ca-chip">结直肠癌</span>
+                  <span class="ca-chip">宫颈癌</span>
+                  <span class="ca-chip">乳腺癌</span>
+                  <span class="ca-chip">胃癌</span>
+                  <span class="ca-chip">食管癌</span>
+                  <span class="ca-chip">肝癌</span>
+                  <span class="ca-chip">鼻咽癌</span>
+                </div>
+              </div>
+
+              <div class="ca-group">
+                <div class="ca-title">为什么选这 16 种</div>
+                <ul class="ca-list">
+                  <li>重点填补空白：8 个过去无推荐筛查手段的高发癌种（如胰腺癌），MCED 让它们也能被筛。</li>
+                  <li>这 8 个癌种发病率与死亡率均居前 20，疾病负担重。</li>
+                  <li>自然史清晰，大多数早期停留至少 1 年，有足够筛查窗口。</li>
+                  <li>有较明确的早期诊断方法，筛查阳性后能及时确诊。</li>
+                  <li>已有推荐筛查（SOC）的 8 个癌种一并纳入，一次覆盖更全。</li>
+                </ul>
+              </div>
+
+              <p class="footnote">癌种发病占比等为参考口径，正式以发表数据与权威指南为准。</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="sheet-mask" id="guarantee-sheet">
+          <div class="sheet">
+            <div class="sheet-head">
+              <strong>补贴保障说明</strong>
+              <button class="sheet-close" data-action="close-sheet" aria-label="关闭">✕</button>
+            </div>
+            <div class="sheet-body">
+              <p class="mini" style="margin-bottom:14px">我们对用户实事求是，也直面技术瓶颈：从及时诊断到假阳、假阴，都有补贴一路兜底。</p>
+
+              <div class="gtier">
+                <div class="gtier-amt">¥600</div>
+                <div class="gtier-body">
+                  <strong>诊断检查补贴</strong>
+                  <p class="mini">提示癌症风险后及时就医诊断，补贴检查费（600 元内个人实付部分）。600 元约为大部分癌症检查在医保赔付后的自付量级。</p>
+                </div>
+              </div>
+              <div class="gtier">
+                <div class="gtier-amt">¥2000</div>
+                <div class="gtier-body">
+                  <strong>假阳安抚补贴</strong>
+                  <p class="mini">技术不可能做到 100% 准确，必然存在假阳。若进一步诊断排除癌症，直接给付或保险补贴 2000 元，安抚你多做一次检查、担惊受怕的心理成本。</p>
+                </div>
+              </div>
+              <div class="gtier">
+                <div class="gtier-amt">¥10万</div>
+                <div class="gtier-body">
+                  <strong>假阴治疗补贴</strong>
+                  <p class="mini">若本次未提示风险，但出结果后 1 年内确诊癌症（假阴），直接给付或保险补贴 10 万元，减轻治疗费用负担。</p>
+                </div>
+              </div>
+
+              <p class="mini" style="margin-top:8px">DNA 甲基化已是当前先进成熟的多癌筛查技术；经多方考证，小荷多癌早筛在国内最大规模、高质量样本的训练与验证下，灵敏度、特异度都相对更高。但任何技术都不可能做到 100%，仍会有假阳、假阴——我们不避讳、不免责，而是尽力多帮你一把，建立更负责的口碑。</p>
+              <p class="footnote">"最大规模""灵敏度 / 特异度更高"等表述需以公开发表数据 / 临床验证为准（数据来源：____，待补充）；补贴金额与形式（直接给付 / 保险）为示意，正式以服务条款为准。</p>
+            </div>
           </div>
         </div>
       </div>
@@ -1423,7 +1566,7 @@
         status: "当前阶段：约前咨询",
         steps: ["产品详情", "预约确认"],
         insights: [
-          ["价值先讲清", "首屏直接呈现16种高发癌、约83%发病率覆盖，帮助用户理解为什么值得做。"],
+          ["价值先讲清", "首屏直接呈现16种高发癌、约86%发病率覆盖，帮助用户理解为什么值得做。"],
           ["决策不孤单", "提供在线咨询入口，犹豫人群先沟通适用性再预约，降低流失。"],
           ["知情前置", "预约页内置受检人信息与知情确认，规避特殊状态人群的医疗风险。"]
         ]
@@ -1551,6 +1694,20 @@
       });
     });
 
+    // 支付方式 → 同步底部确认按钮的文案与行为
+    const payConfirm = document.querySelector("#pay-confirm");
+    document.querySelectorAll("#pay-options .pay-option").forEach(opt => {
+      opt.addEventListener("click", () => {
+        if (opt.dataset.pay === "onsite") {
+          payConfirm.textContent = "确认，到场再付";
+          payConfirm.dataset.action = "onsite";
+        } else {
+          payConfirm.textContent = "线上支付 ¥3000";
+          payConfirm.dataset.action = "pay";
+        }
+      });
+    });
+
     // checkbox toggle
     document.querySelectorAll("[data-check]").forEach(c => {
       c.addEventListener("click", () => c.classList.toggle("on"));
@@ -1592,6 +1749,11 @@
       "rebook":  () => showToast("已为你预留明年复查名额"),
       "refer":   () => showToast("推荐链接已生成，可分享给家人"),
       "share-story": () => showToast("已提交科普共创申请，工作人员会与你联系确认授权范围"),
+      "open-cancer": () => document.querySelector("#cancer-sheet").classList.add("open"),
+      "open-guarantee": () => document.querySelector("#guarantee-sheet").classList.add("open"),
+      "close-sheet": () => document.querySelectorAll(".sheet-mask").forEach(m => m.classList.remove("open")),
+      "open-wecom": () => showToast("正在打开企业微信对话…（示意，正式版经微信客服 / 活码直达会话）"),
+      "copy-wecom": () => showToast("顾问企业微信号已复制：xiaohe-care-001"),
       "upload":  () => showToast("已选择文件（示意）")
     };
 
@@ -1666,6 +1828,11 @@
         addMsg(text, "me");
         replyTo(text);
       });
+    });
+
+    // 点浮层空白处关闭
+    document.querySelectorAll(".sheet-mask").forEach(mask => {
+      mask.addEventListener("click", e => { if (e.target === mask) mask.classList.remove("open"); });
     });
 
     document.querySelector("#im-voice").addEventListener("click", () => showToast("按住说话（示意）"));
