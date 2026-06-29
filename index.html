@@ -1434,11 +1434,11 @@
               <button class="sheet-close" data-action="close-sheet" aria-label="关闭">✕</button>
             </div>
             <div class="sheet-body">
-              <p class="mini" style="margin-bottom:14px">一次抽血完成 <b>16 种</b>高发癌症筛查。相比逐项做 CT、内镜，或依赖肿瘤标记物，本检测覆盖更全、更适合用于筛查。（50–74 岁人群中这 16 癌发病占比约 <b>86%</b>）</p>
+              <p class="mini" style="margin-bottom:12px">一次抽血完成 <b>16 种</b>高发癌症筛查。下表按<b>中国年新发病例数从高到低</b>排列；相比逐项做 CT、内镜或依赖肿瘤标记物，本检测覆盖更全、更适合用于筛查。（50–74 岁人群中这 16 癌发病占比约 <b>86%</b>）</p>
 
               <div class="cov-scroll">
                 <table class="cov-table">
-                  <thead><tr><th>癌种</th><th>常规筛查</th><th>肿瘤标记物</th><th>本检测</th></tr></thead>
+                  <thead><tr><th>癌种<div class="mk">年新发·全国约</div></th><th>常规筛查</th><th>肿瘤标记物</th><th>本检测价值</th></tr></thead>
                   <tbody>
                     <tr><td>肺癌</td><td>低剂量 CT</td><td>CEA·CYFRA<div class="mk">不适合筛查</div></td><td><span class="pill green">更优</span></td></tr>
                     <tr><td>结直肠癌</td><td>肠镜 / 粪检</td><td>CEA<div class="mk">不适合筛查</div></td><td><span class="pill green">更优</span></td></tr>
@@ -1839,6 +1839,17 @@
       btn.addEventListener("click", () => goTo(Number(btn.dataset.stage), 0));
     });
 
+    // 顶部进度条同样可点击跳转到对应阶段
+    stepperSteps.forEach((el, i) => {
+      el.style.cursor = "pointer";
+      el.setAttribute("role", "button");
+      el.setAttribute("tabindex", "0");
+      el.addEventListener("click", () => goTo(i, 0));
+      el.addEventListener("keydown", e => {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); goTo(i, 0); }
+      });
+    });
+
     // slot selectors (per group)
     document.querySelectorAll(".calendar").forEach(group => {
       group.querySelectorAll(".slot").forEach(slot => {
@@ -1954,6 +1965,7 @@
     function openIM() {
       im.classList.add("open");
       imBody.scrollTop = imBody.scrollHeight;
+      window.setTimeout(() => imInput.focus(), 280);
     }
     function closeIM() { im.classList.remove("open"); }
 
@@ -1992,9 +2004,20 @@
     }
 
     document.querySelector("#service-badge").addEventListener("click", openIM);
+    document.querySelector("#service-badge").addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openIM(); }
+    });
     document.querySelector("#im-back").addEventListener("click", closeIM);
     document.querySelector("#im-send").addEventListener("click", sendIM);
     imInput.addEventListener("keydown", e => { if (e.key === "Enter") sendIM(); });
+
+    // Esc：优先关闭已打开的浮层，其次关闭健康管家对话
+    document.addEventListener("keydown", e => {
+      if (e.key !== "Escape") return;
+      const openSheet = document.querySelector(".sheet-mask.open");
+      if (openSheet) { openSheet.classList.remove("open"); return; }
+      if (im.classList.contains("open")) closeIM();
+    });
 
     document.querySelectorAll("#im-quick button").forEach(btn => {
       btn.addEventListener("click", () => {
