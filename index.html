@@ -1,4 +1,5 @@
 <!doctype html>
+<!-- 小荷早筛 DEMO -->
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
@@ -282,7 +283,7 @@
 
     .metrics {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 8px;
       margin: 14px 0 4px;
       position: relative;
@@ -312,13 +313,9 @@
       margin-top: 3px;
     }
 
-    /* accordion */
-    .acc-head { cursor: pointer; user-select: none; margin-bottom: 0; }
-    .acc.open .acc-head { margin-bottom: 12px; }
-    .acc .acc-body { display: none; }
-    .acc.open .acc-body { display: block; animation: fade .2s ease; }
+    /* 折叠箭头（参考研究来源用） */
     .chev { color: var(--muted); font-size: 13px; transition: transform .2s; }
-    .acc.open .chev, .ref.open .chev { transform: rotate(180deg); }
+    .ref.open .chev { transform: rotate(180deg); }
 
     /* 技术标签 + 优势 */
     .tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
@@ -906,6 +903,25 @@
     .ca-chip.soc { background: var(--brand-soft); border-color: var(--brand-line); color: var(--brand-deep); }
     .ca-list { margin: 0; padding-left: 18px; }
     .ca-list li { font-size: 12px; color: var(--muted); line-height: 1.6; margin-bottom: 4px; }
+    .cov-head { display: grid; grid-template-columns: 68px 1fr auto; gap: 8px; padding: 0 0 6px; font-size: 11px; color: var(--muted); font-weight: 700; }
+    .cov-row { display: grid; grid-template-columns: 68px 1fr auto; gap: 8px; align-items: center; padding: 9px 0; border-top: 1px solid #edf1f6; }
+    .cov-row strong { font-size: 13px; }
+    .cov-row .m { font-size: 12px; color: var(--muted); }
+    .cov-row .pill { font-size: 11px; padding: 3px 8px; }
+    .cov-scroll { overflow-x: auto; margin: 0 -16px; padding: 0 16px 2px; -webkit-overflow-scrolling: touch; }
+    .cov-table { border-collapse: collapse; min-width: 470px; }
+    .cov-table th, .cov-table td { text-align: left; padding: 9px 8px; border-bottom: 1px solid #edf1f6; font-size: 12px; vertical-align: top; }
+    .cov-table th { color: var(--muted); font-weight: 700; font-size: 11px; border-bottom: 1px solid var(--line); }
+    .cov-table td:first-child, .cov-table th:first-child { font-weight: 700; color: var(--ink); white-space: nowrap; }
+    .cov-table .mk { color: var(--muted); font-size: 11px; margin-top: 2px; }
+    .cov-table .pill { font-size: 11px; padding: 3px 8px; white-space: nowrap; }
+    .adv-link { cursor: pointer; }
+    .adv-more { display: inline-block; margin-top: 4px; color: var(--brand-deep); font-size: 12px; font-weight: 700; }
+    .perf-table { min-width: 560px; }
+    .perf-table th:first-child, .perf-table td:first-child { white-space: normal; min-width: 124px; max-width: 140px; }
+    .cov-table th.me { color: var(--brand-deep); }
+    .cov-table td.me { background: var(--brand-soft); }
+    .cov-table td.me strong { color: var(--brand-deep); }
     .gtier { display: grid; grid-template-columns: 62px 1fr; gap: 12px; padding: 13px 0; border-top: 1px solid #edf1f6; }
     .gtier:first-of-type { border-top: 0; }
     .gtier-amt { font-size: 18px; font-weight: 800; color: var(--brand-deep); }
@@ -914,6 +930,15 @@
     .card-link:active { background: #fbfdff; }
     .tech-fig { background: var(--brand-soft); border: 1px solid var(--brand-line); border-radius: 12px; padding: 14px 10px 8px; }
     .tech-cap { font-size: 11px; color: var(--muted); text-align: center; margin: 6px 0 14px; }
+    .letter-top { display: flex; align-items: center; gap: 10px; padding-bottom: 12px; border-bottom: 2px solid var(--brand-deep); margin-bottom: 4px; }
+    .letter-top img { width: 36px; height: 36px; border-radius: 8px; border: 1px solid var(--brand-line); }
+    .letter-top strong { display: block; font-size: 14px; }
+    .letter-top span { display: block; font-size: 11px; color: var(--muted); margin-top: 2px; }
+    .letter h4 { font-size: 13px; color: var(--brand-deep); margin: 14px 0 5px; }
+    .letter p { font-size: 12.5px; color: #3a4654; line-height: 1.6; margin: 0; }
+    .letter .kv { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+    .letter .kv div { background: #f5f8fc; border: 1px solid #e5ebf2; border-radius: 8px; padding: 8px 9px; font-size: 12px; }
+    .letter .kv b { color: var(--brand-deep); }
 
     .site-credit {
       display: flex; align-items: center; justify-content: center; gap: 10px;
@@ -978,7 +1003,6 @@
               <p>跑一趟筛查多种癌，省去逐项检查的奔波；即使提示异常，也有解读和保障一路陪伴。</p>
               <div class="metrics">
                 <div class="metric tappable" data-action="open-cancer"><b>16种</b><span>覆盖86%发病率</span></div>
-                <div class="metric tappable" data-action="open-care"><b>76家</b><span>三甲就医资源</span></div>
                 <div class="metric tappable" data-action="open-guarantee"><b>600-10万</b><span>补贴保障</span></div>
               </div>
               <button class="metrics-more" data-action="open-tech">检测技术 · DNA 甲基化 ›</button>
@@ -989,9 +1013,9 @@
               <div class="card-title"><h2>为什么值得你选择</h2><span class="pill blue">核心优势</span></div>
               <div class="adv-list">
                 <div class="adv"><i>全</i><div><strong>癌种覆盖更全</strong><span class="mini">一次覆盖 16 种中国高发癌，比同类更全。</span></div></div>
-                <div class="adv"><i>简</i><div><strong>比传统筛查更便捷</strong><span class="mini">一次抽血替代 CT、胃肠镜等多项分散检查。</span></div></div>
-                <div class="adv"><i>准</i><div><strong>中早期性能领先</strong><span class="mini">灵敏度 70%、特异度 99%，同规模样本中领先。</span></div></div>
-                <div class="adv"><i>快</i><div><strong>一趟排查多种癌</strong><span class="mini">不用像传统检查那样逐个癌种排查。</span></div></div>
+                <div class="adv"><i>简</i><div><strong>一次抽血，省去逐项检查</strong><span class="mini">替代 CT、胃肠镜等多项分散检查，不用一个个癌种排查。</span></div></div>
+                <div class="adv adv-link" data-action="open-perf"><i>准</i><div><strong>中早期性能领先</strong><span class="mini">灵敏度 70%、特异度 99%，同规模样本中领先。</span><span class="adv-more">查看与同类产品对比 ›</span></div></div>
+                <div class="adv"><i>安</i><div><strong>无创更安全</strong><span class="mini">只需抽血，无辐射、无内镜痛苦，适合定期检查。</span></div></div>
                 <div class="adv"><i>孝</i><div><strong>替长辈约更省心</strong><span class="mini">覆盖重要高发癌，老人跑一趟，少折腾。</span></div></div>
               </div>
               <p class="footnote">数据来源：XX 临床研究（N=____），样本来源 / 统计口径以正式发表为准。</p>
@@ -1016,16 +1040,10 @@
               <p class="footnote">数据示意，为服务规模与时效说明，不代表筛查或诊断有效性的承诺。</p>
             </div>
 
-            <div class="card">
-              <div class="card-title"><h2>还有疑问？</h2><span class="pill green">顾问在线</span></div>
-              <div class="doctor">
-                <div class="avatar avatar-logo" aria-hidden="true"></div>
-                <div><strong>约前咨询</strong><p class="mini">不确定自己适不适合？先和顾问聊聊适用性、流程和价格，再决定预约。</p></div>
-              </div>
-              <button class="ghost" style="width:100%;margin-top:12px" data-action="consult">在线咨询顾问</button>
+            <div class="two-actions">
+              <button class="ghost" data-action="consult">在线咨询</button>
+              <button class="primary" data-action="go-book">去预约</button>
             </div>
-
-            <button class="primary" data-action="go-book">去预约</button>
           </section>
 
           <section class="stage-screen" data-stage="0" data-step="1">
@@ -1119,14 +1137,14 @@
             <div class="card">
               <div class="card-title"><h2>这段时间你可以</h2></div>
               <div class="row"><div><strong>了解报告怎么看</strong><span class="mini">提前熟悉筛查结论与诊断的区别</span></div><span class="pill gray">科普</span></div>
-              <div class="row"><div><strong>预留解读时段</strong><span class="mini">报告出具后可第一时间预约医生解读</span></div><span class="pill blue">可预约</span></div>
+              <div class="row"><div><strong>了解后续保障</strong><span class="mini">异常时的检查补贴、就医资源与协助</span></div><span class="pill blue">可了解</span></div>
             </div>
             <button class="primary" data-action="report-ready">模拟：报告已就绪，去查看</button>
           </section>
 
           <!-- ===================== 阶段3 报告解读 ===================== -->
           <section class="stage-screen" data-stage="2" data-step="0">
-            <div class="substep">结果 · <b>第 1 步 / 共 3 步</b> · 筛查结论</div>
+            <div class="substep">结果 · <b>筛查结论</b></div>
             <div class="banner"><i>📄</i><div><strong>你的筛查报告已就绪</strong><span class="mini">点击下方切换查看两种结论示例</span></div></div>
 
             <div class="seg" id="result-seg">
@@ -1154,6 +1172,7 @@
                 <button class="primary" style="margin-top:12px" data-action="go-care">针对肺部就医，连接诊断资源 →</button>
               </div>
               <button class="linkbtn" data-action="go-interpret">仍有疑问？也可预约医生解读</button>
+              <button class="linkbtn" data-action="open-docsupport">医生没听过小荷？获取就医支持 ›</button>
             </div>
 
             <!-- 正常：DOC 无风险，无 TOO 提示 -->
@@ -1183,7 +1202,7 @@
           </section>
 
           <section class="stage-screen" data-stage="2" data-step="1">
-            <div class="substep">结果 · <b>第 2 步 / 共 3 步</b> · 预约解读</div>
+            <div class="substep">结果 · <b>预约医生解读</b> · 可选</div>
             <div class="card">
               <div class="card-title"><h2>预约报告解读</h2><span class="pill blue">最快今晚</span></div>
               <div class="doctor">
@@ -1207,7 +1226,7 @@
           </section>
 
           <section class="stage-screen" data-stage="2" data-step="2">
-            <div class="substep">结果 · <b>第 3 步 / 共 3 步</b> · 解读小结</div>
+            <div class="substep">结果 · <b>解读小结</b></div>
             <div class="banner"><i>✓</i><div><strong>解读已完成</strong><span class="mini">李医生 · 06-25 20:14 · 15分钟</span></div></div>
             <div class="card">
               <div class="card-title"><h2>医生解读</h2><span class="pill orange">重点</span></div>
@@ -1260,6 +1279,14 @@
 
           <section class="stage-screen" data-stage="3" data-step="1">
             <div class="substep">协助 · <b>第 2 步 / 共 3 步</b> · 辅助申请</div>
+            <div class="card card-link" data-action="open-care">
+              <div class="card-title"><h2>三甲就医资源</h2><span style="color:var(--brand-deep);font-size:18px">›</span></div>
+              <p class="mini">已对接 76 家三甲医院资源，可协助专科就医、连接诊断与治疗。</p>
+            </div>
+            <div class="card card-link" data-action="open-docsupport">
+              <div class="card-title"><h2>带报告见医生 · 就医支持</h2><span style="color:var(--brand-deep);font-size:18px">›</span></div>
+              <p class="mini">医生没听过多癌早筛？提供给医生的说明、结果解读，必要时人工连线沟通。</p>
+            </div>
             <div class="card">
               <div class="card-title"><h2>辅助申请</h2><span class="pill blue">可申请</span></div>
               <div class="row"><div><strong>申请专科就医建议</strong><span class="mini">推荐科室、检查顺序与就诊材料</span></div><span class="pill gray">免费</span></div>
@@ -1405,50 +1432,34 @@
               <button class="sheet-close" data-action="close-sheet" aria-label="关闭">✕</button>
             </div>
             <div class="sheet-body">
-              <p class="mini" style="margin-bottom:14px">一次检测覆盖 <b>16 种</b>中国高发癌症。50–74 岁人群中，这 16 个癌种发病占比约 <b>86%</b>，是我国癌症负担的主要来源。</p>
+              <p class="mini" style="margin-bottom:14px">一次抽血完成 <b>16 种</b>高发癌症筛查。相比逐项做 CT、内镜，或依赖肿瘤标记物，本检测覆盖更全、更适合用于筛查。（50–74 岁人群中这 16 癌发病占比约 <b>86%</b>）</p>
 
-              <div class="ca-group">
-                <div class="ca-title">过去没有推荐筛查手段的 8 种 · <span style="color:var(--brand-deep)">本产品独特价值</span></div>
-                <p class="mini" style="margin-bottom:8px">这些高发癌种过去缺乏合适的筛查方法，MCED 检测填补空白、帮你提前发现。</p>
-                <div class="ca-chips">
-                  <span class="ca-chip soc">胰腺癌</span>
-                  <span class="ca-chip soc">卵巢癌</span>
-                  <span class="ca-chip soc">子宫内膜癌</span>
-                  <span class="ca-chip soc">胆道癌</span>
-                  <span class="ca-chip soc">淋巴瘤</span>
-                  <span class="ca-chip soc">前列腺癌</span>
-                  <span class="ca-chip soc">膀胱癌</span>
-                  <span class="ca-chip soc">肾癌</span>
-                </div>
+              <div class="cov-scroll">
+                <table class="cov-table">
+                  <thead><tr><th>癌种</th><th>常规筛查</th><th>肿瘤标记物</th><th>本检测</th></tr></thead>
+                  <tbody>
+                    <tr><td>肺癌</td><td>低剂量 CT</td><td>CEA·CYFRA<div class="mk">不适合筛查</div></td><td><span class="pill green">更优</span></td></tr>
+                    <tr><td>结直肠癌</td><td>肠镜 / 粪检</td><td>CEA<div class="mk">不适合筛查</div></td><td><span class="pill green">更优</span></td></tr>
+                    <tr><td>肝癌</td><td>超声 + AFP</td><td>AFP<div class="mk">辅助，单用不足</div></td><td><span class="pill green">更优</span></td></tr>
+                    <tr><td>胃癌</td><td>胃镜</td><td>CA72-4·CEA<div class="mk">不适合筛查</div></td><td><span class="pill gray">相当</span></td></tr>
+                    <tr><td>食管癌</td><td>胃镜</td><td>SCC<div class="mk">不适合筛查</div></td><td><span class="pill green">更优</span></td></tr>
+                    <tr><td>乳腺癌</td><td>钼靶 / 超声</td><td>CA15-3<div class="mk">不适合筛查</div></td><td><span class="pill green">更优</span></td></tr>
+                    <tr><td>宫颈癌</td><td>HPV / TCT</td><td>SCC<div class="mk">不适合筛查</div></td><td><span class="pill gray">相当</span></td></tr>
+                    <tr><td>鼻咽癌</td><td>鼻咽镜 / EBV</td><td>EBV 抗体<div class="mk">辅助</div></td><td><span class="pill gray">相当</span></td></tr>
+                    <tr><td>胰腺癌</td><td>无</td><td>CA19-9<div class="mk">不适合筛查</div></td><td><span class="pill green">可筛 ✓</span></td></tr>
+                    <tr><td>前列腺癌</td><td>无</td><td>PSA<div class="mk">可参考</div></td><td><span class="pill green">可筛 ✓</span></td></tr>
+                    <tr><td>卵巢癌</td><td>无</td><td>CA125·HE4<div class="mk">不适合筛查</div></td><td><span class="pill green">可筛 ✓</span></td></tr>
+                    <tr><td>淋巴瘤</td><td>无</td><td>LDH<div class="mk">不适合筛查</div></td><td><span class="pill green">可筛 ✓</span></td></tr>
+                    <tr><td>膀胱癌</td><td>无</td><td>NMP22<div class="mk">不适合筛查</div></td><td><span class="pill green">可筛 ✓</span></td></tr>
+                    <tr><td>肾癌</td><td>无</td><td>无特异标记物</td><td><span class="pill green">可筛 ✓</span></td></tr>
+                    <tr><td>胆道癌</td><td>无</td><td>CA19-9<div class="mk">不适合筛查</div></td><td><span class="pill green">可筛 ✓</span></td></tr>
+                    <tr><td>子宫内膜癌</td><td>无</td><td>无特异标记物</td><td><span class="pill green">可筛 ✓</span></td></tr>
+                  </tbody>
+                </table>
               </div>
+              <p class="mini" style="margin-top:10px">注:绝大多数肿瘤标记物并不适合用于癌症筛查（早期灵敏度/特异度不足），不能替代多癌早筛；前列腺 PSA 是少数可参考的例外。</p>
 
-              <div class="ca-group">
-                <div class="ca-title">已有推荐筛查方法（SOC）· 8 种</div>
-                <p class="mini" style="margin-bottom:8px">这些癌种也一并纳入，一次检测同步覆盖。</p>
-                <div class="ca-chips">
-                  <span class="ca-chip">肺癌</span>
-                  <span class="ca-chip">结直肠癌</span>
-                  <span class="ca-chip">宫颈癌</span>
-                  <span class="ca-chip">乳腺癌</span>
-                  <span class="ca-chip">胃癌</span>
-                  <span class="ca-chip">食管癌</span>
-                  <span class="ca-chip">肝癌</span>
-                  <span class="ca-chip">鼻咽癌</span>
-                </div>
-              </div>
-
-              <div class="ca-group">
-                <div class="ca-title">为什么选这 16 种</div>
-                <ul class="ca-list">
-                  <li>重点填补空白：8 个过去无推荐筛查手段的高发癌种（如胰腺癌），MCED 让它们也能被筛。</li>
-                  <li>这 8 个癌种发病率与死亡率均居前 20，疾病负担重。</li>
-                  <li>自然史清晰，大多数早期停留至少 1 年，有足够筛查窗口。</li>
-                  <li>有较明确的早期诊断方法，筛查阳性后能及时确诊。</li>
-                  <li>已有推荐筛查（SOC）的 8 个癌种一并纳入，一次覆盖更全。</li>
-                </ul>
-              </div>
-
-              <p class="footnote">癌种发病占比等为参考口径，正式以发表数据与权威指南为准。</p>
+              <p class="footnote">常规筛查、肿瘤标记物及其适用性为参考口径，本检测各癌种性能以正式发表数据为准；发病占比为示意。</p>
             </div>
           </div>
         </div>
@@ -1550,6 +1561,109 @@
               </div>
 
               <p class="footnote">Grail / Galleri 为公开资料，仅作技术路径参考，不代表与本产品的对比或关联；文献与数据正式以发表来源为准。</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="sheet-mask" id="perf-sheet">
+          <div class="sheet">
+            <div class="sheet-head">
+              <strong>核心性能 · 同类对比</strong>
+              <button class="sheet-close" data-action="close-sheet" aria-label="关闭">✕</button>
+            </div>
+            <div class="sheet-body">
+              <p class="mini" style="margin-bottom:12px">用统一口径对比多癌早筛（MCED）的核心性能，公开透明，便于你参考选择。括号内为 95% 置信区间。</p>
+              <div class="cov-scroll">
+                <table class="cov-table perf-table">
+                  <thead><tr><th>指标</th><th class="me">小荷 MCED</th><th>同类 A</th><th>同类 B</th></tr></thead>
+                  <tbody>
+                    <tr><td>数据样本量<div class="mk">用多少人验证得出，样本越大越可靠</div></td><td class="me"><strong>4–5 万例</strong></td><td>约 1.5 万例</td><td>数百例</td></tr>
+                    <tr><td>整体灵敏度<div class="mk">患癌的人里能被查出的比例，越高漏检越少</div></td><td class="me"><strong>69.5%</strong><div class="mk">68.2–70.8%</div></td><td>51.5%<div class="mk">49.6–53.3%</div></td><td>69.1%<div class="mk">64.8–73.3%</div></td></tr>
+                    <tr><td>I–III 期灵敏度<div class="mk">中早期癌症中能查出的比例，越高越能早发现</div></td><td class="me"><strong>65.2%</strong><div class="mk">63.7–66.6%</div></td><td>40.7%<div class="mk">38.7–42.9%</div></td><td>59.8%<div class="mk">54.4–65.0%</div></td></tr>
+                    <tr><td>AUC 曲线下面积<div class="mk">综合判别能力，越接近 1 越准</div></td><td class="me"><strong>0.955</strong><div class="mk">0.951–0.959</div></td><td>/</td><td>/</td></tr>
+                    <tr><td>特异度<div class="mk">没患癌的人被正确排除的比例，越高误报越少</div></td><td class="me"><strong>99.0%</strong><div class="mk">98.6–99.3%</div></td><td>99.5%<div class="mk">99.0–99.8%</div></td><td>98.9%<div class="mk">97.6–99.7%</div></td></tr>
+                    <tr><td>溯源准确性 TOO<div class="mk">提示风险时正确指出部位的比例</div></td><td class="me"><strong>87.2%</strong><div class="mk">TOP1</div></td><td>88.7%<div class="mk">TOP1/2</div></td><td>83.2%<div class="mk">TOP1</div></td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="mini" style="margin-top:10px">我们的性能基于 4–5 万例大样本；部分产品样本量很小，亮眼数据的参考价值有限。我们也如实呈现个别指标（如特异度、溯源）与同类相当或略低，供你客观判断。</p>
+
+              <div class="ca-title" style="margin-top:16px">作为参考 · 其他常见手段</div>
+              <ul class="ca-list">
+                <li>肿瘤标记物（抽血）：多数早期灵敏度低、特异度有限，一般不用于癌症筛查。</li>
+                <li>低剂量 CT（肺癌）：早期肺癌灵敏度较高，但只查肺、有辐射，需逐项单独做。</li>
+                <li>胃肠镜：胃肠道病变检出准确，但属侵入性、单部位、依从性较低。</li>
+              </ul>
+
+              <p class="footnote">同类 A / B 为匿名同类产品；上述数据与常见手段性能均为占位示意，以各家正式发表/公开数据为准；同类对比仅供参考，正式对外发布前需法务与合规审核。</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="sheet-mask" id="docsupport-sheet">
+          <div class="sheet">
+            <div class="sheet-head">
+              <strong>带报告见医生 · 就医支持</strong>
+              <button class="sheet-close" data-action="close-sheet" aria-label="关闭">✕</button>
+            </div>
+            <div class="sheet-body">
+              <p class="mini" style="margin-bottom:14px">不少医生还不了解多癌早筛（MCED）。这些支持帮你和医生顺畅沟通，不必夹在中间为难。</p>
+              <div class="todo">
+                <div class="todo-item"><i>1</i><div><strong>给医生的说明材料</strong><span class="mini">一页式说明检测方法、性能与本次结果，供你出示或下载给接诊医生。</span></div></div>
+                <div class="todo-item"><i>2</i><div><strong>结果含义解读</strong><span class="mini">筛查阳性是“风险提示”而非确诊，需影像 / 内镜 / 病理进一步明确。</span></div></div>
+                <div class="todo-item"><i>3</i><div><strong>为什么值得进一步诊断</strong><span class="mini">说明针对提示部位尽快检查的必要性，以及早诊早治的获益。</span></div></div>
+                <div class="todo-item"><i>4</i><div><strong>一键呼起人工协助</strong><span class="mini">就诊现场可让小荷医学的医生 / 顾问与接诊医生电话或视频沟通、当场答疑。</span></div></div>
+              </div>
+              <div class="two-actions" style="margin-top:14px">
+                <button class="ghost" data-action="doc-letter">获取给医生的说明</button>
+                <button class="primary" data-action="call-support">呼起人工协助</button>
+              </div>
+              <p class="footnote">就医支持为沟通辅助，不替代接诊医生的临床判断与诊疗决策。</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="sheet-mask" id="docletter-sheet">
+          <div class="sheet">
+            <div class="sheet-head">
+              <strong>给接诊医生的说明</strong>
+              <button class="sheet-close" data-action="close-sheet" aria-label="关闭">✕</button>
+            </div>
+            <div class="sheet-body">
+              <div class="letter">
+                <div class="letter-top">
+                  <img src="logo-mark.png?v=1" alt="小荷医学">
+                  <div><strong>小荷多癌早筛（MCED）· 检测说明</strong><span>致接诊医生 · 供临床参考</span></div>
+                </div>
+
+                <h4>本次筛查结果</h4>
+                <p>受检人 张女士（45 岁）。DOC 模型：<b>检测到癌症风险信号</b>；TOO 溯源提示：<b>肺部</b>（最显著）。报告编号 HX-20260625-0842。</p>
+
+                <h4>检测原理</h4>
+                <p>无创抽血，检测血液游离 DNA（cfDNA）的甲基化信号。异常甲基化在肿瘤极早期即出现，是国际公认的多癌早筛（MCED）主流技术路径。</p>
+
+                <h4>性能（4–5 万例样本验证）</h4>
+                <div class="kv">
+                  <div>整体灵敏度 <b>69.5%</b></div>
+                  <div>I–III 期灵敏度 <b>65.2%</b></div>
+                  <div>特异度 <b>99.0%</b></div>
+                  <div>溯源 TOO <b>87.2%</b></div>
+                </div>
+
+                <h4>证据与指南依据</h4>
+                <p>覆盖 16 种中国高发癌（50–74 岁人群发病占比约 86%）。技术路径参考 cfDNA 甲基化多癌早筛公开研究（如 Annals of Oncology, 2020）；具体以本产品正式发表数据为准。</p>
+
+                <h4>建议诊疗路径</h4>
+                <p>筛查阳性为<b>风险提示，非临床诊断</b>。建议针对提示部位（肺部）尽快进一步检查，如低剂量胸部 CT（LDCT），必要时呼吸科 / 胸外科就诊，由医生结合临床综合判断。</p>
+
+                <h4>如需沟通</h4>
+                <p>可联系小荷医学医学团队，就检测方法与结果电话 / 视频沟通，必要时三方连线。</p>
+              </div>
+              <div class="two-actions" style="margin-top:14px">
+                <button class="ghost" data-action="call-support">联系小荷医学</button>
+                <button class="primary" data-action="doc-save">保存 / 出示给医生</button>
+              </div>
+              <p class="footnote">本说明供临床参考，不替代接诊医生的诊断与诊疗决策；数据为示意，以正式发表与报告为准。</p>
             </div>
           </div>
         </div>
@@ -1800,7 +1914,6 @@
       "consult": () => openIM(),
       "go-book": () => goTo(0, 1),
       "book":    () => goTo(1, 0, "预约成功，已为你保留名额"),
-      "reserve": () => goTo(1, 0, "已预约，可到现场确认后再付款"),
       "pay":     () => goTo(1, 1, "支付成功，核销码已生效"),
       "onsite":  () => goTo(1, 1, "已保留预约，现场沟通后再付"),
       "checkin": () => goTo(1, 2, "采血完成，已进入检验跟踪"),
@@ -1821,6 +1934,11 @@
       "open-guarantee": () => document.querySelector("#guarantee-sheet").classList.add("open"),
       "open-care": () => document.querySelector("#care-sheet").classList.add("open"),
       "open-tech": () => document.querySelector("#tech-sheet").classList.add("open"),
+      "open-perf": () => document.querySelector("#perf-sheet").classList.add("open"),
+      "open-docsupport": () => document.querySelector("#docsupport-sheet").classList.add("open"),
+      "doc-letter": () => document.querySelector("#docletter-sheet").classList.add("open"),
+      "doc-save": () => showToast("已生成图片，可出示给医生或转发（示意）"),
+      "call-support": () => showToast("正在接通小荷医学人工协助，可与接诊医生三方沟通"),
       "close-sheet": () => document.querySelectorAll(".sheet-mask").forEach(m => m.classList.remove("open")),
       "open-wecom": () => showToast("正在打开企业微信对话…（示意，正式版经微信客服 / 活码直达会话）"),
       "copy-wecom": () => showToast("顾问企业微信号已复制：xiaohe-care-001"),
@@ -1835,9 +1953,6 @@
     });
 
     // collapsible 产品详情 + 参考来源
-    document.querySelectorAll("[data-acc]").forEach(acc => {
-      acc.querySelector(".acc-head").addEventListener("click", () => acc.classList.toggle("open"));
-    });
     document.querySelectorAll("[data-ref]").forEach(ref => {
       ref.querySelector(".ref-head").addEventListener("click", () => ref.classList.toggle("open"));
     });
