@@ -478,6 +478,12 @@
     .pay-option strong { display: block; font-size: 14px; margin-bottom: 3px; }
     .perk-tag { display: inline-block; font-size: 11px; font-weight: 700; color: #fff; background: var(--blue); border-radius: 6px; padding: 1px 6px; margin-left: 6px; vertical-align: middle; }
     .perk { margin-top: 6px; font-size: 12px; color: var(--brand-deep); font-weight: 700; }
+    .apply-item { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 11px 0; border-top: 1px solid #edf1f6; }
+    .apply-item:first-of-type { border-top: 0; }
+    .apply-item strong { display: block; font-size: 14px; margin-bottom: 3px; }
+    .apply-btn { flex: none; border: 1px solid var(--brand-line); background: var(--brand-soft); color: var(--brand-deep); border-radius: 8px; padding: 7px 12px; font-size: 13px; font-weight: 700; cursor: pointer; white-space: nowrap; }
+    .apply-btn:active { background: #d7f8eb; }
+    .apply-btn.claim { border-color: #f4dfc2; background: #fff5e9; color: var(--orange); }
 
     /* checkbox */
     .check {
@@ -819,7 +825,7 @@
     }
     .table-row:first-child { border-top: 0; color: var(--ink); font-weight: 800; }
 
-    /* 顾问对话（沿用产品配色） */
+    /* 健康管家对话（沿用产品配色） */
     .im {
       position: absolute; inset: 0; z-index: 30;
       background: var(--bg); display: flex; flex-direction: column;
@@ -981,7 +987,7 @@
                 <button class="person-cur" id="person-cur">本人 · 张女士 ▾</button>
               </div>
             </div>
-            <span class="service-badge" id="service-badge" role="button" tabindex="0">专属顾问在线</span>
+            <span class="service-badge" id="service-badge" role="button" tabindex="0">健康管家在线</span>
           </div>
           <div class="person-menu" id="person-menu"></div>
         </header>
@@ -1010,7 +1016,7 @@
 
             <!-- 核心优势 -->
             <div class="card">
-              <div class="card-title"><h2>为什么值得你选择</h2><span class="pill blue">核心优势</span></div>
+              <div class="card-title"><h2>为什么值得你选择</h2></div>
               <div class="adv-list">
                 <div class="adv"><i>全</i><div><strong>癌种覆盖更全</strong><span class="mini">一次覆盖 16 种中国高发癌，比同类更全。</span></div></div>
                 <div class="adv"><i>简</i><div><strong>一次抽血，省去逐项检查</strong><span class="mini">替代 CT、胃肠镜等多项分散检查，不用一个个癌种排查。</span></div></div>
@@ -1023,7 +1029,7 @@
 
             <!-- 服务与适用（由原产品详情去重精简而来） -->
             <div class="card">
-              <div class="card-title"><h2>服务与适用</h2><span class="pill blue">可预约</span></div>
+              <div class="card-title"><h2>服务与适用</h2></div>
               <div class="row"><div><strong>包含服务</strong><span class="mini">采血检测 · 电子报告 · 医生解读 · 就医连接 · 补贴保障 · 一年随访</span></div></div>
               <div class="row"><div><strong>适用人群</strong><span class="mini">40岁以上、有家族史、长期吸烟饮酒或慢病人群优先</span></div></div>
             </div>
@@ -1093,7 +1099,7 @@
             </div>
 
             <div class="card">
-              <div class="card-title"><h2>选择支付方式</h2><span class="pill green">更放心</span></div>
+              <div class="card-title"><h2>选择支付方式</h2></div>
               <div class="pay-options" id="pay-options">
                 <div class="pay-option active" data-pay="online"><span class="radio-dot"></span><div><strong>线上支付<span class="perk-tag">推荐</span></strong><p class="mini">现在支付，到场直接采血；未采血可随时全额退，无顾虑。</p><p class="perk">专属快速服务通道 · 到检纪念礼</p></div></div>
                 <div class="pay-option" data-pay="onsite"><span class="radio-dot"></span><div><strong>现场沟通后支付</strong><p class="mini">先保留名额，到现场进一步了解产品价值与流程后再付款。</p></div></div>
@@ -1145,7 +1151,7 @@
           <!-- ===================== 阶段3 报告解读 ===================== -->
           <section class="stage-screen" data-stage="2" data-step="0">
             <div class="substep">结果 · <b>筛查结论</b></div>
-            <div class="banner"><i>📄</i><div><strong>你的筛查报告已就绪</strong><span class="mini">点击下方切换查看两种结论示例</span></div></div>
+            <p class="mini" style="margin:2px 4px 12px">报告编号 HX-20260625-0842 · 出具于 2026-06-28</p>
 
             <div class="seg" id="result-seg">
               <button data-result="abn" class="active">异常示例</button>
@@ -1160,19 +1166,21 @@
                   <div>
                     <div class="eyebrow">DOC 模型 · 癌症风险检测</div>
                     <h1>检测到癌症风险信号</h1>
-                    <p class="mini">筛查不是诊断，建议结合影像、内镜等进一步明确。</p>
+                    <p class="mini">这是风险提示，并非确诊。</p>
                   </div>
                 </div>
               </div>
               <div class="card">
-                <div class="card-title"><h2>TOO 模型 · 溯源提示</h2><span class="pill orange">建议解读</span></div>
+                <div class="card-title"><h2>TOO 模型 · 溯源提示</h2></div>
                 <div class="too-label">溯源信号最显著的部位</div>
                 <div class="too-part">肺部</div>
-                <p class="mini">模型只提示一个最显著部位，供医生优先排查。建议优先针对肺部检查（如低剂量 CT）。</p>
-                <button class="primary" style="margin-top:12px" data-action="go-care">针对肺部就医，连接诊断资源 →</button>
+                <p class="mini">这<b>不是确诊结论</b>，而是模型指出最可能的部位。用更直白的方式看：<b style="color:var(--orange)">每 10 位被提示肺部风险的人中，约有 6 位经进一步诊断确为肺癌</b>，请勿忽视，强烈建议尽快到医院检查明确（可优先做低剂量 CT，仅供参考、以医生判断为准）。</p>
+                <p class="footnote">该比例（阳性预测值）为示意，取决于检测性能与人群风险，正式以真实数据为准。</p>
+                <p class="perk" style="margin-top:10px">✓ 无论在哪家医院就医，进一步检查的费用都可补贴（600 元内个人实付部分）</p>
+                <button class="secondary" style="width:100%;margin-top:10px" data-action="open-docsupport">医生没听过小荷？获取就医支持</button>
+                <button class="primary" style="margin-top:10px" data-action="go-care">完成就医诊断，获取检查费补贴</button>
               </div>
               <button class="linkbtn" data-action="go-interpret">仍有疑问？也可预约医生解读</button>
-              <button class="linkbtn" data-action="open-docsupport">医生没听过小荷？获取就医支持 ›</button>
             </div>
 
             <!-- 正常：DOC 无风险，无 TOO 提示 -->
@@ -1188,16 +1196,13 @@
                 </div>
               </div>
               <div class="card">
-                <div class="card-title"><h2>TOO 模型 · 溯源提示</h2><span class="pill green">无需溯源</span></div>
-                <p class="mini">本次未检测到风险，无需部位溯源。</p>
-              </div>
-              <div class="card">
                 <div class="card-title"><h2>下次建议</h2></div>
                 <div class="row"><div><strong>定期复筛</strong><span class="mini">建议 12 个月后再次筛查，高危人群可缩短至 6 个月</span></div><span class="pill blue">提醒我</span></div>
               </div>
               <button class="linkbtn" data-action="go-interpret">如仍想咨询，可预约医生解读</button>
             </div>
 
+            <button class="ghost" style="width:100%;margin-bottom:10px" data-action="save-report">保存报告图片到相册</button>
             <p class="mini" style="margin:2px 4px 12px">⚠️ 本报告为筛查提示，不作为临床诊断依据。任何结论建议由专业医生解读。</p>
           </section>
 
@@ -1229,7 +1234,7 @@
             <div class="substep">结果 · <b>解读小结</b></div>
             <div class="banner"><i>✓</i><div><strong>解读已完成</strong><span class="mini">李医生 · 06-25 20:14 · 15分钟</span></div></div>
             <div class="card">
-              <div class="card-title"><h2>医生解读</h2><span class="pill orange">重点</span></div>
+              <div class="card-title"><h2>医生解读</h2></div>
               <div class="chat">
                 <div class="bubble doc">DOC 模型<b>检测到癌症风险信号</b>，TOO 溯源提示<b>最显著部位是肺部</b>。这是需要重视的<b>信号</b>，但不等于确诊。</div>
                 <div class="bubble me">那我接下来要做什么？</div>
@@ -1251,67 +1256,64 @@
           <section class="stage-screen" data-stage="3" data-step="0">
             <div class="substep">协助 · <b>第 1 步 / 共 3 步</b> · 问题反馈</div>
             <div class="hero">
-              <div class="eyebrow">结果疑问、诊断连接与保障补贴</div>
               <h1>对结果有疑问，我们帮你查清并提供保障</h1>
-              <p>顾问帮你整理问题、连接诊断与治疗资源；假阳、假阴也有补贴。</p>
             </div>
 
             <div class="card">
-              <div class="card-title"><h2>想直接找人？联系顾问</h2><span class="pill green">企业微信 1对1</span></div>
+              <div class="card-title"><h2>着急 · 一对一找健康管家</h2><span class="pill green">即时响应</span></div>
               <div class="doctor">
                 <div class="avatar avatar-logo" aria-hidden="true"></div>
-                <div><strong>小荷健康顾问</strong><p class="mini">想尽快有人帮忙？顾问可协助整理问题、连接就医资源。</p></div>
+                <div><strong>小荷健康管家 · 企业微信</strong><p class="mini">一对一沟通，最快当场答疑；适合想尽快弄清下一步。</p></div>
               </div>
-              <button class="primary" style="margin-top:12px" data-action="open-wecom">打开企业微信，联系顾问</button>
-              <button class="linkbtn" data-action="copy-wecom">或复制顾问企业微信号</button>
+              <button class="primary" style="margin-top:12px" data-action="open-wecom">打开企业微信，联系健康管家</button>
+              <button class="linkbtn" data-action="copy-wecom">或复制健康管家企业微信号</button>
             </div>
 
             <div class="card">
-              <div class="card-title"><h2>问题反馈</h2><span class="pill red">48小时内跟进</span></div>
+              <div class="card-title"><h2>不急 · 留下疑问与资料</h2><span class="pill blue">48小时整体回复</span></div>
+              <p class="mini" style="margin-bottom:10px">把疑问和材料留给我们，健康管家与医生会更全面地回复，服务更完善。</p>
               <div class="form-grid">
                 <label>我的主要疑问<textarea>报告检测到癌症风险、溯源提示肺部，是否必须尽快做低剂量 CT？去哪家医院比较好？</textarea></label>
                 <label>已就诊医院/科室<input value="暂未就诊，计划预约三甲医院胸外/呼吸科"></label>
                 <div class="upload" data-action="upload">＋ 上传影像、门诊病历、检查单或病理报告</div>
               </div>
             </div>
-            <button class="primary" data-action="go-apply">下一步：申请协助</button>
+            <p class="mini" style="margin:0 4px 10px">常见协助可自助申请：专科就医建议、诊断 / 治疗资源连接、检查补贴与保障等。</p>
+            <button class="primary" data-action="go-apply">自助申请协助</button>
           </section>
 
           <section class="stage-screen" data-stage="3" data-step="1">
             <div class="substep">协助 · <b>第 2 步 / 共 3 步</b> · 辅助申请</div>
-            <div class="card card-link" data-action="open-care">
-              <div class="card-title"><h2>三甲就医资源</h2><span style="color:var(--brand-deep);font-size:18px">›</span></div>
-              <p class="mini">已对接 76 家三甲医院资源，可协助专科就医、连接诊断与治疗。</p>
+            <div class="card">
+              <div class="card-title"><h2>自助申请协助</h2></div>
+              <div class="apply-item"><div><strong>专科就医建议</strong><span class="mini">按风险部位推荐科室、检查顺序与就诊材料</span></div><button class="apply-btn" data-action="apply-advice">免费申请</button></div>
+              <div class="apply-item"><div><strong>诊断 / 治疗资源连接</strong><span class="mini">已对接 76 家三甲医院；疑似阳性、需尽快确诊或治疗时可申请</span></div><button class="apply-btn" data-action="apply-resource">申请</button></div>
+              <div class="apply-item"><div><strong>诊断检查补贴 · ¥600</strong><span class="mini">完成 CT / 内镜 / 病理等检查后，上传发票申请</span></div><button class="apply-btn" data-action="apply-subsidy">申请补贴</button></div>
+              <div class="apply-item"><div><strong>假阳安抚保障 · ¥2000</strong><span class="mini">进一步诊断排除癌症后可提交</span></div><button class="apply-btn claim" data-action="claim-fp">提交理赔</button></div>
+              <div class="apply-item"><div><strong>假阴治疗保障 · ¥10万</strong><span class="mini">出结果后 1 年内确诊可提交</span></div><button class="apply-btn claim" data-action="claim-fn">提交理赔</button></div>
+              <p class="footnote">假阳 / 假阴保障由保险承保，符合条件后在线提交理赔；其余协助由健康管家受理。</p>
             </div>
             <div class="card card-link" data-action="open-docsupport">
               <div class="card-title"><h2>带报告见医生 · 就医支持</h2><span style="color:var(--brand-deep);font-size:18px">›</span></div>
               <p class="mini">医生没听过多癌早筛？提供给医生的说明、结果解读，必要时人工连线沟通。</p>
             </div>
-            <div class="card">
-              <div class="card-title"><h2>辅助申请</h2><span class="pill blue">可申请</span></div>
-              <div class="row"><div><strong>申请专科就医建议</strong><span class="mini">推荐科室、检查顺序与就诊材料</span></div><span class="pill gray">免费</span></div>
-              <div class="row"><div><strong>连接诊断与治疗资源</strong><span class="mini">疑似阳性、需尽快确诊与治疗者</span></div><span class="pill orange">审核</span></div>
-              <div class="row"><div><strong>申请诊断检查补贴</strong><span class="mini">完成 CT / 内镜 / 病理等检查可申请</span></div><span class="pill green">¥600</span></div>
-              <div class="row"><div><strong>假阳安抚补贴</strong><span class="mini">诊断排除癌症，补贴额外奔波</span></div><span class="pill green">¥2000</span></div>
-              <div class="row"><div><strong>假阴治疗费用补贴</strong><span class="mini">筛查未提示但后续确诊，补贴治疗费用</span></div><span class="pill red">¥10万</span></div>
-            </div>
-            <button class="primary" data-action="submit">提交反馈与协助申请</button>
+            <button class="primary" data-action="view-progress">查看我的协助进度 →</button>
           </section>
 
           <section class="stage-screen" data-stage="3" data-step="2">
             <div class="substep">协助 · <b>第 3 步 / 共 3 步</b> · 进度与最新情况</div>
-            <div class="banner"><i>✓</i><div><strong>已提交，顾问将在 48 小时内跟进</strong><span class="mini">工单号 FU-20260625-0907</span></div></div>
+            <div class="banner"><i>✓</i><div><strong>已提交，健康管家将在 48 小时内跟进</strong><span class="mini">工单号 FU-20260625-0907</span></div></div>
             <div class="card">
               <div class="card-title"><h2>协助进度</h2><span class="pill orange">进行中</span></div>
               <div class="track">
                 <div class="track-item done"><span class="track-dot"></span><div class="track-body"><strong>已提交反馈与申请</strong><span class="mini">06-25 21:07</span></div></div>
-                <div class="track-item done"><span class="track-dot"></span><div class="track-body"><strong>顾问已联系并确认材料</strong><span class="mini">06-26 10:20 · 已审核补贴资格</span></div></div>
+                <div class="track-item done"><span class="track-dot"></span><div class="track-body"><strong>健康管家已联系并确认材料</strong><span class="mini">06-26 10:20 · 已审核补贴资格</span></div></div>
                 <div class="track-item current"><span class="track-dot"></span><div class="track-body"><strong>已连接胸外科专家号</strong><span class="mini">协和医院 06-29 上午，待你就诊</span></div></div>
                 <div class="track-item"><span class="track-dot"></span><div class="track-body"><strong>诊断结论回传</strong><span class="mini">就诊后上传结果，触发对应补贴</span></div></div>
               </div>
             </div>
             <div class="card">
-              <div class="card-title"><h2>告知我的最新情况</h2><span class="pill blue">可更新</span></div>
+              <div class="card-title"><h2>告知我的最新情况</h2></div>
               <div class="form-grid">
                 <label>就诊后的诊断结论<textarea placeholder="例如：CT 提示 8mm 磨玻璃结节，医生建议随访 / 已排除恶性 / 已确诊需治疗…"></textarea></label>
                 <div class="upload" data-action="upload">＋ 上传 CT / 内镜 / 病理报告</div>
@@ -1332,13 +1334,13 @@
             </div>
 
             <div class="card">
-              <div class="card-title"><h2>你的专属顾问</h2><span class="pill green">企业微信 1对1</span></div>
+              <div class="card-title"><h2>你的专属健康管家</h2><span class="pill green">企业微信 1对1</span></div>
               <div class="doctor">
                 <div class="avatar avatar-logo" aria-hidden="true"></div>
-                <div><strong>小荷健康顾问</strong><p class="mini">一年随访专人对接：解读、就医协调、复查提醒。</p></div>
+                <div><strong>小荷健康管家</strong><p class="mini">一年随访专人对接：解读、就医协调、复查提醒。</p></div>
               </div>
-              <button class="primary" style="margin-top:12px" data-action="open-wecom">打开企业微信，联系顾问</button>
-              <button class="linkbtn" data-action="copy-wecom">或复制顾问企业微信号</button>
+              <button class="primary" style="margin-top:12px" data-action="open-wecom">打开企业微信，联系健康管家</button>
+              <button class="linkbtn" data-action="copy-wecom">或复制健康管家企业微信号</button>
             </div>
 
             <div class="card">
@@ -1397,15 +1399,15 @@
           <button class="nav-btn" data-stage="4"><svg class="nav-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8.4c-.7-1.5-2.5-2-3.8-1C7 8.2 6.8 9.9 7.6 11.1c.8 1.2 4.4 3.3 4.4 3.3s3.6-2.1 4.4-3.3c.8-1.2.6-2.9-.6-3.7-1.3-1-3.1-.5-3.8 1z"/><path d="M4.5 15.3c1.8 2.6 4.6 4 7.5 4s5.7-1.4 7.5-4"/></svg>随访</button>
         </nav>
 
-        <div class="im" id="im" aria-label="顾问对话">
+        <div class="im" id="im" aria-label="健康管家对话">
           <div class="im-bar">
             <button class="im-back" id="im-back" aria-label="返回">‹</button>
-            <div class="im-title">小荷医学 · 健康顾问<small>在线</small></div>
+            <div class="im-title">小荷医学 · 健康管家<small>在线</small></div>
             <div class="im-more" aria-hidden="true">⋯</div>
           </div>
           <div class="im-body" id="im-body">
             <div class="im-time">今天 09:40</div>
-            <div class="im-msg them"><div class="ava ava-doc"></div><div class="im-bubble">您好，我是您的专属健康顾问，关于多癌早筛有任何疑问都可以问我～</div></div>
+            <div class="im-msg them"><div class="ava ava-doc"></div><div class="im-bubble">您好，我是您的专属健康管家，关于多癌早筛有任何疑问都可以问我～</div></div>
             <div class="im-msg them"><div class="ava ava-doc"></div><div class="im-bubble">比如：适不适合做、检测流程、价格、报告怎么看，都可以问我哦。</div></div>
             <div class="im-msg me"><div class="ava ava-me"></div><div class="im-bubble">我45岁，家里有癌症史，适合做这个检查吗？</div></div>
             <div class="im-msg them"><div class="ava ava-doc"></div><div class="im-bubble">非常适合。有家族史属于重点关注人群，建议定期筛查。这个检测一次抽血可覆盖16种高发癌，要不要我帮您看看就近的采血点和时间？</div></div>
@@ -1497,24 +1499,6 @@
 
               <p class="mini" style="margin-top:8px">DNA 甲基化已是当前先进成熟的多癌筛查技术；经多方考证，小荷多癌早筛在国内最大规模、高质量样本的训练与验证下，灵敏度、特异度都相对更高。但任何技术都不可能做到 100%，仍会有假阳、假阴——我们不避讳、不免责，而是尽力多帮你一把，建立更负责的口碑。</p>
               <p class="footnote">"最大规模""灵敏度 / 特异度更高"等表述需以公开发表数据 / 临床验证为准（数据来源：____，待补充）；补贴金额与形式（直接给付 / 保险）为示意，正式以服务条款为准。</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="sheet-mask" id="care-sheet">
-          <div class="sheet">
-            <div class="sheet-head">
-              <strong>提示风险后的就医协助</strong>
-              <button class="sheet-close" data-action="close-sheet" aria-label="关闭">✕</button>
-            </div>
-            <div class="sheet-body">
-              <p class="mini" style="margin-bottom:14px">已对接 76 家三甲医院资源。若检测提示癌症风险，我们不止给结论，更帮你把"下一步就医"安排到位。</p>
-              <div class="todo">
-                <div class="todo-item"><i>1</i><div><strong>专科就医建议</strong><span class="mini">按风险部位推荐科室、检查顺序与就诊材料清单。</span></div></div>
-                <div class="todo-item"><i>2</i><div><strong>连接诊断资源</strong><span class="mini">协助预约影像 / 内镜 / 病理等检查，尽快明确诊断。</span></div></div>
-                <div class="todo-item"><i>3</i><div><strong>连接治疗资源</strong><span class="mini">确诊后优先对接合适的治疗资源与专家。</span></div></div>
-              </div>
-              <p class="footnote">"76 家三甲"为占位示意，正式以实际合作资源为准；就医协助为筛查提示风险后的后续服务，依实际病情与资源情况而定。</p>
             </div>
           </div>
         </div>
@@ -1612,7 +1596,7 @@
                 <div class="todo-item"><i>1</i><div><strong>给医生的说明材料</strong><span class="mini">一页式说明检测方法、性能与本次结果，供你出示或下载给接诊医生。</span></div></div>
                 <div class="todo-item"><i>2</i><div><strong>结果含义解读</strong><span class="mini">筛查阳性是“风险提示”而非确诊，需影像 / 内镜 / 病理进一步明确。</span></div></div>
                 <div class="todo-item"><i>3</i><div><strong>为什么值得进一步诊断</strong><span class="mini">说明针对提示部位尽快检查的必要性，以及早诊早治的获益。</span></div></div>
-                <div class="todo-item"><i>4</i><div><strong>一键呼起人工协助</strong><span class="mini">就诊现场可让小荷医学的医生 / 顾问与接诊医生电话或视频沟通、当场答疑。</span></div></div>
+                <div class="todo-item"><i>4</i><div><strong>一键呼起人工协助</strong><span class="mini">就诊现场可让小荷医学的医生 / 健康管家与接诊医生电话或视频沟通、当场答疑。</span></div></div>
               </div>
               <div class="two-actions" style="margin-top:14px">
                 <button class="ghost" data-action="doc-letter">获取给医生的说明</button>
@@ -1777,7 +1761,7 @@
         status: "当前阶段：异常跟进",
         steps: ["问题反馈", "辅助申请", "进度与回传"],
         insights: [
-          ["疑问结构化", "问题、既往就诊、材料上传拆开收集，方便顾问和医生快速判断。"],
+          ["疑问结构化", "问题、既往就诊、材料上传拆开收集，方便健康管家和医生快速判断。"],
           ["诊疗资源承接", "对异常用户按需连接诊断与治疗资源，并提供检查补贴。"],
           ["状态回传闭环", "诊断结论回传后区分真阳/假阳/假阴，分别触发治疗连接与补贴保障。"]
         ]
@@ -1918,12 +1902,18 @@
       "onsite":  () => goTo(1, 1, "已保留预约，现场沟通后再付"),
       "checkin": () => goTo(1, 2, "采血完成，已进入检验跟踪"),
       "report-ready": () => goTo(2, 0, "报告已就绪"),
+      "save-report": () => showToast("报告图片已保存到相册（示意）"),
       "go-interpret": () => goTo(2, 1),
       "interpret": () => goTo(2, 2, "已预约解读，服务前将短信提醒"),
       "go-assist": () => goTo(3, 0),
-      "go-care": () => goTo(3, 1, "已跳转到就医连接服务，可申请专科就医建议与诊断资源"),
+      "go-care": () => goTo(3, 1, "完成就医诊断后可在此申请检查费补贴；如需就医建议或资源连接可按需选择"),
       "go-apply": () => goTo(3, 1),
-      "submit":  () => goTo(3, 2, "已提交，顾问将在 48 小时内跟进"),
+      "apply-advice":   () => showToast("已申请专科就医建议，健康管家将整理后回复"),
+      "apply-resource": () => showToast("已提交资源连接申请，审核后为你对接诊断 / 治疗资源"),
+      "apply-subsidy":  () => showToast("检查补贴申请已提交，上传检查发票后核发"),
+      "claim-fp":       () => showToast("假阳保障理赔已提交，将按保险条款审核（示意）"),
+      "claim-fn":       () => showToast("假阴保障理赔已提交，将按保险条款审核（示意）"),
+      "view-progress":  () => goTo(3, 2),
       "update":  () => showToast("最新诊断结论已更新，将触发对应保障"),
       "go-loyalty": () => goTo(4, 1),
       "rebook":  () => showToast("已为你预留明年复查名额"),
@@ -1932,7 +1922,6 @@
       "share-story": () => showToast("已提交科普共创申请，工作人员会与你联系确认授权范围"),
       "open-cancer": () => document.querySelector("#cancer-sheet").classList.add("open"),
       "open-guarantee": () => document.querySelector("#guarantee-sheet").classList.add("open"),
-      "open-care": () => document.querySelector("#care-sheet").classList.add("open"),
       "open-tech": () => document.querySelector("#tech-sheet").classList.add("open"),
       "open-perf": () => document.querySelector("#perf-sheet").classList.add("open"),
       "open-docsupport": () => document.querySelector("#docsupport-sheet").classList.add("open"),
@@ -1941,7 +1930,7 @@
       "call-support": () => showToast("正在接通小荷医学人工协助，可与接诊医生三方沟通"),
       "close-sheet": () => document.querySelectorAll(".sheet-mask").forEach(m => m.classList.remove("open")),
       "open-wecom": () => showToast("正在打开企业微信对话…（示意，正式版经微信客服 / 活码直达会话）"),
-      "copy-wecom": () => showToast("顾问企业微信号已复制：xiaohe-care-001"),
+      "copy-wecom": () => showToast("健康管家企业微信号已复制：xiaohe-care-001"),
       "upload":  () => showToast("已选择文件（示意）")
     };
 
@@ -1990,7 +1979,7 @@
     };
 
     function replyTo(text) {
-      const r = quickReplies[text] || "收到～ 顾问正在为您查询（示意回复）。需要的话也可以帮您直接预约采血点。";
+      const r = quickReplies[text] || "收到～ 健康管家正在为您查询（示意回复）。需要的话也可以帮您直接预约采血点。";
       window.setTimeout(() => addMsg(r, "them"), 700);
     }
 
