@@ -980,6 +980,7 @@
     .ident { display: flex; align-items: center; gap: 10px; min-width: 0; }
     .profile-ava { width: 38px; height: 38px; border-radius: 12px; border: 0; cursor: pointer; background: linear-gradient(135deg, #19bf8c, #0f9f7b); color: #fff; font-weight: 900; font-size: 17px; display: grid; place-items: center; flex: none; }
     .profile-ava:active { transform: scale(.96); }
+    .profile-ava svg { width: 22px; height: 22px; }
     .ident-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; align-items: flex-start; }
     .ident-text .person-cur { margin-top: 0; }
     .profile-link { border: 0; background: transparent; color: var(--muted); font-size: 11px; text-align: left; padding: 0; cursor: pointer; }
@@ -1027,6 +1028,14 @@
     .pr-t span { display: block; font-size: 11px; color: var(--muted); margin-top: 2px; }
     .pr-arrow { color: #c2ccd6; font-size: 18px; }
     .pc-badge { font-size: 11px; color: #fff; background: var(--red); border-radius: 999px; padding: 1px 7px; font-weight: 700; }
+
+    /* 采血城市选择 */
+    .city-row { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 4px; margin-bottom: 12px; }
+    .city-row::-webkit-scrollbar { display: none; }
+    .city-chip { flex: none; border: 1px solid var(--line); background: #fff; color: var(--ink); border-radius: 999px; padding: 7px 14px; font-size: 13px; cursor: pointer; }
+    .city-chip.active { border-color: var(--brand-line); background: var(--brand-soft); color: var(--brand-deep); font-weight: 700; }
+    .draw-soon { display: flex; align-items: center; justify-content: space-between; gap: 10px; border: 1px dashed #cfd8e2; border-radius: 10px; padding: 12px; background: #f7f9fb; margin-top: 8px; }
+    .draw-soon strong { display: block; font-size: 14px; margin-bottom: 3px; color: #53606e; }
   </style>
 </head>
 <body>
@@ -1036,7 +1045,7 @@
         <header class="app-header">
           <div class="header-row">
             <div class="ident">
-              <button class="profile-ava" id="profile-entry" aria-label="打开个人中心">荷</button>
+              <button class="profile-ava" id="profile-entry" aria-label="打开个人中心"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg></button>
               <div class="ident-text">
                 <button class="person-cur" id="person-cur">本人 · 张女士 ▾</button>
                 <button class="profile-link" id="profile-link">个人中心 ›</button>
@@ -1110,8 +1119,14 @@
           <section class="stage-screen" data-stage="0" data-step="1">
             <div class="substep">预约 · <b>第 2 步 / 共 2 步</b> · 确认信息</div>
             <div class="card">
-              <div class="card-title"><h2>选择采血点与时间</h2><span class="mini">北京</span></div>
-              <p class="mini" style="margin-bottom:8px">三里屯采血点 · 距你 1.8km</p>
+              <div class="card-title"><h2>选择采血城市与采血点</h2></div>
+              <div class="city-row" id="city-chips"></div>
+              <div class="pay-options" id="draw-points"></div>
+              <div class="draw-soon">
+                <div><strong>上门采血服务</strong><p class="mini">护士上门采血，免出行；正在筹备中</p></div>
+                <span class="pill gray">敬请期待</span>
+              </div>
+              <p class="mini" style="margin:16px 0 8px;font-weight:800;color:var(--ink)">选择到检时间</p>
               <div class="calendar" id="slots-book">
                 <button class="slot active">今天<br><span class="mini">10:00</span></button>
                 <button class="slot">明天<br><span class="mini">14:30</span></button>
@@ -1142,7 +1157,7 @@
             <div class="substep">检查 · <b>第 1 步 / 共 3 步</b> · 支付</div>
             <div class="hero">
               <div class="eyebrow">已预约 · 支付方式可二选一</div>
-              <h1>三里屯采血点 明天 14:30</h1>
+              <h1 id="bk-hero">三里屯采血点 明天 14:30</h1>
               <p>可现在线上支付，也可到现场确认后再付。名额已为你保留。</p>
               <div class="price">¥3000 <span>¥3680</span></div>
             </div>
@@ -1177,8 +1192,8 @@
             </div>
             <div class="card">
               <div class="card-title"><h2>到检指引</h2></div>
-              <div class="row"><div><strong>地点</strong><span class="mini">北京 · 三里屯采血点 2 层 A 区</span></div><span class="pill blue">导航</span></div>
-              <div class="row"><div><strong>时间</strong><span class="mini">明天 14:30，请提前 10 分钟到达</span></div></div>
+              <div class="row"><div><strong>地点</strong><span class="mini" id="bk-place">北京 · 三里屯采血点 2 层 A 区</span></div><span class="pill blue">导航</span></div>
+              <div class="row"><div><strong>时间</strong><span class="mini" id="bk-time">明天 14:30，请提前 10 分钟到达</span></div></div>
               <div class="row"><div><strong>采血须知</strong><span class="mini">无需空腹；采血约 5 分钟；采血后自动进入报告跟踪</span></div></div>
             </div>
             <button class="primary" data-action="checkin">模拟：已到场完成采血</button>
@@ -1189,7 +1204,7 @@
             <div class="card">
               <div class="card-title"><h2>检验进度</h2><span class="pill orange">检测中</span></div>
               <div class="track">
-                <div class="track-item done"><span class="track-dot"></span><div class="track-body"><strong>已采血</strong><span class="mini">06-25 14:36 三里屯采血点</span></div></div>
+                <div class="track-item done"><span class="track-dot"></span><div class="track-body"><strong>已采血</strong><span class="mini" id="bk-draw">06-25 14:36 三里屯采血点</span></div></div>
                 <div class="track-item done"><span class="track-dot"></span><div class="track-body"><strong>样本已送达实验室</strong><span class="mini">06-25 20:10</span></div></div>
                 <div class="track-item current"><span class="track-dot"></span><div class="track-body"><strong>实验室检测中</strong><span class="mini">预计 06-28 出具报告</span></div></div>
                 <div class="track-item"><span class="track-dot"></span><div class="track-body"><strong>报告生成</strong><span class="mini">完成后短信 + App 推送通知</span></div></div>
@@ -1378,14 +1393,16 @@
 
           <!-- ===================== 阶段5 长期随访 ===================== -->
           <section class="stage-screen" data-stage="4" data-step="0">
-            <div class="substep">随访 · <b>第 1 步 / 共 2 步</b> · 长期权益</div>
-            <div class="banner"><i>♥</i><div><strong>本次已含一年随访权益</strong><span class="mini">无需额外付费，已包含在 ¥3000 服务内</span></div></div>
+            <div class="substep">随访 · <b>长期管理与复购</b></div>
+
+            <!-- ① 已含权益 + 定位（合并原 banner 与 hero） -->
             <div class="hero">
-              <div class="eyebrow">癌症筛查建议每年一次</div>
+              <div class="eyebrow">本次已含一年随访 · ¥3000 内，无需额外付费</div>
               <h1>检查结束不是终点，我们陪你管理一整年</h1>
-              <p>报告之后持续为你提供科普、就医建议和情绪陪伴；明年复查或推荐亲友，还有返现感谢。</p>
+              <p>无论结果如何，这一年持续提供科普、就医建议与情绪陪伴；明年复查或推荐亲友，还有返现感谢。</p>
             </div>
 
+            <!-- ② 主行动：专属健康管家 -->
             <div class="card">
               <div class="card-title"><h2>你的专属健康管家</h2><span class="pill green">企业微信 1对1</span></div>
               <div class="doctor">
@@ -1396,6 +1413,7 @@
               <button class="linkbtn" data-action="copy-wecom">或复制健康管家企业微信号</button>
             </div>
 
+            <!-- ③ 给你什么 + 什么时候（权益与节奏合并一卡） -->
             <div class="card">
               <div class="card-title"><h2>你的随访权益</h2><span class="pill green">全部用户</span></div>
               <div class="row"><div><strong>健康科普推送</strong><span class="mini">防癌、复查与生活方式科普</span></div><span class="pill gray">定期</span></div>
@@ -1403,31 +1421,23 @@
               <div class="row"><div><strong>情绪陪伴陪聊</strong><span class="mini">焦虑、担心时有人倾听疏导</span></div><span class="pill green">随时</span></div>
               <div class="row"><div><strong>年度复查提醒</strong><span class="mini">到期自动提醒，把"每年一次"坚持下来</span></div><span class="pill blue">每年</span></div>
               <div class="row"><div><strong style="color:var(--brand-deep)">✦ 更多权益陆续上线</strong><span class="mini">专属体检折扣 · 家庭健康档案 · 专属健康保险…</span></div><span class="pill green">敬请期待</span></div>
-              <p class="footnote">随访强度按本次筛查结果分层：结果正常侧重科普与提醒；结果异常加强就医建议与主动回访。</p>
-            </div>
-            <div class="card">
-              <div class="card-title"><h2>随访节奏</h2></div>
+              <p class="mini" style="font-weight:800;color:var(--ink);margin:14px 0 8px">随访节奏</p>
               <div class="track">
                 <div class="track-item done"><span class="track-dot"></span><div class="track-body"><strong>检查后 1 周 · 报告科普</strong><span class="mini">帮你读懂报告，说明后续注意事项</span></div></div>
                 <div class="track-item current"><span class="track-dot"></span><div class="track-body"><strong>每月 · 健康关怀</strong><span class="mini">科普推送 + 随时咨询与陪聊</span></div></div>
                 <div class="track-item"><span class="track-dot"></span><div class="track-body"><strong>满 1 年 · 复查提醒</strong><span class="mini">提醒并协助预约下一年度筛查</span></div></div>
               </div>
+              <p class="footnote">随访强度按本次筛查结果分层：结果正常侧重科普与提醒；结果异常加强就医建议与主动回访。</p>
             </div>
-            <div class="card">
-              <div class="card-title"><h2>参与科普共创</h2><span class="pill green">稿酬 ¥1000</span></div>
-              <p class="mini">把你的经历分享出来，帮到更多还在犹豫或担心的人。完全自愿、可化名，仅用于健康科普、经授权后使用，提供 1000 元稿酬。</p>
-              <button class="secondary" style="width:100%;margin-top:12px" data-action="share-story">申请参与科普共创</button>
-            </div>
-            <button class="primary" data-action="go-loyalty">查看复购 / 推荐返现</button>
-          </section>
 
-          <section class="stage-screen" data-stage="4" data-step="1">
-            <div class="substep">随访 · <b>第 2 步 / 共 2 步</b> · 复购 / 推荐返现</div>
+            <!-- ④ 下一步：复购 / 推荐返现 -->
             <div class="card">
               <div class="card-title"><h2>复购与推荐返现</h2><span class="pill green">返现 15%</span></div>
               <div class="row"><div><strong>明年复查复购</strong><span class="mini">续约明年筛查，返现 15%</span></div><span class="pill green">¥450</span></div>
               <div class="row"><div><strong>推荐亲友</strong><span class="mini">每推荐一位完成检查，返现 15%</span></div><span class="pill green">¥450</span></div>
             </div>
+
+            <!-- ⑤ 把守护带给家人 -->
             <div class="card">
               <div class="card-title"><h2>把守护带给家人</h2></div>
               <div class="doctor">
@@ -1439,6 +1449,15 @@
                 <button class="primary" data-action="book-family">帮家人预约</button>
               </div>
             </div>
+
+            <!-- ⑥ 科普共创（保留原样，置于靠后） -->
+            <div class="card">
+              <div class="card-title"><h2>参与科普共创</h2><span class="pill green">稿酬 ¥1000</span></div>
+              <p class="mini">把你的经历分享出来，帮到更多还在犹豫或担心的人。完全自愿、可化名，仅用于健康科普、经授权后使用，提供 1000 元稿酬。</p>
+              <button class="secondary" style="width:100%;margin-top:12px" data-action="share-story">申请参与科普共创</button>
+            </div>
+
+            <!-- ⑦ 收尾 CTA -->
             <button class="primary" data-action="rebook">预约明年复查</button>
           </section>
 
@@ -1866,7 +1885,7 @@
       {
         title: "长期随访与会员权益",
         status: "当前阶段：长期随访",
-        steps: ["长期权益", "复购/推荐"],
+        steps: ["长期随访"],
         insights: [
           ["预期前置", "在第一次检查前后就讲清随访价值，让用户知道 3000 元里含一整年服务。"],
           ["分层提供", "科普、就医建议、情绪陪伴按筛查结果分层投放，异常人群获更高频跟进。"],
@@ -1953,6 +1972,84 @@
       });
     });
 
+    // 采血城市与采血点（目标服务区域 5 城，各 ≥2 个采血点）
+    const drawCities = {
+      "北京": [
+        { name: "三里屯采血点", info: "朝阳区 · 距你 1.8km" },
+        { name: "中关村采血点", info: "海淀区 · 距你 5.2km" }
+      ],
+      "上海": [
+        { name: "陆家嘴采血点", info: "浦东新区 · 距你 2.3km" },
+        { name: "徐家汇采血点", info: "徐汇区 · 距你 4.0km" }
+      ],
+      "杭州": [
+        { name: "武林采血点", info: "拱墅区 · 距你 1.5km" },
+        { name: "滨江采血点", info: "滨江区 · 距你 6.1km" }
+      ],
+      "广州": [
+        { name: "珠江新城采血点", info: "天河区 · 距你 2.0km" },
+        { name: "天河体育中心采血点", info: "天河区 · 距你 3.4km" }
+      ],
+      "深圳": [
+        { name: "福田 CBD 采血点", info: "福田区 · 距你 1.2km" },
+        { name: "南山科技园采血点", info: "南山区 · 距你 4.8km" }
+      ]
+    };
+    let currentCity = "北京";
+    const cityChips = document.querySelector("#city-chips");
+    const drawPoints = document.querySelector("#draw-points");
+
+    function renderDrawPoints() {
+      drawPoints.innerHTML = drawCities[currentCity].map((p, i) => `
+        <div class="pay-option ${i === 0 ? "active" : ""}" data-point="${i}">
+          <span class="radio-dot"></span>
+          <div><strong>${p.name}</strong><p class="mini">${p.info}</p></div>
+        </div>`).join("");
+      drawPoints.querySelectorAll(".pay-option").forEach(opt => {
+        opt.addEventListener("click", () => {
+          drawPoints.querySelectorAll(".pay-option").forEach(o => o.classList.remove("active"));
+          opt.classList.add("active");
+          applyBooking();
+        });
+      });
+      applyBooking();
+    }
+
+    // 将所选城市 / 采血点 / 时段联动到下游页面
+    function getActiveSlot() {
+      const s = document.querySelector("#slots-book .slot.active");
+      if (!s) return { day: "明天", time: "14:30" };
+      const day = s.childNodes[0].textContent.trim();
+      const mini = s.querySelector(".mini");
+      return { day, time: mini ? mini.textContent.trim() : "" };
+    }
+
+    function applyBooking() {
+      const active = drawPoints.querySelector(".pay-option.active strong");
+      const pname = active ? active.textContent : drawCities[currentCity][0].name;
+      const { day, time } = getActiveSlot();
+      const set = (id, txt) => { const el = document.querySelector(id); if (el) el.textContent = txt; };
+      set("#bk-hero", `${pname} ${day} ${time}`);
+      set("#bk-place", `${currentCity} · ${pname}`);
+      set("#bk-time", `${day} ${time}，请提前 10 分钟到达`);
+      set("#bk-draw", `${day} ${time} · ${pname}`);
+    }
+
+    function renderCities() {
+      cityChips.innerHTML = Object.keys(drawCities).map(c =>
+        `<button class="city-chip ${c === currentCity ? "active" : ""}" data-city="${c}">${c}</button>`).join("");
+      cityChips.querySelectorAll("[data-city]").forEach(b => {
+        b.addEventListener("click", () => {
+          currentCity = b.dataset.city;
+          renderCities();
+          renderDrawPoints();
+        });
+      });
+    }
+
+    renderCities();
+    renderDrawPoints();
+
     // slot selectors (per group)
     document.querySelectorAll(".calendar").forEach(group => {
       group.querySelectorAll(".slot").forEach(slot => {
@@ -1962,6 +2059,10 @@
         });
       });
     });
+
+    // 时段变化也联动到下游
+    document.querySelectorAll("#slots-book .slot").forEach(s => s.addEventListener("click", applyBooking));
+    applyBooking();
 
     // pay-option / radio groups
     document.querySelectorAll(".pay-options").forEach(group => {
@@ -2029,7 +2130,6 @@
       "claim-fn":       () => showToast("假阴保障理赔已提交，将按保险条款审核（示意）"),
       "view-progress":  () => goTo(3, 2),
       "update":  () => showToast("最新诊断结论已更新，将触发对应保障"),
-      "go-loyalty": () => goTo(4, 1),
       "rebook":  () => showToast("已为你预留明年复查名额"),
       "refer":   () => showToast("推荐链接已生成，可分享给家人"),
       "book-family": () => showToast("帮家人预约：可填写家人信息、选择采血点与时间"),
