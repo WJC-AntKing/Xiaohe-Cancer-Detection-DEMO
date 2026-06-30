@@ -534,6 +534,9 @@
       font-weight: 700;
     }
 
+    /* 结果未出时弱化“协助/随访”，仍可点 */
+    .nav-btn.nav-dim { opacity: .4; }
+
     .calendar { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
 
     .slot {
@@ -1223,14 +1226,12 @@
                 </div>
               </div>
               <div class="card">
-                <div class="card-title"><h2>TOO 模型 · 溯源提示</h2></div>
-                <div class="too-label">溯源信号最显著的部位</div>
+                <div class="card-title"><h2>TOO 模型 · 溯源信号最显著的部位</h2></div>
                 <div class="too-part">肺部</div>
-                <p class="mini">这<b>不是确诊结论</b>，而是模型指出最可能的部位。用更直白的方式看：<b style="color:var(--orange)">每 10 位被提示肺部风险的人中，约有 6 位经进一步诊断确为肺癌</b>，请勿忽视，强烈建议尽快到医院检查明确（可优先做低剂量 CT，仅供参考、以医生判断为准）。</p>
-                <p class="footnote">该比例（阳性预测值）为示意，取决于检测性能与人群风险，正式以真实数据为准。</p>
-                <p class="perk" style="margin-top:10px">✓ 无论在哪家医院就医，进一步检查的费用都可补贴（600 元内个人实付部分）</p>
+                <p class="mini">这<b>不是确诊结论</b>，而是模型指出最可能的部位。<b style="color:var(--orange)">每 10 位被提示肺部风险的人，约 6 位经进一步诊断确为肺癌</b>，建议尽快到医院检查明确，可优先做低剂量 CT。</p>
+                <p class="footnote">阳性预测值为示意，以医生判断与真实数据为准；就医进一步检查费可补贴（600 元内个人实付）。</p>
                 <button class="secondary" style="width:100%;margin-top:10px" data-action="open-docsupport">医生没听过小荷？获取就医支持</button>
-                <button class="primary" style="margin-top:10px" data-action="go-care">完成就医诊断，获取检查费补贴</button>
+                <button class="primary" style="margin-top:10px" data-action="go-care">上传就医诊断报告，获取检查费补贴</button>
               </div>
               <button class="linkbtn" data-action="go-interpret">仍有疑问？也可预约医生解读</button>
             </div>
@@ -1915,7 +1916,13 @@
       current = { stage, step };
       screens.forEach(s => s.classList.toggle("active",
         Number(s.dataset.stage) === stage && Number(s.dataset.step) === step));
-      navButtons.forEach(b => b.classList.toggle("active", Number(b.dataset.stage) === stage));
+      navButtons.forEach(b => {
+        const s = Number(b.dataset.stage);
+        b.classList.toggle("active", s === stage);
+        // 当前预约人结果未出（进度<2）时，弱化“协助/随访”，但当前浏览的那一栏不弱化
+        const preResult = typeof currentPerson !== "undefined" && currentPerson && currentPerson.stage < 2;
+        b.classList.toggle("nav-dim", preResult && (s === 3 || s === 4) && s !== stage);
+      });
       stageTabs.forEach(b => b.classList.toggle("active", Number(b.dataset.stage) === stage));
       stepperSteps.forEach((el, i) => {
         el.classList.toggle("active", i === stage);
