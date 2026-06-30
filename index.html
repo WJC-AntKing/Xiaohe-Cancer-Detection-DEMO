@@ -418,23 +418,23 @@
     /* 单一主操作的流程节点：主“下一步”固定在底部、不随内容滚动 */
     .stage-screen > .primary:last-child {
       position: sticky;
-      bottom: 12px;
+      bottom: 4px;
       z-index: 5;
       margin-top: 16px;
-      box-shadow: 0 10px 22px rgba(8, 118, 93, .30);
+      box-shadow: 0 4px 12px rgba(8, 118, 93, .20);
     }
 
     /* 页尾的双按钮（在线咨询 / 去预约）整组固定在底部 */
     .stage-screen > .two-actions:last-child {
       position: sticky;
-      bottom: 12px;
+      bottom: 4px;
       z-index: 5;
       margin-top: 16px;
-      padding: 8px;
+      padding: 6px;
       background: rgba(255, 255, 255, .96);
       backdrop-filter: blur(2px);
       border-radius: 14px;
-      box-shadow: 0 10px 22px rgba(15, 23, 32, .14);
+      box-shadow: 0 4px 12px rgba(15, 23, 32, .12);
     }
 
     .secondary {
@@ -527,41 +527,28 @@
     .check .box::after { content: "✓"; opacity: 0; }
     .check.on .box::after { opacity: 1; }
 
-    /* 底部导航 = 阶段进度 + 导航（合并原顶部 stepper） */
+    /* 底部导航：可点 Tab，同时用数字与配色兼作阶段进度 */
     .bottom-nav {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
-      padding: 10px 8px;
+      gap: 4px;
+      padding: 8px;
       background: #fff;
       border-top: 1px solid var(--line);
       flex: none;
     }
 
     .nav-btn {
-      position: relative;
       border: 0;
       background: transparent;
-      color: #9aa4b0;
+      color: #7a8490;
       font-size: 11px;
-      padding: 2px 3px;
+      padding: 6px 3px;
+      border-radius: 10px;
       cursor: pointer;
     }
 
-    .nav-btn::before {
-      content: "";
-      position: absolute;
-      top: 14px;
-      left: -50%;
-      width: 100%;
-      height: 2px;
-      background: #e7edf3;
-      z-index: 0;
-    }
-    .nav-btn:first-child::before { display: none; }
-
     .nav-num {
-      position: relative;
-      z-index: 1;
       display: grid;
       place-items: center;
       width: 24px;
@@ -575,9 +562,8 @@
     }
 
     .nav-btn.done .nav-num { background: var(--green); }
-    .nav-btn.done::before { background: var(--green); }
-    .nav-btn.active { color: var(--brand-deep); font-weight: 800; }
-    .nav-btn.active .nav-num { background: var(--brand-deep); box-shadow: 0 0 0 4px var(--brand-soft); }
+    .nav-btn.active { background: var(--brand-soft); color: var(--brand-deep); font-weight: 800; }
+    .nav-btn.active .nav-num { background: var(--brand-deep); }
 
     .calendar { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
 
