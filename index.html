@@ -2141,9 +2141,11 @@
 
     // 受检人切换器
     const people = [
-      { id: "self", label: "本人", name: "张女士", age: 45, stage: 0, stageName: "约前咨询" },
+      { id: "self", label: "本人", name: "张女士", age: 45, stage: 1, stageName: "检查中" },
       { id: "mom",  label: "妈妈", name: "王秀兰", age: 68, stage: 2, stageName: "结果待解读" },
-      { id: "dad",  label: "爸爸", name: "张建国", age: 71, stage: 3, stageName: "协助跟进中" }
+      { id: "dad",  label: "爸爸", name: "张建国", age: 71, stage: 0, stageName: "约前咨询" },
+      { id: "grandma", label: "奶奶", name: "李桂珍", age: 73, stage: 3, stageName: "协助跟进中" },
+      { id: "grandpa", label: "爷爷", name: "张福海", age: 76, stage: 4, stageName: "随访中" }
     ];
     let currentPerson = people[0];
     const personCur = document.querySelector("#person-cur");
