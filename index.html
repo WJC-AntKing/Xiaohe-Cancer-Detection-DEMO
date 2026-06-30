@@ -845,6 +845,7 @@
     .im-more { width: 30px; text-align: center; color: var(--muted); font-size: 20px; }
     .im-body { flex: 1; overflow: auto; padding: 14px 12px 8px; display: flex; flex-direction: column; gap: 14px; }
     .im-time { text-align: center; font-size: 11px; color: var(--muted); }
+    .im-note { align-self: center; max-width: 90%; text-align: center; font-size: 11px; line-height: 1.5; color: var(--brand-deep); background: var(--brand-soft); border: 1px solid var(--brand-line); border-radius: 8px; padding: 6px 10px; }
     .im-msg { display: flex; gap: 8px; align-items: flex-start; }
     .im-msg.me { flex-direction: row-reverse; }
     .im .ava { width: 36px; height: 36px; border-radius: 10px; flex: none; }
@@ -1474,11 +1475,12 @@
         <div class="im" id="im" aria-label="健康管家对话">
           <div class="im-bar">
             <button class="im-back" id="im-back" aria-label="返回">‹</button>
-            <div class="im-title">小荷医学 · 健康管家<small>在线</small></div>
+            <div class="im-title">小荷医学 · 健康管家<small id="im-status">在线</small></div>
             <div class="im-more" aria-hidden="true">⋯</div>
           </div>
           <div class="im-body" id="im-body">
             <div class="im-time">今天 09:40</div>
+            <div class="im-note" id="im-note">人工服务 8:00–20:00（两班倒）；其他时段由 AI 助手先解答，人工上线后跟进</div>
             <div class="im-msg them"><div class="ava ava-doc"></div><div class="im-bubble">您好，我是您的专属健康管家，关于多癌早筛有任何疑问都可以问我～</div></div>
             <div class="im-msg them"><div class="ava ava-doc"></div><div class="im-bubble">比如：适不适合做、检测流程、价格、报告怎么看，都可以问我哦。</div></div>
             <div class="im-msg me"><div class="ava ava-me"></div><div class="im-bubble">我45岁，家里有癌症史，适合做这个检查吗？</div></div>
@@ -2193,10 +2195,23 @@
       "采血点在哪": "您在哪个城市？我帮您找最近的采血点，比如北京三里屯采血点支持当天预约。"
     };
 
+    // 人工客服在线时段：8:00–20:00（两班倒），其余时段 AI 助手值守
+    function svcOnline() { const h = new Date().getHours(); return h >= 8 && h < 20; }
+
     function replyTo(text) {
-      const r = quickReplies[text] || "收到～ 健康管家正在为您查询（示意回复）。需要的话也可以帮您直接预约采血点。";
+      let r = quickReplies[text] || "收到～ 正在为您查询（示意回复）。需要的话也可以帮您直接预约采血点。";
+      if (!svcOnline()) r = "（AI 助手）" + r + " 人工客服将在 8:00–20:00 在线时为您跟进。";
       window.setTimeout(() => addMsg(r, "them"), 700);
     }
+
+    // 根据当前时间联动“在线/AI 值守”状态，管理用户预期
+    (function initServiceStatus() {
+      const online = svcOnline();
+      const badge = document.querySelector("#service-badge");
+      const status = document.querySelector("#im-status");
+      if (badge) badge.textContent = online ? "健康管家在线" : "AI 助手值守";
+      if (status) status.textContent = online ? "人工在线 · 8:00–20:00" : "AI 值守 · 人工 8:00–20:00";
+    })();
 
     function sendIM() {
       const text = imInput.value.trim();
