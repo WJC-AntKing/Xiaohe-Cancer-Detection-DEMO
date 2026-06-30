@@ -972,6 +972,58 @@
       .phone { height: 100vh; border-radius: 0; }
       .workspace { display: none; }
     }
+
+    /* 头部身份区（替代品牌位） */
+    .ident { display: flex; align-items: center; gap: 10px; min-width: 0; }
+    .profile-ava { width: 38px; height: 38px; border-radius: 12px; border: 0; cursor: pointer; background: linear-gradient(135deg, #19bf8c, #0f9f7b); color: #fff; font-weight: 900; font-size: 17px; display: grid; place-items: center; flex: none; }
+    .profile-ava:active { transform: scale(.96); }
+    .ident-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; align-items: flex-start; }
+    .ident-text .person-cur { margin-top: 0; }
+    .profile-link { border: 0; background: transparent; color: var(--muted); font-size: 11px; text-align: left; padding: 0; cursor: pointer; }
+    .profile-link:active { color: var(--brand-deep); }
+
+    /* 个人中心面板 */
+    .pc { position: absolute; inset: 0; z-index: 35; background: var(--bg); display: flex; flex-direction: column; transform: translateX(100%); transition: transform .28s ease; }
+    .pc.open { transform: translateX(0); }
+    .pc-body { flex: 1; overflow: auto; padding: 14px; display: flex; flex-direction: column; gap: 14px; }
+    .pc-profile { display: flex; align-items: center; gap: 12px; background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 14px; }
+    .pc-ava { width: 52px; height: 52px; border-radius: 16px; background: linear-gradient(135deg, #19bf8c, #0f9f7b); color: #fff; font-weight: 900; font-size: 22px; display: grid; place-items: center; flex: none; }
+    .pc-id { flex: 1; min-width: 0; }
+    .pc-id strong { display: block; font-size: 17px; }
+    .pc-id span { display: block; color: var(--muted); font-size: 12px; margin-top: 3px; }
+    .pc-member { flex: none; border: 1px solid var(--brand-line); background: var(--brand-soft); color: var(--brand-deep); border-radius: 999px; padding: 6px 12px; font-size: 12px; font-weight: 700; cursor: pointer; }
+    .pc-section { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 14px; }
+    .pc-sec-head { display: flex; align-items: center; justify-content: space-between; font-size: 15px; font-weight: 800; margin-bottom: 12px; }
+    .pc-sec-head span { font-size: 12px; color: var(--brand-deep); font-weight: 700; cursor: pointer; }
+    .pc-cur-row { display: flex; align-items: center; gap: 10px; }
+    .pc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .pc-tile { border: 1px solid #e7edf4; border-radius: 10px; background: #fbfdff; padding: 12px 6px; text-align: center; cursor: pointer; }
+    .pc-tile:active { background: var(--brand-soft); }
+    .pc-tile i { display: grid; place-items: center; width: 30px; height: 30px; margin: 0 auto 7px; border-radius: 9px; background: var(--brand-soft); color: var(--brand-deep); font-style: normal; font-weight: 800; font-size: 14px; }
+    .pc-tile strong { display: block; font-size: 13px; font-weight: 600; color: var(--ink); }
+    .pc-tile span { display: block; font-size: 10.5px; color: var(--muted); margin-top: 3px; }
+    .pc-tile.locked { background: #f5f7fa; border-style: dashed; }
+    .pc-tile.locked i { background: #eef1f4; color: #aeb6bf; }
+    .pc-tile.locked strong { color: #9aa4b0; }
+    .pc-tile.locked span { color: #aeb6bf; }
+    .pc-person { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 11px 10px; border: 1px solid #e7edf4; border-radius: 10px; margin-bottom: 8px; cursor: pointer; }
+    .pc-person.active { border-color: var(--brand-line); background: var(--brand-soft); }
+    .pp-l { display: flex; align-items: center; gap: 10px; min-width: 0; }
+    .pp-ava { width: 38px; height: 38px; border-radius: 11px; background: #eef3f9; color: #53606e; font-weight: 800; display: grid; place-items: center; flex: none; }
+    .pc-person.active .pp-ava { background: var(--brand-deep); color: #fff; }
+    .pp-name strong { display: block; font-size: 14px; }
+    .pp-name span { display: block; font-size: 11px; color: var(--muted); margin-top: 2px; }
+    .pp-stage { font-size: 11px; color: var(--brand-deep); white-space: nowrap; }
+    .pc-add { display: block; width: 100%; margin-top: 4px; border: 1px dashed var(--brand-line); background: #fff; color: var(--brand-deep); border-radius: 10px; padding: 10px; font-weight: 700; cursor: pointer; }
+    .pc-list { display: grid; }
+    .pc-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 13px 2px; border-top: 1px solid #edf1f6; cursor: pointer; }
+    .pc-row:first-child { border-top: 0; }
+    .pr-l { display: flex; align-items: center; gap: 10px; min-width: 0; }
+    .pr-ic { width: 30px; height: 30px; border-radius: 9px; background: #f2f5f8; color: #53606e; display: grid; place-items: center; font-style: normal; font-size: 14px; flex: none; }
+    .pr-t strong { display: block; font-size: 14px; }
+    .pr-t span { display: block; font-size: 11px; color: var(--muted); margin-top: 2px; }
+    .pr-arrow { color: #c2ccd6; font-size: 18px; }
+    .pc-badge { font-size: 11px; color: #fff; background: var(--red); border-radius: 999px; padding: 1px 7px; font-weight: 700; }
   </style>
 </head>
 <body>
@@ -980,11 +1032,11 @@
       <div class="phone">
         <header class="app-header">
           <div class="header-row">
-            <div class="brand">
-              <img class="mark" src="logo-mark.png?v=1" alt="小荷医学" onerror="this.onerror=null;const d=document.createElement('div');d.className='mark mark-fallback';d.textContent='荷';this.replaceWith(d);">
-              <div>
-                <strong>小荷早筛</strong>
+            <div class="ident">
+              <button class="profile-ava" id="profile-entry" aria-label="打开个人中心">荷</button>
+              <div class="ident-text">
                 <button class="person-cur" id="person-cur">本人 · 张女士 ▾</button>
+                <button class="profile-link" id="profile-link">个人中心 ›</button>
               </div>
             </div>
             <span class="service-badge" id="service-badge" role="button" tabindex="0">健康管家在线</span>
@@ -1018,13 +1070,13 @@
             <div class="card">
               <div class="card-title"><h2>为什么值得你选择</h2></div>
               <div class="adv-list">
-                <div class="adv"><i>全</i><div><strong>癌种覆盖更全</strong><span class="mini">一次覆盖 16 种中国高发癌，比同类更全。</span></div></div>
-                <div class="adv"><i>简</i><div><strong>一次抽血，省去逐项检查</strong><span class="mini">替代 CT、胃肠镜等多项分散检查，不用一个个癌种排查。</span></div></div>
-                <div class="adv adv-link" data-action="open-perf"><i>准</i><div><strong>中早期性能领先</strong><span class="mini">灵敏度 70%、特异度 99%，同规模样本中领先。</span><span class="adv-more">查看与同类产品对比 ›</span></div></div>
+                <div class="adv adv-link" data-action="open-cancer"><i>全</i><div><strong>一次覆盖 16 种高发癌</strong><span class="mini">约占 50–74 岁人群癌症发病的 86%，含胰腺、卵巢等原本难筛的癌种。</span><span class="adv-more">查看覆盖癌种与依据 ›</span></div></div>
+                <div class="adv"><i>简</i><div><strong>一次抽血，省去逐项检查</strong><span class="mini">把多种癌纳入一次抽血，省去逐项 CT、内镜的奔波。</span></div></div>
+                <div class="adv adv-link" data-action="open-perf"><i>准</i><div><strong>中早期也能发现</strong><span class="mini">I–III 期灵敏度 65%、整体 70%、特异度 99%，基于 4–5 万例大样本验证。</span><span class="adv-more">查看与同类产品对比 ›</span></div></div>
                 <div class="adv"><i>安</i><div><strong>无创更安全</strong><span class="mini">只需抽血，无辐射、无内镜痛苦，适合定期检查。</span></div></div>
                 <div class="adv"><i>孝</i><div><strong>替长辈约更省心</strong><span class="mini">覆盖重要高发癌，老人跑一趟，少折腾。</span></div></div>
               </div>
-              <p class="footnote">数据来源：XX 临床研究（N=____），样本来源 / 统计口径以正式发表为准。</p>
+              <p class="footnote">性能数据来自多中心临床研究（N≈4–5 万例）；具体样本来源、统计口径与各癌种性能以正式发表为准。</p>
             </div>
 
             <!-- 服务与适用（由原产品详情去重精简而来） -->
@@ -1427,6 +1479,49 @@
           </div>
         </div>
 
+        <div class="pc" id="pc" aria-label="个人中心">
+          <div class="im-bar">
+            <button class="im-back" id="pc-back" aria-label="返回">‹</button>
+            <div class="im-title">个人中心</div>
+            <button class="im-more" id="pc-settings" aria-label="设置" style="border:0;background:transparent;cursor:pointer">⚙</button>
+          </div>
+          <div class="pc-body">
+            <div class="pc-profile">
+              <div class="pc-ava">荷</div>
+              <div class="pc-id">
+                <strong>张女士 · 账户本人</strong>
+                <span>138****6021 · 已实名认证</span>
+              </div>
+              <button class="pc-member" id="pc-member">会员</button>
+            </div>
+
+            <div class="pc-section">
+              <div class="pc-sec-head">预约人管理<span style="cursor:default;color:var(--muted)">本人 + 家人</span></div>
+              <div id="pc-people"></div>
+            </div>
+
+            <div class="pc-section">
+              <div class="pc-sec-head" id="pc-svc-head">我的服务</div>
+              <p class="mini" style="margin:-4px 0 12px">服务随该预约人进度逐步解锁，灰色为当前不可用。</p>
+              <div class="pc-grid" id="pc-grid"></div>
+            </div>
+
+            <div class="pc-section">
+              <div class="pc-sec-head">常用功能</div>
+              <div class="pc-list">
+                <div class="pc-row" data-toast="优惠券与补贴：暂无可用优惠券；异常后可申请检查补贴、复购推荐返现"><span class="pr-l"><i class="pr-ic">券</i><span class="pr-t"><strong>优惠券与补贴</strong><span>复购返现·检查补贴</span></span></span><span class="pr-arrow">›</span></div>
+                <div class="pc-row" data-toast="消息通知：报告就绪、随访提醒、协助进度都会在此提醒"><span class="pr-l"><i class="pr-ic">铃</i><span class="pr-t"><strong>消息通知</strong><span>报告·随访·协助提醒</span></span></span><span class="pc-badge">2</span></div>
+                <div class="pc-row" data-toast="家庭健康档案：集中管理家人报告与就医记录（即将上线）"><span class="pr-l"><i class="pr-ic">档</i><span class="pr-t"><strong>家庭健康档案</strong><span>家人报告·就医记录</span></span></span><span class="pr-arrow">›</span></div>
+                <div class="pc-row" data-toast="帮助与客服：常见问题，或一键联系健康管家"><span class="pr-l"><i class="pr-ic">问</i><span class="pr-t"><strong>帮助与客服</strong><span>常见问题·人工</span></span></span><span class="pr-arrow">›</span></div>
+                <div class="pc-row" data-toast="隐私与授权：知情同意、数据授权与撤回"><span class="pr-l"><i class="pr-ic">隐</i><span class="pr-t"><strong>隐私与授权</strong><span>知情·数据授权</span></span></span><span class="pr-arrow">›</span></div>
+                <div class="pc-row" data-toast="设置：账号、通知与偏好（示意）"><span class="pr-l"><i class="pr-ic">设</i><span class="pr-t"><strong>设置</strong><span>账号·通知偏好</span></span></span><span class="pr-arrow">›</span></div>
+              </div>
+            </div>
+
+            <p class="footnote" style="text-align:center;padding:4px 0 10px">小荷医学 · 本页面仅为产品原型演示</p>
+          </div>
+        </div>
+
         <div class="sheet-mask" id="cancer-sheet">
           <div class="sheet">
             <div class="sheet-head">
@@ -1498,8 +1593,8 @@
                 </div>
               </div>
 
-              <p class="mini" style="margin-top:8px">DNA 甲基化已是当前先进成熟的多癌筛查技术；经多方考证，小荷多癌早筛在国内最大规模、高质量样本的训练与验证下，灵敏度、特异度都相对更高。但任何技术都不可能做到 100%，仍会有假阳、假阴——我们不避讳、不免责，而是尽力多帮你一把，建立更负责的口碑。</p>
-              <p class="footnote">"最大规模""灵敏度 / 特异度更高"等表述需以公开发表数据 / 临床验证为准（数据来源：____，待补充）；补贴金额与形式（直接给付 / 保险）为示意，正式以服务条款为准。</p>
+              <p class="mini" style="margin-top:8px">DNA 甲基化是国际公认的多癌早筛主流技术路径；小荷基于大规模、高质量样本（约 4–5 万例）训练与验证，中早期灵敏度等核心指标表现居前（详见性能对比）。但任何技术都不可能做到 100%，仍会有假阳、假阴——我们不避讳、不免责，而是尽力多帮你一把，建立更负责的口碑。</p>
+              <p class="footnote">性能相关表述以公开发表数据 / 临床验证为准（数据来源：____，待补充）；补贴金额与形式（直接给付 / 保险）为示意，正式以服务条款为准。</p>
             </div>
           </div>
         </div>
@@ -2017,6 +2112,7 @@
       if (e.key !== "Escape") return;
       const openSheet = document.querySelector(".sheet-mask.open");
       if (openSheet) { openSheet.classList.remove("open"); return; }
+      if (pc.classList.contains("open")) { pc.classList.remove("open"); return; }
       if (im.classList.contains("open")) closeIM();
     });
 
@@ -2072,11 +2168,7 @@
           personMenu.classList.remove("open");
           const pid = el.dataset.pid;
           if (pid === "add") { showToast("添加家人：填写姓名、关系并完成本人授权"); return; }
-          currentPerson = people.find(x => x.id === pid);
-          personCur.textContent = `${currentPerson.label} · ${currentPerson.name} ▾`;
-          updateSubject(currentPerson);
-          renderPersonMenu();
-          goTo(currentPerson.stage, 0, `已切换到「${currentPerson.label} · ${currentPerson.name}」的早筛进程`);
+          selectPerson(people.find(x => x.id === pid));
         });
       });
     }
@@ -2084,6 +2176,89 @@
     personCur.addEventListener("click", e => { e.stopPropagation(); personMenu.classList.toggle("open"); });
     document.addEventListener("click", () => personMenu.classList.remove("open"));
     renderPersonMenu();
+
+    // ============ 个人中心 ============
+    const pc = document.querySelector("#pc");
+    const pcPeople = document.querySelector("#pc-people");
+    const pcSvcHead = document.querySelector("#pc-svc-head");
+    const pcGrid = document.querySelector("#pc-grid");
+
+    // 服务卡：code 的阶段号即解锁门槛（预约/付款/检查=1，报告=2，协助=3，随访=4）
+    const pcServices = [
+      { code: "1-1", icon: "约", title: "预约信息", sub: "时间·采血点", locked: "预约后可查看" },
+      { code: "1-0", icon: "付", title: "付款信息", sub: "订单·发票", locked: "下单后可查看" },
+      { code: "1-2", icon: "检", title: "检查状态", sub: "采血·检验", locked: "采血后可查看" },
+      { code: "2-0", icon: "报", title: "报告结果", sub: "详细解读", locked: "出报告后可查看" },
+      { code: "3-2", icon: "助", title: "协助信息", sub: "进度·补贴", locked: "发起协助后可查看" },
+      { code: "4-0", icon: "访", title: "随访信息", sub: "权益·提醒", locked: "进入随访后可查看" }
+    ];
+
+    function selectPerson(p) {
+      if (!p) return;
+      currentPerson = p;
+      personCur.textContent = `${p.label} · ${p.name} ▾`;
+      updateSubject(p);
+      renderPersonMenu();
+      if (pc.classList.contains("open")) renderPC();
+      goTo(p.stage, 0, `已切换到「${p.label} · ${p.name}」的早筛进程`);
+    }
+
+    function jumpFromPC(code) {
+      const [s, t] = code.split("-").map(Number);
+      pc.classList.remove("open");
+      goTo(s, t);
+    }
+
+    function renderPC() {
+      const p = currentPerson;
+
+      // 我的服务标题：当前预约人 + 进度（可点查看）
+      pcSvcHead.innerHTML = `我的服务 · ${p.name}<span data-jump="${p.stage}-0">${p.stageName} ›</span>`;
+      pcSvcHead.querySelector("[data-jump]").addEventListener("click", () => jumpFromPC(`${p.stage}-0`));
+
+      // 服务卡：按当前预约人进度解锁
+      pcGrid.innerHTML = pcServices.map(s => {
+        const ok = p.stage >= Number(s.code.split("-")[0]);
+        return `<button class="pc-tile ${ok ? "" : "locked"}" data-code="${s.code}" data-ok="${ok}" data-title="${s.title}" data-locked="${s.locked}">
+          <i>${s.icon}</i><strong>${s.title}</strong><span>${ok ? s.sub : "🔒 " + s.locked}</span></button>`;
+      }).join("");
+      pcGrid.querySelectorAll(".pc-tile").forEach(t => {
+        t.addEventListener("click", () => {
+          if (t.dataset.ok === "true") jumpFromPC(t.dataset.code);
+          else showToast(`「${t.dataset.title}」当前不可用：${t.dataset.locked}`);
+        });
+      });
+
+      // 预约人列表
+      pcPeople.innerHTML = people.map(x => `
+        <div class="pc-person ${x.id === p.id ? "active" : ""}" data-pid="${x.id}">
+          <span class="pp-l">
+            <span class="pp-ava">${x.name.slice(0, 1)}</span>
+            <span class="pp-name"><strong>${x.label} · ${x.name}</strong><span>${x.age}岁</span></span>
+          </span>
+          <span class="pp-stage">${x.stageName}</span>
+        </div>`).join("") +
+        `<button class="pc-add" data-pid="add">＋ 添加预约人（家人）</button>`;
+      pcPeople.querySelectorAll("[data-pid]").forEach(el => {
+        el.addEventListener("click", () => {
+          const pid = el.dataset.pid;
+          if (pid === "add") { showToast("添加预约人：填写姓名、关系并完成本人授权"); return; }
+          selectPerson(people.find(x => x.id === pid));
+        });
+      });
+    }
+
+    function openPC() { renderPC(); pc.classList.add("open"); }
+    function closePC() { pc.classList.remove("open"); }
+
+    document.querySelector("#profile-entry").addEventListener("click", openPC);
+    document.querySelector("#profile-link").addEventListener("click", openPC);
+    document.querySelector("#pc-back").addEventListener("click", closePC);
+    document.querySelector("#pc-settings").addEventListener("click", () => showToast("设置（示意）"));
+    document.querySelector("#pc-member").addEventListener("click", () => showToast("会员权益：体检折扣、专属保险等陆续上线（示意）"));
+    document.querySelectorAll("#pc .pc-row[data-toast]").forEach(r => {
+      r.addEventListener("click", () => showToast(r.dataset.toast));
+    });
 
     goTo(0, 0);
   </script>
