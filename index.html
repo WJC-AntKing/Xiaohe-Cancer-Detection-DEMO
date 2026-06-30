@@ -1037,6 +1037,38 @@
     .city-chip.active { border-color: var(--brand-line); background: var(--brand-soft); color: var(--brand-deep); font-weight: 700; }
     .draw-soon { display: flex; align-items: center; justify-content: space-between; gap: 10px; border: 1px dashed #cfd8e2; border-radius: 10px; padding: 12px; background: #f7f9fb; margin-top: 8px; }
     .draw-soon strong { display: block; font-size: 14px; margin-bottom: 3px; color: #53606e; }
+
+    /* 开关组件 */
+    .switch { width: 44px; height: 26px; border-radius: 999px; background: #d7dee6; position: relative; flex: none; transition: background .2s; cursor: pointer; }
+    .switch::after { content: ""; position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.2); transition: transform .2s; }
+    .switch.on { background: var(--blue); }
+    .switch.on::after { transform: translateX(18px); }
+
+    /* 关怀 / 大字模式：放大关键文字与点击区 */
+    .phone.care-mode .mini, .phone.care-mode p { font-size: 14.5px; line-height: 1.7; }
+    .phone.care-mode h1 { font-size: 26px; }
+    .phone.care-mode .card-title h2 { font-size: 19px; }
+    .phone.care-mode .row strong, .phone.care-mode .adv strong, .phone.care-mode .todo-item strong, .phone.care-mode .track-body strong, .phone.care-mode .pc-id strong { font-size: 16.5px; }
+    .phone.care-mode .primary, .phone.care-mode .secondary, .phone.care-mode .ghost { min-height: 54px; font-size: 17px; }
+    .phone.care-mode .pill { font-size: 13px; padding: 6px 10px; }
+    .phone.care-mode .substep { font-size: 14px; }
+    .phone.care-mode .slot { font-size: 15px; padding: 13px 8px; }
+    .phone.care-mode .city-chip { font-size: 15px; padding: 9px 16px; }
+    .phone.care-mode .im-bubble { font-size: 16px; line-height: 1.65; }
+    .phone.care-mode .pc-tile strong { font-size: 14px; }
+
+    /* 首启字号选择弹窗 */
+    .launch-mask { position: absolute; inset: 0; z-index: 50; background: rgba(15,23,32,.45); display: flex; align-items: center; justify-content: center; padding: 24px; opacity: 0; pointer-events: none; transition: opacity .25s ease; }
+    .launch-mask.open { opacity: 1; pointer-events: auto; }
+    .launch-card { background: #fff; border-radius: 16px; padding: 20px; width: 100%; max-width: 320px; }
+    .launch-card > strong { font-size: 18px; display: block; margin-bottom: 6px; }
+    .launch-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+    .launch-opt { border: 1px solid var(--line); border-radius: 12px; padding: 16px 10px; background: #fbfdff; cursor: pointer; display: grid; gap: 10px; place-items: center; }
+    .launch-opt:active { border-color: var(--brand-line); background: var(--brand-soft); }
+    .lo-demo { display: grid; place-items: center; width: 100%; height: 48px; border-radius: 8px; background: #f2f5f8; color: var(--ink); font-weight: 700; }
+    .lo-demo.sm { font-size: 14px; }
+    .lo-demo.big { font-size: 22px; }
+    .launch-opt strong { font-size: 13px; }
   </style>
 </head>
 <body>
@@ -1115,6 +1147,7 @@
               <button class="ghost" data-action="consult">在线咨询</button>
               <button class="primary" data-action="go-book">去预约</button>
             </div>
+            <button class="linkbtn" data-action="offline-channel">不方便自己线上预约？点这里，由我们协助你预约（也可替长辈代约）</button>
           </section>
 
           <section class="stage-screen" data-stage="0" data-step="1">
@@ -1147,7 +1180,8 @@
             <div class="card">
               <div class="card-title"><h2>检测前确认</h2><span class="pill orange">必读</span></div>
               <p class="mini" style="margin-bottom:10px">请确认当前不处于以下状态：孕期、肿瘤治疗中、近期手术或感染期。</p>
-              <div class="check on" data-check><span class="box"></span><span>我已阅读并同意《知情同意书》《隐私政策》，且不处于上述特殊状态。</span></div>
+              <div class="check on" data-check><span class="box"></span><span>我已阅读《知情同意书》《隐私政策》并<b>预同意</b>，且不处于上述特殊状态。</span></div>
+              <p class="footnote">正式《知情同意书》将于到检现场，由工作人员讲解后协助你完成面签。</p>
             </div>
 
             <button class="primary" data-action="book">提交预约</button>
@@ -1195,7 +1229,13 @@
               <div class="card-title"><h2>到检指引</h2></div>
               <div class="row"><div><strong>地点</strong><span class="mini" id="bk-place">北京 · 三里屯采血点 2 层 A 区</span></div><span class="pill blue">导航</span></div>
               <div class="row"><div><strong>时间</strong><span class="mini" id="bk-time">明天 14:30，请提前 10 分钟到达</span></div></div>
-              <div class="row"><div><strong>采血须知</strong><span class="mini">无需空腹；采血约 5 分钟；采血后自动进入报告跟踪</span></div></div>
+              <p class="mini" style="font-weight:800;color:var(--ink);margin:12px 0 8px">现场流程</p>
+              <div class="todo">
+                <div class="todo-item"><i>1</i><div><strong>出示核销码 · 身份核对</strong><span class="mini">工作人员扫码并核对受检人信息</span></div></div>
+                <div class="todo-item"><i>2</i><div><strong>知情同意面签</strong><span class="mini">工作人员讲解后，现场完成《知情同意书》正式签署</span></div></div>
+                <div class="todo-item"><i>3</i><div><strong>采血</strong><span class="mini">无需空腹，约 5 分钟</span></div></div>
+                <div class="todo-item"><i>4</i><div><strong>进入报告跟踪</strong><span class="mini">采血后自动进入检验进度</span></div></div>
+              </div>
             </div>
             <button class="primary" data-action="checkin">模拟：已到场完成采血</button>
           </section>
@@ -1205,6 +1245,7 @@
             <div class="card">
               <div class="card-title"><h2>检验进度</h2><span class="pill orange">检测中</span></div>
               <div class="track">
+                <div class="track-item done"><span class="track-dot"></span><div class="track-body"><strong>现场知情面签完成</strong><span class="mini">工作人员核对受检人并完成《知情同意书》签署</span></div></div>
                 <div class="track-item done"><span class="track-dot"></span><div class="track-body"><strong>已采血</strong><span class="mini" id="bk-draw">06-25 14:36 三里屯采血点</span></div></div>
                 <div class="track-item done"><span class="track-dot"></span><div class="track-body"><strong>样本已送达实验室</strong><span class="mini">06-25 20:10</span></div></div>
                 <div class="track-item current"><span class="track-dot"></span><div class="track-body"><strong>实验室检测中</strong><span class="mini">预计 06-28 出具报告</span></div></div>
@@ -1531,6 +1572,7 @@
             <div class="pc-section">
               <div class="pc-sec-head">常用功能</div>
               <div class="pc-list">
+                <div class="pc-row" id="care-toggle"><span class="pr-l"><i class="pr-ic">字</i><span class="pr-t"><strong>关怀模式（大字）</strong><span>放大字号与按钮，界面更简洁</span></span></span><span class="switch" id="care-switch"></span></div>
                 <div class="pc-row" data-toast="优惠券与补贴：暂无可用优惠券；异常后可申请检查补贴、复购推荐返现"><span class="pr-l"><i class="pr-ic">券</i><span class="pr-t"><strong>优惠券与补贴</strong><span>复购返现·检查补贴</span></span></span><span class="pr-arrow">›</span></div>
                 <div class="pc-row" data-toast="消息通知：报告就绪、随访提醒、协助进度都会在此提醒"><span class="pr-l"><i class="pr-ic">铃</i><span class="pr-t"><strong>消息通知</strong><span>报告·随访·协助提醒</span></span></span><span class="pc-badge">2</span></div>
                 <div class="pc-row" data-toast="家庭健康档案：集中管理家人报告与就医记录（即将上线）"><span class="pr-l"><i class="pr-ic">档</i><span class="pr-t"><strong>家庭健康档案</strong><span>家人报告·就医记录</span></span></span><span class="pr-arrow">›</span></div>
@@ -1541,6 +1583,34 @@
             </div>
 
             <p class="footnote" style="text-align:center;padding:4px 0 10px">小荷医学 · 本页面仅为产品原型演示</p>
+          </div>
+        </div>
+
+        <div class="launch-mask" id="launch-mask">
+          <div class="launch-card">
+            <strong>选择字号显示</strong>
+            <p class="mini">为方便阅读，请选择适合你的字号。稍后可在「个人中心 · 关怀模式」随时修改。</p>
+            <div class="launch-opts">
+              <button class="launch-opt" data-size="normal"><span class="lo-demo sm">标准</span><strong>标准字号</strong></button>
+              <button class="launch-opt" data-size="big"><span class="lo-demo big">大字</span><strong>大字 · 关怀模式</strong></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="sheet-mask" id="offline-sheet">
+          <div class="sheet">
+            <div class="sheet-head">
+              <strong>选择代预约 / 代办方式</strong>
+              <button class="sheet-close" data-action="close-sheet" aria-label="关闭">✕</button>
+            </div>
+            <div class="sheet-body">
+              <p class="mini" style="margin-bottom:14px">不方便自己线上操作？选一种方式，由我们帮你完成预约与到检安排（也可替长辈代办）。</p>
+              <div class="apply-item"><div><strong>电话预约</strong><span class="mini">400-100-XXXX · 人工 8:00–20:00</span></div><button class="apply-btn" data-action="ch-phone">拨打</button></div>
+              <div class="apply-item"><div><strong>到店人工协助</strong><span class="mini">到采血点，由工作人员协助办理全部流程</span></div><button class="apply-btn" data-action="ch-store">查看门店</button></div>
+              <div class="apply-item"><div><strong>在线管家沟通</strong><span class="mini">在 App 内和健康管家对话，由 TA 代你预约</span></div><button class="apply-btn" data-action="ch-im">去对话</button></div>
+              <div class="apply-item"><div><strong>企业微信沟通</strong><span class="mini">加企业微信，1 对 1 协助预约与答疑</span></div><button class="apply-btn" data-action="ch-wecom">打开企微</button></div>
+              <p class="footnote">以上为示意：正式版电话、门店与企业微信入口以实际配置为准。</p>
+            </div>
           </div>
         </div>
 
@@ -2147,7 +2217,12 @@
       "close-sheet": () => document.querySelectorAll(".sheet-mask").forEach(m => m.classList.remove("open")),
       "open-wecom": () => showToast("正在打开企业微信对话…（示意，正式版经微信客服 / 活码直达会话）"),
       "copy-wecom": () => showToast("健康管家企业微信号已复制：xiaohe-care-001"),
-      "upload":  () => showToast("已选择文件（示意）")
+      "upload":  () => showToast("已选择文件（示意）"),
+      "offline-channel": () => document.querySelector("#offline-sheet").classList.add("open"),
+      "ch-phone": () => showToast("正在呼叫 400-100-XXXX，人工帮您预约（示意）"),
+      "ch-store": () => showToast("已为你列出就近门店，到店由工作人员协助办理（示意）"),
+      "ch-im":    () => { document.querySelectorAll(".sheet-mask").forEach(m => m.classList.remove("open")); openIM(); },
+      "ch-wecom": () => { document.querySelectorAll(".sheet-mask").forEach(m => m.classList.remove("open")); showToast("正在打开企业微信对话…（示意）"); }
     };
 
     document.querySelectorAll("[data-action]").forEach(btn => {
@@ -2383,6 +2458,33 @@
     document.querySelectorAll("#pc .pc-row[data-toast]").forEach(r => {
       r.addEventListener("click", () => showToast(r.dataset.toast));
     });
+
+    // 关怀 / 大字模式开关
+    const phoneEl = document.querySelector(".phone");
+    const careToggle = document.querySelector("#care-toggle");
+    const careSwitch = document.querySelector("#care-switch");
+    if (careToggle) {
+      careToggle.addEventListener("click", () => {
+        const on = phoneEl.classList.toggle("care-mode");
+        careSwitch.classList.toggle("on", on);
+        showToast(on ? "已开启关怀模式（大字）" : "已关闭关怀模式");
+      });
+    }
+
+    // 首启字号选择弹窗：选择后可在「个人中心 · 关怀模式」修改
+    const launchMask = document.querySelector("#launch-mask");
+    if (launchMask) {
+      launchMask.querySelectorAll("[data-size]").forEach(b => {
+        b.addEventListener("click", () => {
+          const big = b.dataset.size === "big";
+          phoneEl.classList.toggle("care-mode", big);
+          if (careSwitch) careSwitch.classList.toggle("on", big);
+          launchMask.classList.remove("open");
+          showToast(big ? "已设为大字 · 关怀模式，可在个人中心修改" : "已设为标准字号，可在个人中心修改");
+        });
+      });
+      launchMask.classList.add("open");
+    }
 
     goTo(0, 0);
   </script>
