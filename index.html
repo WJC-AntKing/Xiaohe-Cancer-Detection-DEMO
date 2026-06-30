@@ -415,6 +415,28 @@
     }
     .primary:active { transform: scale(.99); }
 
+    /* 单一主操作的流程节点：主“下一步”固定在底部、不随内容滚动 */
+    .stage-screen > .primary:last-child {
+      position: sticky;
+      bottom: 12px;
+      z-index: 5;
+      margin-top: 16px;
+      box-shadow: 0 10px 22px rgba(8, 118, 93, .30);
+    }
+
+    /* 页尾的双按钮（在线咨询 / 去预约）整组固定在底部 */
+    .stage-screen > .two-actions:last-child {
+      position: sticky;
+      bottom: 12px;
+      z-index: 5;
+      margin-top: 16px;
+      padding: 8px;
+      background: rgba(255, 255, 255, .96);
+      backdrop-filter: blur(2px);
+      border-radius: 14px;
+      box-shadow: 0 10px 22px rgba(15, 23, 32, .14);
+    }
+
     .secondary {
       background: var(--brand-soft);
       color: var(--brand-deep);
@@ -505,37 +527,57 @@
     .check .box::after { content: "✓"; opacity: 0; }
     .check.on .box::after { opacity: 1; }
 
+    /* 底部导航 = 阶段进度 + 导航（合并原顶部 stepper） */
     .bottom-nav {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
-      gap: 4px;
-      padding: 8px;
+      padding: 10px 8px;
       background: #fff;
       border-top: 1px solid var(--line);
       flex: none;
     }
 
     .nav-btn {
+      position: relative;
       border: 0;
       background: transparent;
-      color: #7a8490;
+      color: #9aa4b0;
       font-size: 11px;
-      padding: 7px 3px;
-      border-radius: 8px;
+      padding: 2px 3px;
       cursor: pointer;
     }
 
-    .nav-btn b { display: block; font-size: 18px; line-height: 1; margin-bottom: 3px; }
-    .nav-ic { display: block; width: 22px; height: 22px; margin: 0 auto 4px; }
+    .nav-btn::before {
+      content: "";
+      position: absolute;
+      top: 14px;
+      left: -50%;
+      width: 100%;
+      height: 2px;
+      background: #e7edf3;
+      z-index: 0;
+    }
+    .nav-btn:first-child::before { display: none; }
 
-    .nav-btn.active {
-      background: var(--brand-soft);
-      color: var(--brand-deep);
-      font-weight: 700;
+    .nav-num {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      place-items: center;
+      width: 24px;
+      height: 24px;
+      margin: 0 auto 5px;
+      border-radius: 50%;
+      background: #e7edf3;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 800;
     }
 
-    /* 结果未出时弱化“协助/随访”，仍可点 */
-    .nav-btn.nav-dim { opacity: .4; }
+    .nav-btn.done .nav-num { background: var(--green); }
+    .nav-btn.done::before { background: var(--green); }
+    .nav-btn.active { color: var(--brand-deep); font-weight: 800; }
+    .nav-btn.active .nav-num { background: var(--brand-deep); box-shadow: 0 0 0 4px var(--brand-soft); }
 
     .calendar { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
 
@@ -1035,6 +1077,9 @@
     .city-row::-webkit-scrollbar { display: none; }
     .city-chip { flex: none; border: 1px solid var(--line); background: #fff; color: var(--ink); border-radius: 999px; padding: 7px 14px; font-size: 13px; cursor: pointer; }
     .city-chip.active { border-color: var(--brand-line); background: var(--brand-soft); color: var(--brand-deep); font-weight: 700; }
+    .pay-option.soldout { grid-template-columns: 20px 1fr auto; align-items: center; cursor: default; background: #f7f9fb; opacity: .8; }
+    .pay-option.soldout .radio-dot { border-color: var(--line); }
+    .pay-option.soldout strong { color: #6d7682; }
     .draw-soon { display: flex; align-items: center; justify-content: space-between; gap: 10px; border: 1px dashed #cfd8e2; border-radius: 10px; padding: 12px; background: #f7f9fb; margin-top: 8px; }
     .draw-soon strong { display: block; font-size: 14px; margin-bottom: 3px; color: #53606e; }
 
@@ -1071,6 +1116,18 @@
     /* 实验流程步骤的时间标签 */
     .todo-item .th { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
     .lab-t { font-size: 11px; color: var(--brand-deep); font-weight: 700; white-space: nowrap; flex: none; }
+
+    /* 协助预约入口（醒目大卡片） */
+    .assist-cta { display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; cursor: pointer; background: var(--brand-soft); border: 1px solid var(--brand-line); border-radius: 12px; padding: 14px; margin-top: 4px; }
+    .assist-cta:active { background: #d7f8eb; }
+    .assist-ic { width: 42px; height: 42px; flex: none; border-radius: 12px; background: #fff; border: 1px solid var(--brand-line); display: grid; place-items: center; }
+    .assist-ic svg { width: 22px; height: 22px; }
+    .assist-tx { flex: 1; min-width: 0; }
+    .assist-tx strong { display: block; font-size: 15px; color: var(--brand-deep); margin-bottom: 3px; }
+    .assist-tx span { display: block; font-size: 12px; color: var(--muted); line-height: 1.45; }
+    .assist-arrow { color: var(--brand-deep); font-size: 22px; flex: none; }
+    .phone.care-mode .assist-tx strong { font-size: 17px; }
+    .phone.care-mode .assist-tx span { font-size: 14px; }
     .launch-opt strong { font-size: 13px; }
   </style>
 </head>
@@ -1092,13 +1149,6 @@
           <div class="person-menu" id="person-menu"></div>
         </header>
 
-        <div class="stepper" id="stepper">
-          <div class="step" data-step="0"><i>1</i>预约</div>
-          <div class="step" data-step="1"><i>2</i>检查</div>
-          <div class="step" data-step="2"><i>3</i>结果</div>
-          <div class="step" data-step="3"><i>4</i>协助</div>
-          <div class="step" data-step="4"><i>5</i>随访</div>
-        </div>
 
         <div class="content" id="content">
 
@@ -1146,11 +1196,15 @@
               <p class="footnote">数据示意，为服务规模与时效说明，不代表筛查或诊断有效性的承诺。</p>
             </div>
 
+            <button class="assist-cta" data-action="offline-channel">
+              <span class="assist-ic"><svg viewBox="0 0 24 24" fill="none" stroke="#08765d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8 9.6a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2z"/></svg></span>
+              <span class="assist-tx"><strong>不想自己在线预约？我们帮你约</strong><span>电话 / 到店 / 在线管家代办，也可替长辈代约</span></span>
+              <span class="assist-arrow">›</span>
+            </button>
             <div class="two-actions">
               <button class="ghost" data-action="consult">在线咨询</button>
               <button class="primary" data-action="go-book">去预约</button>
             </div>
-            <button class="linkbtn" data-action="offline-channel">不方便自己线上预约？点这里，由我们协助你预约（也可替长辈代约）</button>
           </section>
 
           <section class="stage-screen" data-stage="0" data-step="1">
@@ -1508,12 +1562,12 @@
 
         </div>
 
-        <nav class="bottom-nav" aria-label="阶段导航">
-          <button class="nav-btn active" data-stage="0"><svg class="nav-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>预约</button>
-          <button class="nav-btn" data-stage="1"><svg class="nav-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s6 6.5 6 10.5a6 6 0 0 1-12 0C6 9.5 12 3 12 3z"/></svg>检查</button>
-          <button class="nav-btn" data-stage="2"><svg class="nav-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2h8l4 4v16H6z"/><path d="M14 2v4h4M9 13h6M9 17h6"/></svg>结果</button>
-          <button class="nav-btn" data-stage="3"><svg class="nav-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-7-9.5A3.5 3.5 0 0 1 12 8a3.5 3.5 0 0 1 7 3.5C19 16.5 12 21 12 21z"/></svg>协助</button>
-          <button class="nav-btn" data-stage="4"><svg class="nav-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8.4c-.7-1.5-2.5-2-3.8-1C7 8.2 6.8 9.9 7.6 11.1c.8 1.2 4.4 3.3 4.4 3.3s3.6-2.1 4.4-3.3c.8-1.2.6-2.9-.6-3.7-1.3-1-3.1-.5-3.8 1z"/><path d="M4.5 15.3c1.8 2.6 4.6 4 7.5 4s5.7-1.4 7.5-4"/></svg>随访</button>
+        <nav class="bottom-nav" aria-label="阶段进度与导航">
+          <button class="nav-btn active" data-stage="0"><span class="nav-num">1</span>预约</button>
+          <button class="nav-btn" data-stage="1"><span class="nav-num">2</span>检查</button>
+          <button class="nav-btn" data-stage="2"><span class="nav-num">3</span>结果</button>
+          <button class="nav-btn" data-stage="3"><span class="nav-num">4</span>协助</button>
+          <button class="nav-btn" data-stage="4"><span class="nav-num">5</span>随访</button>
         </nav>
 
         <div class="im" id="im" aria-label="健康管家对话">
@@ -2050,16 +2104,11 @@
         Number(s.dataset.stage) === stage && Number(s.dataset.step) === step));
       navButtons.forEach(b => {
         const s = Number(b.dataset.stage);
+        // 底部 tab 兼作进度：已过的阶段为 done，当前为 active，未来为默认灰
         b.classList.toggle("active", s === stage);
-        // 当前预约人结果未出（进度<2）时，弱化“协助/随访”，但当前浏览的那一栏不弱化
-        const preResult = typeof currentPerson !== "undefined" && currentPerson && currentPerson.stage < 2;
-        b.classList.toggle("nav-dim", preResult && (s === 3 || s === 4) && s !== stage);
+        b.classList.toggle("done", s < stage);
       });
       stageTabs.forEach(b => b.classList.toggle("active", Number(b.dataset.stage) === stage));
-      stepperSteps.forEach((el, i) => {
-        el.classList.toggle("active", i === stage);
-        el.classList.toggle("done", i < stage);
-      });
       if (stageSubtitle) stageSubtitle.textContent = stages[stage].title;
       currentStatus.textContent = stages[stage].status;
       renderInsights(stage);
@@ -2089,19 +2138,24 @@
     const drawCities = {
       "北京": [
         { name: "三里屯采血点", info: "朝阳区 · 距你 1.8km" },
-        { name: "中关村采血点", info: "海淀区 · 距你 5.2km" }
+        { name: "中关村采血点", info: "海淀区 · 距你 5.2km" },
+        { name: "北京协和医院", info: "东城区 · 顶尖三甲", soldout: true },
+        { name: "北京大学第一医院", info: "西城区 · 顶尖三甲", soldout: true }
       ],
       "上海": [
         { name: "陆家嘴采血点", info: "浦东新区 · 距你 2.3km" },
-        { name: "徐家汇采血点", info: "徐汇区 · 距你 4.0km" }
+        { name: "徐家汇采血点", info: "徐汇区 · 距你 4.0km" },
+        { name: "复旦大学附属中山医院", info: "徐汇区 · 顶尖三甲", soldout: true }
       ],
       "杭州": [
         { name: "武林采血点", info: "拱墅区 · 距你 1.5km" },
-        { name: "滨江采血点", info: "滨江区 · 距你 6.1km" }
+        { name: "滨江采血点", info: "滨江区 · 距你 6.1km" },
+        { name: "浙江大学医学院附属第二医院", info: "上城区 · 顶尖三甲", soldout: true }
       ],
       "广州": [
         { name: "珠江新城采血点", info: "天河区 · 距你 2.0km" },
-        { name: "天河体育中心采血点", info: "天河区 · 距你 3.4km" }
+        { name: "天河体育中心采血点", info: "天河区 · 距你 3.4km" },
+        { name: "中山大学附属第一医院", info: "越秀区 · 顶尖三甲", soldout: true }
       ],
       "深圳": [
         { name: "福田 CBD 采血点", info: "福田区 · 距你 1.2km" },
@@ -2113,13 +2167,25 @@
     const drawPoints = document.querySelector("#draw-points");
 
     function renderDrawPoints() {
-      drawPoints.innerHTML = drawCities[currentCity].map((p, i) => `
-        <div class="pay-option ${i === 0 ? "active" : ""}" data-point="${i}">
+      drawPoints.innerHTML = drawCities[currentCity].map((p, i) => {
+        if (p.soldout) {
+          return `<div class="pay-option soldout" data-point="${i}">
+            <span class="radio-dot"></span>
+            <div><strong>${p.name}</strong><p class="mini">${p.info}</p></div>
+            <span class="pill gray">暂无号</span>
+          </div>`;
+        }
+        return `<div class="pay-option ${i === 0 ? "active" : ""}" data-point="${i}">
           <span class="radio-dot"></span>
           <div><strong>${p.name}</strong><p class="mini">${p.info}</p></div>
-        </div>`).join("");
+        </div>`;
+      }).join("");
       drawPoints.querySelectorAll(".pay-option").forEach(opt => {
         opt.addEventListener("click", () => {
+          if (opt.classList.contains("soldout")) {
+            showToast("该院区号源已约满，可选其他采血点或开启到号提醒（示意）");
+            return;
+          }
           drawPoints.querySelectorAll(".pay-option").forEach(o => o.classList.remove("active"));
           opt.classList.add("active");
           applyBooking();
