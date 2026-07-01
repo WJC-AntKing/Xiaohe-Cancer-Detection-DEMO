@@ -1088,17 +1088,12 @@
     .phone.care-mode .im-bubble { font-size: 16px; line-height: 1.65; }
     .phone.care-mode .pc-tile strong { font-size: 14px; }
 
-    /* 首启字号选择弹窗 */
-    .launch-mask { position: absolute; inset: 0; z-index: 50; background: rgba(15,23,32,.45); display: flex; align-items: center; justify-content: center; padding: 24px; opacity: 0; pointer-events: none; transition: opacity .25s ease; }
-    .launch-mask.open { opacity: 1; pointer-events: auto; }
-    .launch-card { background: #fff; border-radius: 16px; padding: 20px; width: 100%; max-width: 320px; }
-    .launch-card > strong { font-size: 18px; display: block; margin-bottom: 6px; }
-    .launch-opts { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
-    .launch-opt { border: 1px solid var(--line); border-radius: 12px; padding: 16px 10px; background: #fbfdff; cursor: pointer; display: grid; gap: 10px; place-items: center; }
-    .launch-opt:active { border-color: var(--brand-line); background: var(--brand-soft); }
-    .lo-demo { display: grid; place-items: center; width: 100%; height: 48px; border-radius: 8px; background: #f2f5f8; color: var(--ink); font-weight: 700; }
-    .lo-demo.sm { font-size: 14px; }
-    .lo-demo.big { font-size: 22px; }
+    /* 字号提示条（默认标准字号，可点切换大字，非强制） */
+    .font-hint { flex: none; display: none; align-items: center; gap: 8px; background: var(--brand-soft); border-bottom: 1px solid var(--brand-line); color: var(--brand-deep); padding: 9px 12px 9px 14px; font-size: 12px; line-height: 1.4; }
+    .font-hint.show { display: flex; }
+    .font-hint span { flex: 1; }
+    .fh-switch { flex: none; border: 0; background: var(--blue); color: #fff; border-radius: 8px; padding: 6px 10px; font-size: 12px; font-weight: 700; cursor: pointer; }
+    .fh-close { flex: none; border: 0; background: transparent; color: var(--muted); font-size: 15px; cursor: pointer; padding: 2px 4px; }
     /* 实验流程步骤的时间标签 */
     .todo-item .th { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
     .lab-t { font-size: 11px; color: var(--brand-deep); font-weight: 700; white-space: nowrap; flex: none; }
@@ -1114,7 +1109,6 @@
     .assist-arrow { color: var(--brand-deep); font-size: 22px; flex: none; }
     .phone.care-mode .assist-tx strong { font-size: 17px; }
     .phone.care-mode .assist-tx span { font-size: 14px; }
-    .launch-opt strong { font-size: 13px; }
   </style>
 </head>
 <body>
@@ -1135,6 +1129,11 @@
           <div class="person-menu" id="person-menu"></div>
         </header>
 
+        <div class="font-hint" id="font-hint">
+          <span>已默认标准字号，看不清可切换<b>大字·关怀模式</b>，也可稍后在个人中心修改。</span>
+          <button class="fh-switch" id="fh-switch">切换大字</button>
+          <button class="fh-close" id="fh-close" aria-label="关闭">✕</button>
+        </div>
 
         <div class="content" id="content">
 
@@ -1629,17 +1628,6 @@
           </div>
         </div>
 
-        <div class="launch-mask" id="launch-mask">
-          <div class="launch-card">
-            <strong>选择字号显示</strong>
-            <p class="mini">为方便阅读，请选择适合你的字号。稍后可在「个人中心 · 关怀模式」随时修改。</p>
-            <div class="launch-opts">
-              <button class="launch-opt" data-size="normal"><span class="lo-demo sm">标准</span><strong>标准字号</strong></button>
-              <button class="launch-opt" data-size="big"><span class="lo-demo big">大字</span><strong>大字 · 关怀模式</strong></button>
-            </div>
-          </div>
-        </div>
-
         <div class="sheet-mask" id="offline-sheet">
           <div class="sheet">
             <div class="sheet-head">
@@ -1702,33 +1690,33 @@
               <button class="sheet-close" data-action="close-sheet" aria-label="关闭">✕</button>
             </div>
             <div class="sheet-body">
-              <p class="mini" style="margin-bottom:12px">一次抽血完成 <b>16 种</b>高发癌症筛查。下表按<b>中国年新发病例数从高到低</b>排列；相比逐项做 CT、内镜或依赖肿瘤标记物，本检测覆盖更全、更适合用于筛查。（50–74 岁人群中这 16 癌发病占比约 <b>86%</b>）</p>
+              <p class="mini" style="margin-bottom:10px">一次抽血完成 <b>16 种</b>高发癌症筛查。下表按<b>中国年新发病例数从高到低</b>排列；相比逐项做 CT、内镜或依赖肿瘤标记物，本检测覆盖更全、更适合用于筛查。（50–74 岁人群中这 16 癌发病占比约 <b>86%</b>）</p>
+              <p class="mini" style="margin-bottom:12px;background:#fff5e9;border:1px solid #f4dfc2;border-radius:8px;padding:9px 11px;color:#8a5a12"><b>常见误区：抽血查肿瘤标志物 ≠ 防癌筛查。</b>绝大多数肿标早期灵敏度 / 特异度不足，并不适合用于癌症筛查，不能替代多癌早筛（前列腺 PSA 是少数可参考的例外）。</p>
 
               <div class="cov-scroll">
-                <table class="cov-table">
-                  <thead><tr><th>癌种<div class="mk">年新发·全国约</div></th><th>常规筛查</th><th>肿瘤标记物</th><th>本检测价值</th></tr></thead>
+                <table class="cov-table" style="min-width:0;width:100%">
+                  <thead><tr><th>癌种<div class="mk">年新发·全国约</div></th><th>现有手段</th><th>本检测价值</th></tr></thead>
                   <tbody>
-                    <tr><td>肺癌<div class="mk">约 106 万</div></td><td>低剂量 CT</td><td>CEA·CYFRA<div class="mk">不适合筛查</div></td><td><span class="pill green">一并纳入</span><div class="mk">省去单独 CT</div></td></tr>
-                    <tr><td>结直肠癌<div class="mk">约 52 万</div></td><td>肠镜 / 粪检</td><td>CEA<div class="mk">不适合筛查</div></td><td><span class="pill green">一并纳入</span><div class="mk">省去肠镜</div></td></tr>
-                    <tr><td>肝癌<div class="mk">约 37 万</div></td><td>超声 + AFP</td><td>AFP<div class="mk">辅助，单用不足</div></td><td><span class="pill green">一并纳入</span><div class="mk">纳入一次抽血</div></td></tr>
-                    <tr><td>胃癌<div class="mk">约 36 万</div></td><td>胃镜</td><td>CA72-4·CEA<div class="mk">不适合筛查</div></td><td><span class="pill green">一并纳入</span><div class="mk">省去胃镜</div></td></tr>
-                    <tr><td>乳腺癌<div class="mk">约 36 万</div></td><td>钼靶 / 超声</td><td>CA15-3<div class="mk">不适合筛查</div></td><td><span class="pill green">一并纳入</span><div class="mk">纳入一次抽血</div></td></tr>
-                    <tr><td>食管癌<div class="mk">约 22 万</div></td><td>胃镜</td><td>SCC<div class="mk">不适合筛查</div></td><td><span class="pill green">一并纳入</span><div class="mk">省去胃镜</div></td></tr>
-                    <tr><td>宫颈癌<div class="mk">约 15 万</div></td><td>HPV / TCT</td><td>SCC<div class="mk">不适合筛查</div></td><td><span class="pill gray">辅助补充</span><div class="mk">不替代专项</div></td></tr>
-                    <tr><td>前列腺癌<div class="mk">约 13 万</div></td><td>无</td><td>PSA<div class="mk">可参考</div></td><td><span class="pill green">填补空白</span><div class="mk">PSA 仅可参考</div></td></tr>
-                    <tr><td>胰腺癌<div class="mk">约 12 万</div></td><td>无</td><td>CA19-9<div class="mk">不适合筛查</div></td><td><span class="pill green">填补空白</span><div class="mk">原本无成熟筛查</div></td></tr>
-                    <tr><td>淋巴瘤<div class="mk">约 9 万</div></td><td>无</td><td>LDH<div class="mk">不适合筛查</div></td><td><span class="pill green">填补空白</span><div class="mk">原本无成熟筛查</div></td></tr>
-                    <tr><td>膀胱癌<div class="mk">约 9 万</div></td><td>无</td><td>NMP22<div class="mk">不适合筛查</div></td><td><span class="pill green">填补空白</span><div class="mk">原本无成熟筛查</div></td></tr>
-                    <tr><td>子宫内膜癌<div class="mk">约 7.8 万</div></td><td>无</td><td>无特异标记物</td><td><span class="pill green">填补空白</span><div class="mk">原本无成熟筛查</div></td></tr>
-                    <tr><td>肾癌<div class="mk">约 7.3 万</div></td><td>无</td><td>无特异标记物</td><td><span class="pill green">填补空白</span><div class="mk">原本无成熟筛查</div></td></tr>
-                    <tr><td>卵巢癌<div class="mk">约 6 万</div></td><td>无</td><td>CA125·HE4<div class="mk">不适合筛查</div></td><td><span class="pill green">填补空白</span><div class="mk">原本无成熟筛查</div></td></tr>
-                    <tr><td>鼻咽癌<div class="mk">约 4.8 万</div></td><td>鼻咽镜 / EBV</td><td>EBV 抗体<div class="mk">辅助</div></td><td><span class="pill gray">辅助补充</span><div class="mk">不替代专项</div></td></tr>
-                    <tr><td>胆道癌<div class="mk">约 3 万</div></td><td>无</td><td>CA19-9<div class="mk">不适合筛查</div></td><td><span class="pill green">填补空白</span><div class="mk">原本无成熟筛查</div></td></tr>
+                    <tr><td>肺癌<div class="mk">约 106 万</div></td><td>常规：低剂量 CT<div class="mk">肿标：CEA·CYFRA · 不适合筛查</div></td><td><span class="pill green">一并纳入</span><div class="mk">省去单独 CT</div></td></tr>
+                    <tr><td>结直肠癌<div class="mk">约 52 万</div></td><td>常规：肠镜 / 粪检<div class="mk">肿标：CEA · 不适合筛查</div></td><td><span class="pill green">一并纳入</span><div class="mk">省去肠镜</div></td></tr>
+                    <tr><td>肝癌<div class="mk">约 37 万</div></td><td>常规：超声 + AFP<div class="mk">肿标：AFP · 辅助，单用不足</div></td><td><span class="pill green">一并纳入</span><div class="mk">纳入一次抽血</div></td></tr>
+                    <tr><td>胃癌<div class="mk">约 36 万</div></td><td>常规：胃镜<div class="mk">肿标：CA72-4·CEA · 不适合筛查</div></td><td><span class="pill green">一并纳入</span><div class="mk">省去胃镜</div></td></tr>
+                    <tr><td>乳腺癌<div class="mk">约 36 万</div></td><td>常规：钼靶 / 超声<div class="mk">肿标：CA15-3 · 不适合筛查</div></td><td><span class="pill green">一并纳入</span><div class="mk">纳入一次抽血</div></td></tr>
+                    <tr><td>食管癌<div class="mk">约 22 万</div></td><td>常规：胃镜<div class="mk">肿标：SCC · 不适合筛查</div></td><td><span class="pill green">一并纳入</span><div class="mk">省去胃镜</div></td></tr>
+                    <tr><td>宫颈癌<div class="mk">约 15 万</div></td><td>常规：HPV / TCT<div class="mk">肿标：SCC · 不适合筛查</div></td><td><span class="pill gray">辅助补充</span><div class="mk">不替代专项</div></td></tr>
+                    <tr><td>前列腺癌<div class="mk">约 13 万</div></td><td>常规：无<div class="mk">肿标：PSA · 可参考</div></td><td><span class="pill green">填补空白</span><div class="mk">PSA 仅可参考</div></td></tr>
+                    <tr><td>胰腺癌<div class="mk">约 12 万</div></td><td>常规：无<div class="mk">肿标：CA19-9 · 不适合筛查</div></td><td><span class="pill green">填补空白</span><div class="mk">原本无成熟筛查</div></td></tr>
+                    <tr><td>淋巴瘤<div class="mk">约 9 万</div></td><td>常规：无<div class="mk">肿标：LDH · 不适合筛查</div></td><td><span class="pill green">填补空白</span><div class="mk">原本无成熟筛查</div></td></tr>
+                    <tr><td>膀胱癌<div class="mk">约 9 万</div></td><td>常规：无<div class="mk">肿标：NMP22 · 不适合筛查</div></td><td><span class="pill green">填补空白</span><div class="mk">原本无成熟筛查</div></td></tr>
+                    <tr><td>子宫内膜癌<div class="mk">约 7.8 万</div></td><td>常规：无<div class="mk">肿标：无特异标记物</div></td><td><span class="pill green">填补空白</span><div class="mk">原本无成熟筛查</div></td></tr>
+                    <tr><td>肾癌<div class="mk">约 7.3 万</div></td><td>常规：无<div class="mk">肿标：无特异标记物</div></td><td><span class="pill green">填补空白</span><div class="mk">原本无成熟筛查</div></td></tr>
+                    <tr><td>卵巢癌<div class="mk">约 6 万</div></td><td>常规：无<div class="mk">肿标：CA125·HE4 · 不适合筛查</div></td><td><span class="pill green">填补空白</span><div class="mk">原本无成熟筛查</div></td></tr>
+                    <tr><td>鼻咽癌<div class="mk">约 4.8 万</div></td><td>常规：鼻咽镜 / EBV<div class="mk">肿标：EBV 抗体 · 辅助</div></td><td><span class="pill gray">辅助补充</span><div class="mk">不替代专项</div></td></tr>
+                    <tr><td>胆道癌<div class="mk">约 3 万</div></td><td>常规：无<div class="mk">肿标：CA19-9 · 不适合筛查</div></td><td><span class="pill green">填补空白</span><div class="mk">原本无成熟筛查</div></td></tr>
                   </tbody>
                 </table>
               </div>
               <p class="mini" style="margin-top:12px"><b>"本检测价值"分三类：</b><b style="color:var(--brand-deep)">填补空白</b>＝原本没有成熟筛查手段的癌种（如胰腺、卵巢、胆道），从"查不了"到"能查"；<b style="color:var(--brand-deep)">一并纳入</b>＝有筛查但需单独做 CT / 内镜，本检测一次抽血即覆盖、省去逐项奔波；<b>辅助补充</b>＝已有有效专项筛查（如宫颈 HPV），本检测仅作多一层提示、不替代。</p>
-              <p class="mini" style="margin-top:8px">注：绝大多数肿瘤标记物并不适合用于癌症筛查（早期灵敏度 / 特异度不足），不能替代多癌早筛；前列腺 PSA 是少数可参考的例外。</p>
 
               <p class="footnote">年新发病例为国家癌症中心 2022 年全国估计数据的约数（四舍五入；甲状腺癌等未覆盖癌种未列入，故与全部癌症占比不完全对应）。常规筛查、肿瘤标记物及其适用性为参考口径，本检测各癌种性能以正式发表数据为准。</p>
             </div>
@@ -2565,19 +2553,22 @@
       });
     }
 
-    // 首启字号选择弹窗：选择后可在「个人中心 · 关怀模式」修改
-    const launchMask = document.querySelector("#launch-mask");
-    if (launchMask) {
-      launchMask.querySelectorAll("[data-size]").forEach(b => {
-        b.addEventListener("click", () => {
-          const big = b.dataset.size === "big";
-          phoneEl.classList.toggle("care-mode", big);
-          if (careSwitch) careSwitch.classList.toggle("on", big);
-          launchMask.classList.remove("open");
-          showToast(big ? "已设为大字 · 关怀模式，可在个人中心修改" : "已设为标准字号，可在个人中心修改");
-        });
+    // 字号提示条：默认标准字号，可点切换大字（非强制），也可去个人中心改
+    const fontHint = document.querySelector("#font-hint");
+    const fhSwitch = document.querySelector("#fh-switch");
+    const fhClose = document.querySelector("#fh-close");
+    if (fontHint) {
+      fontHint.classList.add("show");
+      // 未手动关闭则 10s 后自动收起，释放显示面积
+      const hintTimer = window.setTimeout(() => fontHint.classList.remove("show"), 10000);
+      const dismissHint = () => { window.clearTimeout(hintTimer); fontHint.classList.remove("show"); };
+      if (fhSwitch) fhSwitch.addEventListener("click", () => {
+        phoneEl.classList.add("care-mode");
+        if (careSwitch) careSwitch.classList.add("on");
+        dismissHint();
+        showToast("已切换大字 · 关怀模式，可在个人中心关闭");
       });
-      launchMask.classList.add("open");
+      if (fhClose) fhClose.addEventListener("click", dismissHint);
     }
 
     goTo(0, 0);
