@@ -283,8 +283,8 @@
 
     .metrics {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 8px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 7px;
       margin: 14px 0 4px;
       position: relative;
       z-index: 1;
@@ -294,14 +294,14 @@
       background: #f5f8fc;
       border: 1px solid #e5ebf2;
       border-radius: 8px;
-      padding: 9px 8px;
+      padding: 9px 7px;
     }
 
     .metric b {
       display: flex;
       align-items: flex-end;
       min-height: 22px;
-      font-size: 16px;
+      font-size: 15px;
       line-height: 1;
       white-space: nowrap;
     }
@@ -309,8 +309,9 @@
     .metric span {
       display: block;
       color: var(--muted);
-      font-size: 11px;
+      font-size: 10.5px;
       margin-top: 3px;
+      line-height: 1.3;
     }
 
     /* 折叠箭头（参考研究来源用） */
@@ -1141,9 +1142,9 @@
           <section class="stage-screen active" data-stage="0" data-step="0">
             <div class="hero">
               <h1>一次抽血，高效覆盖大部分癌症担忧</h1>
-              <p>跑一趟筛查多种癌，省去逐项检查的奔波；即使提示异常，也有解读和保障一路陪伴。</p>
               <div class="metrics">
                 <div class="metric tappable" data-action="open-cancer"><b>16种</b><span>覆盖86%发病率</span></div>
+                <div class="metric tappable" data-action="open-perf"><b>70/99%</b><span>灵敏度/特异度</span></div>
                 <div class="metric tappable" data-action="open-guarantee"><b>600-10万</b><span>补贴保障</span></div>
               </div>
               <button class="metrics-more" data-action="open-tech">检测技术 · DNA 甲基化 ›</button>
@@ -1151,15 +1152,11 @@
 
             <!-- 核心优势 -->
             <div class="card">
-              <div class="card-title"><h2>为什么值得你选择</h2></div>
+              <div class="card-title"><h2>尤其适合替爸妈约</h2></div>
               <div class="adv-list">
-                <div class="adv adv-link" data-action="open-cancer"><i>全</i><div><strong>一次覆盖 16 种高发癌</strong><span class="mini">约占 50–74 岁人群癌症发病的 86%，含胰腺、卵巢等原本难筛的癌种。</span><span class="adv-more">查看覆盖癌种与依据 ›</span></div></div>
-                <div class="adv"><i>简</i><div><strong>一次抽血，省去逐项检查</strong><span class="mini">把多种癌纳入一次抽血，省去逐项 CT、内镜的奔波。</span></div></div>
-                <div class="adv adv-link" data-action="open-perf"><i>准</i><div><strong>中早期也能发现</strong><span class="mini">I–III 期灵敏度 65%、整体 70%、特异度 99%，基于 4–5 万例大样本验证。</span><span class="adv-more">查看与同类产品对比 ›</span></div></div>
-                <div class="adv"><i>安</i><div><strong>无创更安全</strong><span class="mini">只需抽血，无辐射、无内镜痛苦，适合定期检查。</span></div></div>
+                <div class="adv"><i>安</i><div><strong>无创更安全</strong><span class="mini">只需抽血，无辐射、无内镜痛苦，适合老人定期检查。</span></div></div>
                 <div class="adv"><i>孝</i><div><strong>替长辈约更省心</strong><span class="mini">覆盖重要高发癌，老人跑一趟，少折腾。</span></div></div>
               </div>
-              <p class="footnote">性能数据来自多中心临床研究（N≈4–5 万例）；具体样本来源、统计口径与各癌种性能以正式发表为准。</p>
             </div>
 
             <!-- 服务与适用（由原产品详情去重精简而来） -->
@@ -1177,13 +1174,12 @@
                 <div class="stat"><b>¥48<i>万</i></b><span>累计发放检查补贴</span></div>
                 <div class="stat"><b>5.8<i>天</i></b><span>风险提示到协助就诊（平均）</span></div>
               </div>
-              <p class="stat-recent"><span class="dot"></span>近 7 天新增 · 早筛 +38 人次 · 协助就诊 +5 人</p>
-              <p class="footnote">数据示意，为服务规模与时效说明，不代表筛查或诊断有效性的承诺。</p>
+              <p class="footnote">数据示意，不代表有效性承诺。</p>
             </div>
 
             <button class="assist-cta" data-action="offline-channel">
               <span class="assist-ic"><svg viewBox="0 0 24 24" fill="none" stroke="#08765d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8 9.6a16 16 0 0 0 6 6l1.2-1.2a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2z"/></svg></span>
-              <span class="assist-tx"><strong>不想自己在线预约？我们帮你约</strong><span>电话 / 到店 / 在线管家代办，也可替长辈代约</span></span>
+              <span class="assist-tx"><strong>不想自己在线预约？我们帮你约</strong><span>也可替长辈代约</span></span>
               <span class="assist-arrow">›</span>
             </button>
             <div class="two-actions">
@@ -1222,7 +1218,7 @@
             <div class="card">
               <div class="card-title"><h2>检测前确认</h2><span class="pill orange">必读</span></div>
               <p class="mini" style="margin-bottom:10px">请确认当前不处于以下状态：孕期、肿瘤治疗中、近期手术或感染期。</p>
-              <div class="check on" data-check><span class="box"></span><span>我已阅读《知情同意书》《隐私政策》并<b>预同意</b>，且不处于上述特殊状态。</span></div>
+              <div class="check on" data-check><span class="box"></span><span>我已阅读《知情同意书》《隐私政策》并<b>预同意</b>。</span></div>
               <p class="footnote">正式《知情同意书》将于到检现场，由工作人员讲解后协助你完成面签。</p>
             </div>
 
@@ -1235,7 +1231,6 @@
             <div class="hero">
               <div class="eyebrow">已预约 · 支付方式可二选一</div>
               <h1 id="bk-hero">三里屯采血点 明天 14:30</h1>
-              <p>可现在线上支付，也可到现场确认后再付。名额已为你保留。</p>
               <div class="price">¥3000 <span>¥3680</span></div>
             </div>
 
@@ -1248,8 +1243,8 @@
             <div class="card">
               <div class="card-title"><h2>选择支付方式</h2></div>
               <div class="pay-options" id="pay-options">
-                <div class="pay-option active" data-pay="online"><span class="radio-dot"></span><div><strong>线上支付<span class="perk-tag">推荐</span></strong><p class="mini">现在支付，到场直接采血；未采血可随时全额退，无顾虑。</p><p class="perk">专属快速服务通道 · 到检纪念礼</p></div></div>
-                <div class="pay-option" data-pay="onsite"><span class="radio-dot"></span><div><strong>现场沟通后支付</strong><p class="mini">先保留名额，到现场进一步了解产品价值与流程后再付款。</p></div></div>
+                <div class="pay-option active" data-pay="online"><span class="radio-dot"></span><div><strong>线上支付<span class="perk-tag">推荐</span></strong><p class="mini">现在支付，到场直接采血；未采血可随时全额退。</p></div></div>
+                <div class="pay-option" data-pay="onsite"><span class="radio-dot"></span><div><strong>现场沟通后支付</strong><p class="mini">先保留名额，到现场了解后再付款。</p></div></div>
               </div>
             </div>
 
@@ -1264,7 +1259,6 @@
               <div class="code-box">
                 <div class="qr" aria-hidden="true"></div>
                 <strong>HX-20260625-0842</strong>
-                <p class="mini">现场向工作人员出示此码核销采血。</p>
               </div>
             </div>
             <div class="card">
@@ -1294,11 +1288,6 @@
                 <div class="track-item"><span class="track-dot"></span><div class="track-body"><strong>报告生成</strong><span class="mini">完成后短信 + App 推送通知</span></div></div>
               </div>
             </div>
-            <div class="card">
-              <div class="card-title"><h2>这段时间你可以</h2></div>
-              <div class="row"><div><strong>了解报告怎么看</strong><span class="mini">提前熟悉筛查结论与诊断的区别</span></div><span class="pill gray">科普</span></div>
-              <div class="row"><div><strong>了解后续保障</strong><span class="mini">异常时的检查补贴、就医资源与协助</span></div><span class="pill blue">可了解</span></div>
-            </div>
             <button class="primary" data-action="report-ready">模拟：报告已就绪，去查看</button>
           </section>
 
@@ -1327,7 +1316,7 @@
               <div class="card">
                 <div class="card-title"><h2>TOO 模型 · 溯源信号最显著的部位</h2></div>
                 <div class="too-part">肺部</div>
-                <p class="mini">这<b>不是确诊结论</b>，而是模型指出最可能的部位。<b style="color:var(--orange)">每 10 位被提示肺部风险的人，约 6 位经进一步诊断确为肺癌</b>，建议尽快到医院检查明确，可优先做低剂量 CT。</p>
+                <p class="mini">模型指出<b>最可能的部位</b>。<b style="color:var(--orange)">每 10 位被提示肺部风险的人，约 6 位经进一步诊断确为肺癌</b>，建议尽快到医院检查明确，可优先做低剂量 CT。</p>
                 <p class="footnote">阳性预测值为示意，以医生判断与真实数据为准；就医进一步检查费可补贴（600 元内个人实付）。</p>
                 <button class="secondary" style="width:100%;margin-top:10px" data-action="open-docsupport">医生没听过小荷？获取就医支持</button>
                 <button class="primary" style="margin-top:10px" data-action="go-care">上传就医诊断报告，获取检查费补贴</button>
@@ -1355,7 +1344,7 @@
             </div>
 
             <button class="ghost" style="width:100%;margin-bottom:10px" data-action="save-report">保存报告图片到相册</button>
-            <p class="mini" style="margin:2px 4px 12px">⚠️ 本报告为筛查提示，不作为临床诊断依据。任何结论建议由专业医生解读。</p>
+            <p class="mini" style="margin:2px 4px 12px">⚠️ 本报告为筛查提示，非诊断依据，请由医生解读。</p>
           </section>
 
           <section class="stage-screen" data-stage="2" data-step="1">
@@ -1375,8 +1364,8 @@
             <div class="card">
               <div class="card-title"><h2>解读方式</h2></div>
               <div class="pay-options">
-                <div class="pay-option active"><span class="radio-dot"></span><div><strong>视频解读</strong><p class="mini">可同屏看报告，沟通更直观</p></div></div>
-                <div class="pay-option"><span class="radio-dot"></span><div><strong>电话解读</strong><p class="mini">不方便视频时选择</p></div></div>
+                <div class="pay-option active"><span class="radio-dot"></span><div><strong>视频解读</strong></div></div>
+                <div class="pay-option"><span class="radio-dot"></span><div><strong>电话解读</strong></div></div>
               </div>
             </div>
             <button class="primary" data-action="interpret">确认预约解读</button>
@@ -1415,7 +1404,7 @@
               <div class="card-title"><h2>着急 · 一对一找健康管家</h2><span class="pill green">即时响应</span></div>
               <div class="doctor">
                 <div class="avatar avatar-logo" aria-hidden="true"></div>
-                <div><strong>小荷健康管家 · 企业微信</strong><p class="mini">一对一沟通，最快当场答疑；适合想尽快弄清下一步。</p></div>
+                <div><strong>小荷健康管家 · 企业微信</strong><p class="mini">一对一沟通，最快当场答疑。</p></div>
               </div>
               <button class="primary" style="margin-top:12px" data-action="open-wecom">打开企业微信，联系健康管家</button>
               <button class="linkbtn" data-action="copy-wecom">或复制健康管家企业微信号</button>
@@ -1423,14 +1412,13 @@
 
             <div class="card">
               <div class="card-title"><h2>不急 · 留下疑问与资料</h2><span class="pill blue">48小时整体回复</span></div>
-              <p class="mini" style="margin-bottom:10px">把疑问和材料留给我们，健康管家与医生会更全面地回复，服务更完善。</p>
+              <p class="mini" style="margin-bottom:10px">把疑问和材料留给我们，健康管家与医生会更全面地回复。</p>
               <div class="form-grid">
                 <label>我的主要疑问<textarea>报告检测到癌症风险、溯源提示肺部，是否必须尽快做低剂量 CT？去哪家医院比较好？</textarea></label>
                 <label>已就诊医院/科室<input value="暂未就诊，计划预约三甲医院胸外/呼吸科"></label>
                 <div class="upload" data-action="upload">＋ 上传影像、门诊病历、检查单或病理报告</div>
               </div>
             </div>
-            <p class="mini" style="margin:0 4px 10px">常见协助可自助申请：专科就医建议、诊断 / 治疗资源连接、检查补贴与保障等。</p>
             <button class="primary" data-action="go-apply">自助申请协助</button>
           </section>
 
@@ -1472,7 +1460,6 @@
               </div>
               <button class="primary" style="margin-top:12px" data-action="update">更新诊断结论</button>
             </div>
-            <p class="mini" style="margin:2px 4px 8px">真阳确诊 → 优先连接治疗资源；排除恶性（假阳）→ 发放 2000 元补贴；后续确诊（假阴）→ 启动最高 10 万元保障。</p>
           </section>
 
           <!-- ===================== 阶段5 长期随访 ===================== -->
@@ -1483,7 +1470,7 @@
             <div class="hero">
               <div class="eyebrow">本次已含一年随访 · ¥3000 内，无需额外付费</div>
               <h1>检查结束不是终点，我们陪你管理一整年</h1>
-              <p>无论结果如何，这一年持续提供科普、就医建议与情绪陪伴；明年复查或推荐亲友，还有返现感谢。</p>
+              <p>无论结果如何，这一年持续提供科普、就医建议与情绪陪伴。</p>
             </div>
 
             <!-- ② 主行动：专属健康管家 -->
@@ -1526,7 +1513,7 @@
               <div class="card-title"><h2>把守护带给家人</h2></div>
               <div class="doctor">
                 <div class="avatar" aria-hidden="true"></div>
-                <div><strong>替爸妈、伴侣预约</strong><p class="mini">长辈风险更高，一次抽血少折腾。可直接帮 TA 约，或推荐 TA 自己买。</p></div>
+                <div><strong>替爸妈、伴侣预约</strong><p class="mini">长辈风险更高，一次抽血少折腾。</p></div>
               </div>
               <div class="two-actions" style="margin-top:12px">
                 <button class="ghost" data-action="refer">推荐给家人</button>
@@ -1537,7 +1524,7 @@
             <!-- ⑥ 科普共创（保留原样，置于靠后） -->
             <div class="card">
               <div class="card-title"><h2>参与科普共创</h2><span class="pill green">稿酬 ¥1000</span></div>
-              <p class="mini">把你的经历分享出来，帮到更多还在犹豫或担心的人。完全自愿、可化名，仅用于健康科普、经授权后使用，提供 1000 元稿酬。</p>
+              <p class="mini">把你的经历分享出来，帮到更多还在犹豫或担心的人。完全自愿、可化名，提供 1000 元稿酬。</p>
               <button class="secondary" style="width:100%;margin-top:12px" data-action="share-story">申请参与科普共创</button>
             </div>
 
@@ -1743,7 +1730,7 @@
                 <div class="gtier-amt">¥2000</div>
                 <div class="gtier-body">
                   <strong>假阳安抚补贴</strong>
-                  <p class="mini">技术不可能做到 100% 准确，必然存在假阳。若进一步诊断排除癌症，直接给付或保险补贴 2000 元，安抚你多做一次检查、担惊受怕的心理成本。</p>
+                  <p class="mini">若进一步诊断排除癌症，直接给付或保险补贴 2000 元，安抚你多做一次检查、担惊受怕的心理成本。</p>
                 </div>
               </div>
               <div class="gtier">
